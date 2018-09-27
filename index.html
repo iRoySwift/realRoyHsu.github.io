@@ -275,6 +275,138 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Roy Hsu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="realRoyHsu的Blog!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/" itemprop="url">未命名</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-27T11:00:14+08:00">
+                2018-09-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##关于jquery中的ajax调取数据成功回调函数，失败回调函数</p>
+<ul>
+<li><p>通常，ajax调取数据，在pc端的时候，我们不需要考虑断网情况，所以很多情况下我们都只需要如下格式：<br><div align="center"><br>  <img src="https://realroyhsu.github.io/Img/ajax/20171207150916314.png"><br></div>  </p>
+<blockquote>
+<p>即可实现ajax调取后台数据，我这里用的是jsonp跨域调取的数据。</p>
+</blockquote>
+</li>
+<li><p>但是在移动端就不一样了，在app上，我们通常要考虑手机断网的情况，而我们上一段的代码中，error只是提示我们报错的原因或状态，并不能执行我们网络错误以后的回调函数，所以我们需要改动一下以上的代码。如下：<br><div align="center"><br>  <img src="https://realroyhsu.github.io/Img/ajax/20171207144730978.png"><br></div>  </p>
+<blockquote>
+<p>我用红线框出来的部分需要注意，在断网情况下，必须要设定timeout的值，你可以根据自己想要设定的时间，即表示在加载超过多少秒后就判断为断网了，在这里我设定的值是5秒，即在五秒后若没有获取到数据就进入失败回调函数。同时async:true必须设定为异步的形式，这里我没有进行设置即默认是异步的， 那么我们就可以在失败回调函数中进行我们想要的操作了。</p>
+</blockquote>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/Sublime3 React、JSX 代码美化--[Prettier]/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -369,6 +501,7 @@
         
           
             <h1>Sublime3 React、JSX 代码美化–<a href="https://packagecontrol.io/packages/JsPrettier" target="_blank" rel="noopener">Prettier</a> </h1>  
+
 
 <blockquote>
 <p>最近一直用Sublime写<br><code bgcolor="#f9f2f4"><font color="#c7254e">React</font></code>项目，但是jsx语法格式化一直让我头疼。<br>尝试了<br><code bgcolor="#f9f2f4"><font color="#c7254e">JsFormat</font></code>、<br><code bgcolor="#f9f2f4"><font color="#c7254e">jsfmt</font></code>、<br><code bgcolor="#f9f2f4"><font color="#c7254e">HTML/CSS/JS pretty</font></code>、<br><code bgcolor="#f9f2f4"><font color="#c7254e">esformatter</font></code>等都没有完美的解决我的问题<br>结果惨不忍睹：  </p>
@@ -505,7 +638,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
