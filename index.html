@@ -275,6 +275,207 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/28/SSH远程连接Google的Compute Engine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Roy Hsu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="realRoyHsu的Blog!">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/28/SSH远程连接Google的Compute Engine/" itemprop="url">SSH远程连接Google的Compute Engine</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-28T21:01:24+08:00">
+                2018-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SSH/" itemprop="url" rel="index">
+                    <span itemprop="name">SSH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>##SSH远程连接Google的Compute Engine</p>
+<p>[TOC]</p>
+<blockquote>
+<p>在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名的注释。</p>
+</blockquote>
+<ul>
+<li><p>1、<code>ssh-keygen -t rsa -f ~/.ssh/[KEY_FILENAME] -C [USERNAME]</code>  </p>
+<p>其中：  </p>
+<ul>
+<li><p><strong>[KEY_FILENAME]</strong> 是您要用于 SSH 密钥文件的名称。例如，文件名 my-ssh-key 生成一个名为 my-ssh-key 的私钥文件和一个名为 my-ssh-key.pub 公钥文件。  </p>
+</li>
+<li><p><strong>[USERNAME]</strong> 是您要为其应用此 SSH 密钥的用户。  </p>
+</li>
+<li><p>该命令生成一个 SSH 私钥文件和一个匹配的 SSH 公钥，公钥结构如下所示：<br><code>ssh-rsa [KEY_VALUE] [USERNAME]</code>   </p>
+<ul>
+<li>其中：<br><code>[KEY_VALUE]</code> 是您生成的密钥值。<br><code>[USERNAME]</code> 是此密钥要应用到的用户。   </li>
+</ul>
+</li>
+</ul>
+<div align="center"><br>  <img src="https://realroyhsu.github.io/Img/GoogleCloud/1ssh-keygen.png" width="50%" height="50%"><br></div>  
+
+
+</li>
+</ul>
+<ul>
+<li><p>2、限制对您的私钥的访问，以便只有您能读取此密钥，且所有人都不可向其写入。  </p>
+<p><code>chmod 400 ~/.ssh/[KEY_FILENAME]</code>  </p>
+<p>其中 <code>[KEY_FILENAME]</code> 是您用于 SSH 密钥文件的名称。</p>
+<div align="center"><br>  <img src="https://realroyhsu.github.io/Img/GoogleCloud/2.chmod400.png" width="50%" height="50%"><br></div>  
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>3、要使用 ssh 连接到实例，请执行以下操作：</p>
+<ul>
+<li><p>1、使用其中一个可用选项为实例提供 SSH 公钥。</p>
+<ul>
+<li><p>1、<code>cat google.pub</code></p>
+</li>
+<li><p>2、生成的公钥内容要复制出来</p>
+</li>
+<li><p>3、粘贴到Compute Engine的 元数据中  </p>
+<div align="center"><br><img src="https://realroyhsu.github.io/Img/GoogleCloud/3.元数据.png" width="50%" height="50%"><br></div>
+</li>
+</ul>
+</li>
+<li><p>2、在控制台中，查找要连接到的实例的外部 IP 地址。转到您的实例列表。</p>
+</li>
+<li><p>3、在终端中，使用 ssh 命令和 SSH 私钥文件连接到实例。指定您的用户名和您要连接到的实例的外部 IP 地址。</p>
+<p><code>ssh -i [PATH_TO_PRIVATE_KEY] [USERNAME]@[EXTERNAL_IP_ADDRESS]</code>  </p>
+<ul>
+<li>其中：<br><code>[PATH_TO_PRIVATE_KEY]</code> 是您的 SSH 私钥文件的路径。<br><code>[USERNAME]</code> 是连接到实例的用户的名称。在创建 SSH 密钥时，就指定了该 SSH 公钥的用户名。如果实例具有该用户的有效 SSH 公钥，并且您拥有与之匹配的 SSH 私钥，则您可以以该用户的身份连接到此实例。<br><code>[EXTERNAL_IP_ADDRESS]</code> 是您的实例的外部 IP 地址。<br>如果连接成功，您就可以使用终端在您的实例上运行命令。完成操作后，可使用 <strong>exit</strong> 命令断开与实例的连接。  </li>
+</ul>
+<div align="center"><br>  <img src="https://realroyhsu.github.io/Img/GoogleCloud/4.ssh.png" width="50%" height="50%"><br></div>
+</li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -660,7 +861,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -671,7 +872,7 @@
               
               <div class="site-state-item site-state-categories">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">分类</span>
                 
               </div>
@@ -682,7 +883,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
