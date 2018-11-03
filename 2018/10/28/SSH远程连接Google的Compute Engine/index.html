@@ -2,27 +2,27 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>realRoyHsu的Blog!</title>
+<title>SSH远程连接Google的Compute Engine - realRoyHsu的Blog!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
-    <meta name="description" content="title: SSH远程连接Google的Compute Enginedate: 2018-10-28 21:01:24comments: true #是否可评论toc: true #是否显示文章目录categories: “SSH” #分类tags:   #标签 - SSH   在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名">
-<meta name="keywords" content="Roy Hsu Blog">
+    <meta name="description" content="在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名的注释。   1、ssh-keygen -t rsa -f ~/.ssh/[KEY_FILENAME] -C [USERNAME]   其中：    [KEY_FILENAME] 是您要用于 SSH 密钥文件的名称。例如，文件名 my-ssh-key 生成一个名为 my-ssh-k">
+<meta name="keywords" content="SSH">
 <meta property="og:type" content="article">
-<meta property="og:title" content="realRoyHsu的Blog!">
+<meta property="og:title" content="SSH远程连接Google的Compute Engine">
 <meta property="og:url" content="http://yoursite.com/2018/10/28/SSH远程连接Google的Compute Engine/index.html">
 <meta property="og:site_name" content="realRoyHsu的Blog!">
-<meta property="og:description" content="title: SSH远程连接Google的Compute Enginedate: 2018-10-28 21:01:24comments: true #是否可评论toc: true #是否显示文章目录categories: “SSH” #分类tags:   #标签 - SSH   在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名">
+<meta property="og:description" content="在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名的注释。   1、ssh-keygen -t rsa -f ~/.ssh/[KEY_FILENAME] -C [USERNAME]   其中：    [KEY_FILENAME] 是您要用于 SSH 密钥文件的名称。例如，文件名 my-ssh-key 生成一个名为 my-ssh-k">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/GoogleCloud/1ssh-keygen.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/GoogleCloud/2.chmod400.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/GoogleCloud/3.元数据.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/GoogleCloud/4.ssh.png">
-<meta property="og:updated_time" content="2018-11-03T12:28:20.566Z">
+<meta property="og:updated_time" content="2018-11-03T12:29:40.767Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="realRoyHsu的Blog!">
-<meta name="twitter:description" content="title: SSH远程连接Google的Compute Enginedate: 2018-10-28 21:01:24comments: true #是否可评论toc: true #是否显示文章目录categories: “SSH” #分类tags:   #标签 - SSH   在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名">
+<meta name="twitter:title" content="SSH远程连接Google的Compute Engine">
+<meta name="twitter:description" content="在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名的注释。   1、ssh-keygen -t rsa -f ~/.ssh/[KEY_FILENAME] -C [USERNAME]   其中：    [KEY_FILENAME] 是您要用于 SSH 密钥文件的名称。例如，文件名 my-ssh-key 生成一个名为 my-ssh-k">
 <meta name="twitter:image" content="https://realroyhsu.github.io/Img/GoogleCloud/1ssh-keygen.png">
 
 
@@ -165,13 +165,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-28T12:10:30.925Z">2018-10-28</time>
+                <time class="level-item has-text-grey" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
+                </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 607 words)
+                    4 minutes read (About 571 words)
                 </span>
                 
             </div>
@@ -179,15 +183,11 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                
+                SSH远程连接Google的Compute Engine
             
         </h1>
         <div class="content">
-            <hr>
-<p>title: SSH远程连接Google的Compute Engine<br>date: 2018-10-28 21:01:24<br>comments: true #是否可评论<br>toc: true #是否显示文章目录<br>categories: “SSH” #分类<br>tags:   #标签</p>
-<pre><code>- SSH
-</code></pre><hr>
-<blockquote>
+            <blockquote>
 <p>在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名的注释。</p>
 </blockquote>
 <ul>
@@ -248,6 +248,15 @@
 
         </div>
         
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/SSH/">SSH</a>
+                </div>
+            </div>
+        </div>
+        
         
         
     </div>
@@ -306,7 +315,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Posts
+                        Entradas
                     </p>
                     <p class="title has-text-weight-normal">
                         3
@@ -316,27 +325,27 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categories
+                        Categorias
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        3
                     </p>
                 </div>
             </div>
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Tags
+                        Etiquetas
                     </p>
                     <p class="title has-text-weight-normal">
-                        2
+                        3
                     </p>
                 </div>
             </div>
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="http://github.com/ppoffice">
-                Follow</a>
+                SEGUIR</a>
         </div>
         
         
@@ -383,6 +392,17 @@
 </div>
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catálogo
+            </h3>
+            
+        </div>
+    </div>
+</div>
+
     
         
 
@@ -428,13 +448,21 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categories
+                Categorias
             </h3>
             <ul class="menu-list">
             <li>
         <a class="level is-marginless" href="/categories/Ajax/">
             <span class="level-start">
                 <span class="level-item">Ajax</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SSH/">
+            <span class="level-start">
+                <span class="level-item">SSH</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
@@ -457,9 +485,9 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Tag Cloud
+            Nube de etiquetas
         </h3>
-        <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Sublime/" style="font-size: 10px;">Sublime</a>
+        <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Sublime/" style="font-size: 10px;">Sublime</a>
     </div>
 </div>
 
@@ -471,23 +499,23 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
             
             <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SSH远程连接Google的Compute Engine">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-28T12:10:30.925Z">2018-10-28</time></div>
-                    <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time></div>
+                    <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6">SSH远程连接Google的Compute Engine</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
                     </p>
                 </div>
             </div>
@@ -539,7 +567,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -574,7 +602,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <ul class="menu-list">
                 
@@ -582,6 +610,17 @@
                     <a class="level is-marginless" href="/tags/Ajax/">
                         <span class="level-start">
                             <span class="level-item">Ajax</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SSH/">
+                        <span class="level-start">
+                            <span class="level-item">SSH</span>
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">1</span>
@@ -619,23 +658,23 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recent
+            Recientes
         </h3>
         
         <article class="media">
             
             <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SSH远程连接Google的Compute Engine">
                 </p>
             </a>
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-28T12:10:30.925Z">2018-10-28</time></div>
-                    <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6"></a>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time></div>
+                    <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6">SSH远程连接Google的Compute Engine</a>
                     <p class="is-size-7 is-uppercase">
-                        
+                        <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
                     </p>
                 </div>
             </div>
@@ -687,7 +726,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archives
+            Archivos
         </h3>
         <ul class="menu-list">
         
@@ -722,7 +761,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Tags
+                Etiquetas
             </h3>
             <ul class="menu-list">
                 
@@ -730,6 +769,17 @@
                     <a class="level is-marginless" href="/tags/Ajax/">
                         <span class="level-start">
                             <span class="level-item">Ajax</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SSH/">
+                        <span class="level-start">
+                            <span class="level-item">SSH</span>
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">1</span>
@@ -964,10 +1014,10 @@
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Posts',
+                POSTS: 'Entradas',
                 PAGES: 'Pages',
-                CATEGORIES: 'Categories',
-                TAGS: 'Tags',
+                CATEGORIES: 'Categorias',
+                TAGS: 'Etiquetas',
                 UNTITLED: '(Untitled)',
             },
             CONTENT_URL: '/content.json',

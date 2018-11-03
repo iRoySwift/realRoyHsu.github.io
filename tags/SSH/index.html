@@ -2,16 +2,16 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>Etiquetas - realRoyHsu的Blog!</title>
+<title>Etiqueta: SSH - realRoyHsu的Blog!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
     <meta name="description" content="Roy Hsu Blog">
-<meta name="keywords" content="Sublime,SSH,Ajax">
+<meta name="keywords" content="Roy Hsu Blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="realRoyHsu的Blog!">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/SSH/index.html">
 <meta property="og:site_name" content="realRoyHsu的Blog!">
 <meta property="og:description" content="Roy Hsu Blog">
 <meta property="og:locale" content="zh-Hans">
@@ -121,7 +121,7 @@
                 <a class="navbar-item"
                 href="/categories">Categories</a>
                 
-                <a class="navbar-item is-active"
+                <a class="navbar-item"
                 href="/tags">Tags</a>
                 
                 <a class="navbar-item"
@@ -153,51 +153,116 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card widget">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
     <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Etiquetas
-            </h3>
-            <ul class="menu-list">
-                
-                <li>
-                    <a class="level is-marginless" href="/tags/Ajax/">
-                        <span class="level-start">
-                            <span class="level-item">Ajax</span>
-                        </span>
-                        <span class="level-end">
-                            <span class="level-item tag">1</span>
-                        </span>
-                    </a>
-                </li>
-                
-                <li>
-                    <a class="level is-marginless" href="/tags/SSH/">
-                        <span class="level-start">
-                            <span class="level-item">SSH</span>
-                        </span>
-                        <span class="level-end">
-                            <span class="level-item tag">1</span>
-                        </span>
-                    </a>
-                </li>
-                
-                <li>
-                    <a class="level is-marginless" href="/tags/Sublime/">
-                        <span class="level-start">
-                            <span class="level-item">Sublime</span>
-                        </span>
-                        <span class="level-end">
-                            <span class="level-item tag">1</span>
-                        </span>
-                    </a>
-                </li>
-                
-            </ul>
-        </div>
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/tags">Etiquetas</a></li>
+            <li class="is-active"><a href="#" aria-current="page">SSH</a></li>
+        </ul>
+        </nav>
     </div>
-</div></div>
+</div>
+
+    <div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    4 minutes read (About 571 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2018/10/28/SSH远程连接Google的Compute Engine/">SSH远程连接Google的Compute Engine</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名的注释。</p>
+</blockquote>
+<ul>
+<li><p>1、<code>ssh-keygen -t rsa -f ~/.ssh/[KEY_FILENAME] -C [USERNAME]</code>  </p>
+<p>其中：  </p>
+<ul>
+<li><p><strong>[KEY_FILENAME]</strong> 是您要用于 SSH 密钥文件的名称。例如，文件名 my-ssh-key 生成一个名为 my-ssh-key 的私钥文件和一个名为 my-ssh-key.pub 公钥文件。  </p>
+</li>
+<li><p><strong>[USERNAME]</strong> 是您要为其应用此 SSH 密钥的用户。  </p>
+</li>
+<li><p>该命令生成一个 SSH 私钥文件和一个匹配的 SSH 公钥，公钥结构如下所示：<br><code>ssh-rsa [KEY_VALUE] [USERNAME]</code>   </p>
+<ul>
+<li>其中：<br><code>[KEY_VALUE]</code> 是您生成的密钥值。<br><code>[USERNAME]</code> 是此密钥要应用到的用户。   </li>
+</ul>
+</li>
+</ul>
+<div align="center"><br>  <img src="https://realroyhsu.github.io/Img/GoogleCloud/1ssh-keygen.png" width="50%" height="50%"><br></div>  
+
+
+</li>
+</ul>
+<ul>
+<li><p>2、限制对您的私钥的访问，以便只有您能读取此密钥，且所有人都不可向其写入。  </p>
+<p><code>chmod 400 ~/.ssh/[KEY_FILENAME]</code>  </p>
+<p>其中 <code>[KEY_FILENAME]</code> 是您用于 SSH 密钥文件的名称。</p>
+<div align="center"><br>  <img src="https://realroyhsu.github.io/Img/GoogleCloud/2.chmod400.png" width="50%" height="50%"><br></div>  
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>3、要使用 ssh 连接到实例，请执行以下操作：</p>
+<ul>
+<li><p>1、使用其中一个可用选项为实例提供 SSH 公钥。</p>
+<ul>
+<li><p>1、<code>cat google.pub</code></p>
+</li>
+<li><p>2、生成的公钥内容要复制出来</p>
+</li>
+<li><p>3、粘贴到Compute Engine的 元数据中  </p>
+<div align="center"><br><img src="https://realroyhsu.github.io/Img/GoogleCloud/3.元数据.png" width="50%" height="50%"><br></div>
+</li>
+</ul>
+</li>
+<li><p>2、在控制台中，查找要连接到的实例的外部 IP 地址。转到您的实例列表。</p>
+</li>
+<li><p>3、在终端中，使用 ssh 命令和 SSH 私钥文件连接到实例。指定您的用户名和您要连接到的实例的外部 IP 地址。</p>
+<p><code>ssh -i [PATH_TO_PRIVATE_KEY] [USERNAME]@[EXTERNAL_IP_ADDRESS]</code>  </p>
+<ul>
+<li>其中：<br><code>[PATH_TO_PRIVATE_KEY]</code> 是您的 SSH 私钥文件的路径。<br><code>[USERNAME]</code> 是连接到实例的用户的名称。在创建 SSH 密钥时，就指定了该 SSH 公钥的用户名。如果实例具有该用户的有效 SSH 公钥，并且您拥有与之匹配的 SSH 私钥，则您可以以该用户的身份连接到此实例。<br><code>[EXTERNAL_IP_ADDRESS]</code> 是您的实例的外部 IP 地址。<br>如果连接成功，您就可以使用终端在您的实例上运行命令。完成操作后，可使用 <strong>exit</strong> 命令断开与实例的连接。  </li>
+</ul>
+<div align="center"><br>  <img src="https://realroyhsu.github.io/Img/GoogleCloud/4.ssh.png" width="50%" height="50%"><br></div>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+</div>
                 
 
 
