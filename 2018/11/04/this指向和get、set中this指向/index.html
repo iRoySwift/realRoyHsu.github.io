@@ -17,7 +17,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/nodethis/nodethis.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/nodethis/getset.png">
-<meta property="og:updated_time" content="2018-11-04T13:54:38.031Z">
+<meta property="og:updated_time" content="2018-11-04T13:55:20.476Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="this指向和get、set中this指向">
 <meta name="twitter:description" content="1.全局环境2.事件处理函数3.函数内部4.getter 和 setter 中 this">
@@ -203,7 +203,7 @@
 <p>[TOC]  </p>
 <h2 id="1-全局环境"><a href="#1-全局环境" class="headerlink" title="1.全局环境"></a>1.全局环境</h2><ul>
 <li><p>window    </p>
-  <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="hljs-undefined"></span></span><br><span class="line"><span class="hljs-javascript">	<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span> ); <span class="hljs-comment">//Window</span></span></span><br><span class="line"><span class="hljs-undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="hljs-undefined"></span></span><br><span class="line"><span class="hljs-undefined">	console.log( this ); //Window</span></span><br><span class="line"><span class="hljs-undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
   <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> box = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"box"</span>);</span><br><span class="line">box.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">	setTimeout( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span> );                        <span class="hljs-comment">//  window</span></span><br><span class="line">		<span class="hljs-keyword">this</span>.style.backgroundColor = <span class="hljs-string">"red"</span>;</span><br><span class="line">	&#125;,<span class="hljs-number">1000</span> )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -402,7 +402,7 @@
 
 <div class="card">
     <div class="card-content">
-        <h3 class="title is-5 has-text-weight-normal">Comentarios</h3>
+        <h3 class="title is-5 has-text-weight-normal">Komentar</h3>
         
 <div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ0OC8xNTk3NQ==">
     <script type="text/javascript">
@@ -460,7 +460,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Entradas
+                        pos
                     </p>
                     <p class="title has-text-weight-normal">
                         4
@@ -470,7 +470,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Categorias
+                        Kategori
                     </p>
                     <p class="title has-text-weight-normal">
                         4
@@ -480,7 +480,7 @@
             <div class="level-item has-text-centered is-marginless">
                 <div>
                     <p class="heading">
-                        Etiquetas
+                        tag
                     </p>
                     <p class="title has-text-weight-normal">
                         4
@@ -490,7 +490,7 @@
         </nav>
         <div class="level">
             <a class="level-item button is-link is-rounded" href="https://github.com/realRoyHsu">
-                SEGUIR</a>
+                IKUTI</a>
         </div>
         
         
@@ -541,7 +541,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Catálogo
+                Catalogue
             </h3>
             <ul class="menu-list"><li>
         <a class="is-flex" href="#1-全局环境">
@@ -571,7 +571,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Links
+            tautan
         </h3>
         <ul class="menu-list">
         
@@ -620,7 +620,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Categorias
+                Kategori
             </h3>
             <ul class="menu-list">
             <li>
@@ -665,7 +665,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Nube de etiquetas
+            awan tag
         </h3>
         <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Sublime/" style="font-size: 10px;">Sublime</a> <a href="/tags/this指向/" style="font-size: 10px;">this指向</a>
     </div>
@@ -679,7 +679,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Terbaru
         </h3>
         
         <article class="media">
@@ -766,7 +766,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Arsip
         </h3>
         <ul class="menu-list">
         
@@ -812,7 +812,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                tag
             </h3>
             <ul class="menu-list">
                 
@@ -879,7 +879,7 @@
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
-            Recientes
+            Terbaru
         </h3>
         
         <article class="media">
@@ -966,7 +966,7 @@
     <div class="card-content">
         <div class="menu">
         <h3 class="menu-label">
-            Archivos
+            Arsip
         </h3>
         <ul class="menu-list">
         
@@ -1012,7 +1012,7 @@
     <div class="card-content">
         <div class="menu">
             <h3 class="menu-label">
-                Etiquetas
+                tag
             </h3>
             <ul class="menu-list">
                 
@@ -1273,7 +1273,7 @@
     <div class="searchbox ins-search">
     <div class="searchbox-container ins-search-container">
         <div class="searchbox-input-wrapper">
-            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Tulis Sesuatu.." />
             <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
         </div>
         <div class="searchbox-result-wrapper ins-section-wrapper">
@@ -1285,11 +1285,11 @@
     (function (window) {
         var INSIGHT_CONFIG = {
             TRANSLATION: {
-                POSTS: 'Entradas',
-                PAGES: 'Pages',
-                CATEGORIES: 'Categorias',
-                TAGS: 'Etiquetas',
-                UNTITLED: '(Untitled)',
+                POSTS: 'Pos',
+                PAGES: 'Halaman',
+                CATEGORIES: 'Kategori',
+                TAGS: 'Tag',
+                UNTITLED: 'Tanpa Judul',
             },
             CONTENT_URL: '/content.json',
         };
