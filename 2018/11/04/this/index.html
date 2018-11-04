@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>this指向,get,set - Roy Blog!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    <meta name="description" content="1.全局环境2.事件处理函数3.函数内部4.getter 和 setter 中 this">
+<meta name="keywords" content="this指向">
+<meta property="og:type" content="article">
+<meta property="og:title" content="this指向,get,set">
+<meta property="og:url" content="http://yoursite.com/2018/11/04/this/index.html">
+<meta property="og:site_name" content="Roy Blog!">
+<meta property="og:description" content="1.全局环境2.事件处理函数3.函数内部4.getter 和 setter 中 this">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/nodethis/nodethis.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/nodethis/getset.png">
+<meta property="og:updated_time" content="2018-11-04T13:53:27.311Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="this指向,get,set">
+<meta name="twitter:description" content="1.全局环境2.事件处理函数3.函数内部4.getter 和 setter 中 this">
+<meta name="twitter:image" content="https://realroyhsu.github.io/Img/nodethis/nodethis.png">
+<meta name="twitter:creator" content="@realRoyHsu">
+<meta name="twitter:site" content="https://twitter.com/realRoyHsu">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+    
+
+    
+    
+    
+    <style>body>.navbar,body>.section,body>.footer{opacity: 0}</style>
+    
+
+    
+    
+    
+    
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=realRoyHsu@Gmail.com"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'realRoyHsu@Gmail.com');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+<style>
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #3273dc;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}
+</style>
+
+    
+
+
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/realRoyHsu">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-11-04T13:53:24.000Z">2018-11-04</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/this指向/">this指向</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    10 minutes read (About 1554 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                this指向,get,set
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>1.全局环境<br>2.事件处理函数<br>3.函数内部<br>4.getter 和 setter 中 this</p>
+</blockquote>
+<a id="more"></a>
+<p>[TOC]  </p>
+<h2 id="1-全局环境"><a href="#1-全局环境" class="headerlink" title="1.全局环境"></a>1.全局环境</h2><ul>
+<li><p>window    </p>
+  <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="hljs-undefined"></span></span><br><span class="line"><span class="hljs-javascript">	<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span> ); <span class="hljs-comment">//Window</span></span></span><br><span class="line"><span class="hljs-undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> box = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"box"</span>);</span><br><span class="line">box.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">	setTimeout( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span> );                        <span class="hljs-comment">//  window</span></span><br><span class="line">		<span class="hljs-keyword">this</span>.style.backgroundColor = <span class="hljs-string">"red"</span>;</span><br><span class="line">	&#125;,<span class="hljs-number">1000</span> )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="2-事件处理函数"><a href="#2-事件处理函数" class="headerlink" title="2.事件处理函数"></a>2.事件处理函数</h2><ul>
+<li><p>DOM 事件处理函数</p>
+  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> box = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"box"</span>);</span><br><span class="line">box.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">	<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span> ); <span class="hljs-comment">// 事件处理函数中的 this, 该事件由谁触发,this指的就是谁</span></span><br><span class="line">	<span class="hljs-comment">//此处this返回：&lt;div id="box" &gt;div&lt;/div&gt;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>内联事件处理函数</p>
+  <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"console.log( this )"</span> &gt;</span>div<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line"><span class="hljs-comment">&lt;!-- 此处this指向：&lt;div id="box" onclick="console.log( this )" &gt;div&lt;/div&gt; --&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"box"</span> <span class="hljs-attr">onclick</span>=<span class="hljs-string">"( (function()&#123;console.log( this )&#125;)() )"</span> &gt;</span>div<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line"><span class="hljs-comment">&lt;!-- 此处this指向：window --&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="3-函数内部"><a href="#3-函数内部" class="headerlink" title="3.函数内部"></a>3.函数内部</h2><ul>
+<li><p>1.函数直接执行</p>
+<ul>
+<li><p>非严格模式下</p>
+<ul>
+<li><p>默认指向全局对象</p>
+<ul>
+<li><p>浏览器</p>
+  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">	<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line">fn();<span class="hljs-comment">//此处this，指向window</span></span><br><span class="line"><span class="hljs-built_in">window</span>.fn();<span class="hljs-comment">//此处this，指向window</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>node</p>
+<ul>
+<li>node交互界面中</li>
+<li>js文件中    <div align="center"><br>      <img src="https://realroyhsu.github.io/Img/nodethis/nodethis.png"><br>  </div>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>严格模式下(前面省略window,浏览器严格模式支持)</p>
+<ul>
+<li>undefined  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line"><span class="hljs-meta">	"use strict"</span></span><br><span class="line">	<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>);</span><br><span class="line">&#125;</span><br><span class="line">fn();<span class="hljs-comment">//此处this，打印 undefined</span></span><br><span class="line"><span class="hljs-built_in">window</span>.fn();<span class="hljs-comment">//此处this，指向window</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>2.call,apply和bind</p>
+<ul>
+<li><p>把 this 的值从一个执行环境传入另一个执行环境</p>
+<ul>
+<li>call apply 改变指向同时，运行函数</li>
+<li>call 和 apply 的参数差异:apply 可以传【数组】</li>
+<li>如果传入的不是对象会调用相对的构造函数,进行隐式转换  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params">m,n</span>)</span>&#123;</span><br><span class="line">	<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a,m,n );</span><br><span class="line">&#125;</span><br><span class="line">fn.call( &#123;<span class="hljs-attr">a</span>: <span class="hljs-number">1</span>&#125;,<span class="hljs-number">2</span>,<span class="hljs-number">3</span> );</span><br><span class="line"><span class="hljs-comment">// 函数.call 会直接调用该函数.</span></span><br><span class="line"><span class="hljs-comment">// 并且call 的 第 0个参数就是 函数执行时候的this 指向第0个对象</span></span><br><span class="line"><span class="hljs-comment">// 后面的参数是 函数执行的时候的参数</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>bind</p>
+<ul>
+<li>bind只改变指向，不会调用方法</li>
+<li>返回一个新函数,内部this指向被修改</li>
+<li><p>只会改变一次</p>
+  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">	<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a )</span><br><span class="line">&#125;</span><br><span class="line">fn();<span class="hljs-comment">//  this指向undefined</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> fn1 = fn.bind( &#123;<span class="hljs-attr">a</span>: <span class="hljs-number">2</span>&#125; );</span><br><span class="line"><span class="hljs-keyword">var</span> fn2 = fn.bind( &#123;<span class="hljs-attr">a</span>: <span class="hljs-number">3</span>&#125; );</span><br><span class="line"><span class="hljs-keyword">var</span> fn3 = fn.bind( &#123;<span class="hljs-attr">a</span>: <span class="hljs-number">4</span>&#125; );</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">console</span>.log( fn1 );</span><br><span class="line"><span class="hljs-comment">//ƒ fn()&#123;</span></span><br><span class="line"><span class="hljs-comment">// 	console.log( this.a )</span></span><br><span class="line"><span class="hljs-comment">// &#125;</span></span><br><span class="line"></span><br><span class="line">fn1();<span class="hljs-comment">//打印 2</span></span><br><span class="line">fn2();<span class="hljs-comment">//打印 3</span></span><br><span class="line">fn3();<span class="hljs-comment">//打印 4</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> fn4 = fn1.bind( &#123;<span class="hljs-attr">a</span>:<span class="hljs-number">100</span>&#125; );</span><br><span class="line">fn4();<span class="hljs-comment">//打印 2 bind只会改变一次 , 所以 还是打印 第一次bind的对象</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>传入数字，打印数字类型</p>
+  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fn</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">	<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span> )</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">var</span> fn1 = fn.bind(<span class="hljs-number">1</span>);</span><br><span class="line">fn1();	<span class="hljs-comment">//this指向  Number</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>3.箭头函数内部</p>
+<ul>
+<li><p>与定义时的环境中 this 一致</p>
+<ul>
+<li>点击元素定时改变  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="hljs-string">"box"</span>&gt;box&lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">&lt;script&gt;</span></span><br><span class="line"><span class="hljs-regexp">	var fn = ()=&gt;&#123;</span></span><br><span class="line"><span class="hljs-regexp">		console.log( this ); /</span><span class="hljs-regexp">/ this指向window</span></span><br><span class="line"><span class="hljs-regexp">	&#125;</span></span><br><span class="line"><span class="hljs-regexp">	fn();</span></span><br><span class="line"><span class="hljs-regexp">	box.onclick = function()&#123;</span></span><br><span class="line"><span class="hljs-regexp">		console.log( this );/</span><span class="hljs-regexp">/ this指向box</span></span><br><span class="line"><span class="hljs-regexp">		setTimeout( ()=&gt;&#123;  /</span><span class="hljs-regexp">/ 箭头函数中，this指向与定义时的环境中 this 一致</span></span><br><span class="line"><span class="hljs-regexp">			/</span><span class="hljs-regexp">/如果这个是function， this.style.backgroundColor，会报错，因为this指向window； 而window原型中没有backgroundColor</span></span><br><span class="line"><span class="hljs-regexp">			this.style.backgroundColor = "red";/</span><span class="hljs-regexp">/this指向box</span></span><br><span class="line"><span class="hljs-regexp">		&#125;,500 )</span></span><br><span class="line"><span class="hljs-regexp">	&#125;</span></span><br><span class="line"><span class="hljs-regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>bind,call 不能修改其内部指向</p>
+</li>
+<li><p>全局中定义箭头函数</p>
+<ul>
+<li>全局对象  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> fn = <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span> )<span class="hljs-comment">//this指向window</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">var</span> fn1 = fn.bind( &#123;&#125; );<span class="hljs-comment">//bind,call 不能修改其箭头函数内部指向</span></span><br><span class="line">fn1();<span class="hljs-comment">//this指向window</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>对象内函数定义箭头函数</p>
+<ul>
+<li><p>对象内部this指向window</p>
+  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;</span><br><span class="line"><span class="hljs-keyword">var</span> obj = &#123;</span><br><span class="line">	a: <span class="hljs-number">2</span>,</span><br><span class="line">	b:<span class="hljs-keyword">this</span>,</span><br><span class="line">	fn1: <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a )</span><br><span class="line">	&#125;,</span><br><span class="line">	fn2: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a )</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-built_in">console</span>.log(obj.b);<span class="hljs-comment">//打印window  对象内部this指向window</span></span><br><span class="line">obj.fn1();<span class="hljs-comment">//打印1 this指向window</span></span><br><span class="line">obj.fn2();<span class="hljs-comment">//打印2 this指向obj</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>对象内函数<strong>返回箭头函数</strong></p>
+<ul>
+<li>function函数，原则是谁调用指向谁</li>
+<li>箭头函数，原则是在哪定义，this指向谁，并且不能被call、bind的改变指向</li>
+<li>与上面中有所区别，对于箭头函数，return 箭头函数，里面this指向是不变的  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;</span><br><span class="line"><span class="hljs-keyword">var</span> obj = &#123;</span><br><span class="line">	a: <span class="hljs-number">2</span>,</span><br><span class="line">	fn1: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a )<span class="hljs-comment">//谁调用指向谁</span></span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">			<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a )<span class="hljs-comment">//谁调用指向谁</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	fn2: <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.a);<span class="hljs-comment">//this指向window</span></span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>&#123;</span><br><span class="line">			<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a );<span class="hljs-comment">//this指向window</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	fn3: <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.a);<span class="hljs-comment">//this指向window</span></span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">			<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a );<span class="hljs-comment">//谁调用指向谁</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;,</span><br><span class="line">	fn4: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.a);<span class="hljs-comment">//谁调用指向谁</span></span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>&#123;</span><br><span class="line">			<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a );<span class="hljs-comment">//this指向 fn4中，与function内部this指向一样</span></span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> innerFn1 = obj.fn1();<span class="hljs-comment">//打印  2</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(innerFn1);</span><br><span class="line"><span class="hljs-comment">//这里 innerFn1 = return出来的  function</span></span><br><span class="line">innerFn1();<span class="hljs-comment">//打印  1     this指向window，谁调用指向谁</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> innerFn2 = obj.fn2();<span class="hljs-comment">//打印 1</span></span><br><span class="line">innerFn2();<span class="hljs-comment">//打印1  this指向window</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> innerFn3 = obj.fn3();<span class="hljs-comment">//打印 1</span></span><br><span class="line">innerFn3();<span class="hljs-comment">//打印1   this指向window，谁调用指向谁</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> innerFn4 = obj.fn4();<span class="hljs-comment">//打印 2</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(innerFn4);</span><br><span class="line"><span class="hljs-comment">//这里 innerFn4 = return出来的  ()=&gt;&#123;&#125;</span></span><br><span class="line">innerFn4();<span class="hljs-comment">//打印 2  this指向 fn4中，与function内部this指向一样</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><p>4.对象方法内部</p>
+<ul>
+<li><p>当函数作为对象里的方法被调用时</p>
+<ul>
+<li>调用该函数的对象  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;</span><br><span class="line"><span class="hljs-keyword">var</span> obj = &#123;</span><br><span class="line">	a: <span class="hljs-number">2</span>,</span><br><span class="line">	fn: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a )</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.fn();<span class="hljs-comment">//2</span></span><br><span class="line">obj.fn.bind(&#123;<span class="hljs-attr">a</span>: <span class="hljs-string">"momo"</span>&#125;)();<span class="hljs-comment">//momo</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>对象后续附属上的方法调用</p>
+<ul>
+<li>调用该函数的对象  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> obj = &#123;</span><br><span class="line">	a: <span class="hljs-number">1</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="hljs-keyword">var</span> fn = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">	<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line">obj.fn = fn;<span class="hljs-comment">//与上面中，实际一样，对象赋值，指向同一个对象</span></span><br><span class="line">obj.fn();<span class="hljs-comment">//1</span></span><br><span class="line"><span class="hljs-comment">//-------------------------------------</span></span><br><span class="line"><span class="hljs-keyword">var</span> fn1 = <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span>&#123;</span><br><span class="line">	<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.a)</span><br><span class="line">&#125;</span><br><span class="line">obj.fn1 = fn1;</span><br><span class="line">obj.fn1();<span class="hljs-comment">//undefined  箭头函数this定义时，就确定指向</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>作为函数内嵌套多层的方法调用</p>
+<ul>
+<li>就近绑定  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>;</span><br><span class="line"><span class="hljs-keyword">var</span> obj = &#123;</span><br><span class="line">	a: <span class="hljs-number">2</span>,</span><br><span class="line">	o: &#123;</span><br><span class="line">		a: <span class="hljs-number">3</span>,</span><br><span class="line">		fn: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">			<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.a)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;;</span><br><span class="line">obj.o.fn();<span class="hljs-comment">//3  就近绑定</span></span><br><span class="line"><span class="hljs-keyword">var</span> temp = obj.o.fn;</span><br><span class="line">temp();<span class="hljs-comment">//1  谁调用this指向谁</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>5.构造函数中</p>
+<ul>
+<li><p>构造函数中没有显式return</p>
+  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Fn</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">	<span class="hljs-keyword">this</span>.a = <span class="hljs-number">10</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">var</span> f = <span class="hljs-keyword">new</span> Fn();<span class="hljs-comment">//this指向实例化过程，创建出来的对象    f  </span></span><br><span class="line"><span class="hljs-built_in">console</span>.log( f );<span class="hljs-comment">//&#123;a: 1, fn: ƒ&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>构造函数中显式return</p>
+<ul>
+<li>return 对象</li>
+<li>return 非对象  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Fn</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">	<span class="hljs-keyword">this</span>.a = <span class="hljs-number">10</span>;</span><br><span class="line">	<span class="hljs-comment">//return 1; //返回非 null 的对象,那么实例化结果就是返回出的对象 Fn &#123;a: 10&#125;</span></span><br><span class="line">	<span class="hljs-keyword">return</span> &#123;&#125;; <span class="hljs-comment">//返回非 null 的对象,那么实例化结果就是返回出的对象 &#123;&#125;</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">var</span> f = <span class="hljs-keyword">new</span> Fn();<span class="hljs-comment">//this指向实例化过程，创建出来的对象    f  </span></span><br><span class="line"><span class="hljs-built_in">console</span>.log( f );</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li>6.原型链上函数<ul>
+<li>调用该函数的对象  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> p = &#123;</span><br><span class="line">	a: <span class="hljs-number">1</span>,</span><br><span class="line">	fn: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span>.a )</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">var</span> c = <span class="hljs-built_in">Object</span>.create( p );<span class="hljs-comment">//以p对象来复制一个对象</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log(c);<span class="hljs-comment">//打印空对象&#123;&#125;</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log( c.__proto__ );<span class="hljs-comment">//打印p对象 &#123;a: 1, fn: ƒ&#125;</span></span><br><span class="line"><span class="hljs-built_in">console</span>.log( c.a );<span class="hljs-comment">//打印1   c没有a属性，会往原型链上找</span></span><br><span class="line">c.fn();<span class="hljs-comment">//打印1  c调用fn方法，this指向c对象，但是c上没有a属性，会往原型链上找</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="4-getter-和-setter-中-this"><a href="#4-getter-和-setter-中-this" class="headerlink" title="4.getter 和 setter 中 this"></a>4.getter 和 setter 中 this</h2><ul>
+<li>get 访问</li>
+<li><p>set 设置</p>
+  <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> obj = &#123;</span><br><span class="line">	n: <span class="hljs-number">1</span>,</span><br><span class="line">	m: <span class="hljs-number">2</span>,</span><br><span class="line">	get sum()&#123;<span class="hljs-comment">//拦截  在控制台中，obj.sum</span></span><br><span class="line">		<span class="hljs-built_in">console</span>.log( <span class="hljs-string">"正在尝试访问 sum..."</span> )</span><br><span class="line">		<span class="hljs-comment">// return 2</span></span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.n+<span class="hljs-keyword">this</span>.m<span class="hljs-comment">//这里this指向obj</span></span><br><span class="line">	&#125;,</span><br><span class="line">	set sum(zm)&#123;<span class="hljs-comment">//拦截  在控制台中，obj.sum = 24</span></span><br><span class="line">		<span class="hljs-built_in">console</span>.log( <span class="hljs-string">"正在设置 sum..."</span> );</span><br><span class="line">		<span class="hljs-keyword">this</span>.n = zm/<span class="hljs-number">2</span>;<span class="hljs-comment">//这里this指向obj</span></span><br><span class="line">		<span class="hljs-keyword">this</span>.m = zm/<span class="hljs-number">2</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">// console.log( obj.sum )</span></span><br></pre></td></tr></table></figure>
+  <div align="center"><br>          <img src="https://realroyhsu.github.io/Img/nodethis/getset.png"><br>  </div>
+</li>
+</ul>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/this指向/">this指向</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_google_plus"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/10/28/SSH远程连接Google的Compute Engine/">
+                <span class="level-item">SSH远程连接Google的Compute Engine</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ0OC8xNTk3NQ==">
+    <script type="text/javascript">
+        (function(d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
+</div>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png">
+                    
+                    <p class="is-size-4 is-block">
+                        Roy
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Roy Blogs!
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Nanjing,China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        4
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/realRoyHsu">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/realRoyHsu/realRoyHsu.github.io">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="http://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com/realRoyHsu">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="http://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-全局环境">
+        <span class="has-mr-6">1</span>
+        <span>1.全局环境</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-事件处理函数">
+        <span class="has-mr-6">2</span>
+        <span>2.事件处理函数</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-函数内部">
+        <span class="has-mr-6">3</span>
+        <span>3.函数内部</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-getter-和-setter-中-this">
+        <span class="has-mr-6">4</span>
+        <span>4.getter 和 setter 中 this</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://twitter.com/realRoyHsu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Twitter</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://twitter.com/realRoyHsu</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/realRoyHsu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">GitHub</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/realRoyHsu</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://blog.csdn.net/qq_41711507" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">CSDN</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://blog.csdn.net/qq_41711507</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Ajax/">
+            <span class="level-start">
+                <span class="level-item">Ajax</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SSH/">
+            <span class="level-start">
+                <span class="level-item">SSH</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Sublime/">
+            <span class="level-start">
+                <span class="level-item">Sublime</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/this指向/">
+            <span class="level-start">
+                <span class="level-item">this指向</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Sublime/" style="font-size: 10px;">Sublime</a> <a href="/tags/this指向/" style="font-size: 10px;">this指向</a>
+    </div>
+</div>
+
+    
+    
+        <div class="card card-transparent is-hidden-widescreen">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/this/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="this指向,get,set">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-04T13:53:24.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/this/" class="has-link-black-ter is-size-6">this指向,get,set</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/this指向/">this指向</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SSH远程连接Google的Compute Engine">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time></div>
+                    <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6">SSH远程连接Google的Compute Engine</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="关于jquery中的ajax调取数据成功回调函数，失败回调函数">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-27T03:01:24.000Z">2018-09-27</time></div>
+                    <a href="/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="has-link-black-ter is-size-6">关于jquery中的ajax调取数据成功回调函数，失败回调函数</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ajax/">Ajax</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/09/02/Sublime3 React、JSX 代码美化--[Prettier]/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Sublime3 React、JSX 代码美化--[Prettier]">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-02T13:01:24.000Z">2018-09-02</time></div>
+                    <a href="/2018/09/02/Sublime3 React、JSX 代码美化--[Prettier]/" class="has-link-black-ter is-size-6">Sublime3 React、JSX 代码美化--[Prettier]</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Sublime/">Sublime</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Ajax/">
+                        <span class="level-start">
+                            <span class="level-item">Ajax</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SSH/">
+                        <span class="level-start">
+                            <span class="level-item">SSH</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Sublime/">
+                        <span class="level-start">
+                            <span class="level-item">Sublime</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/this指向/">
+                        <span class="level-start">
+                            <span class="level-item">this指向</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/this/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="this指向,get,set">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-04T13:53:24.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/this/" class="has-link-black-ter is-size-6">this指向,get,set</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/this指向/">this指向</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SSH远程连接Google的Compute Engine">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time></div>
+                    <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6">SSH远程连接Google的Compute Engine</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="关于jquery中的ajax调取数据成功回调函数，失败回调函数">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-27T03:01:24.000Z">2018-09-27</time></div>
+                    <a href="/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="has-link-black-ter is-size-6">关于jquery中的ajax调取数据成功回调函数，失败回调函数</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ajax/">Ajax</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/09/02/Sublime3 React、JSX 代码美化--[Prettier]/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Sublime3 React、JSX 代码美化--[Prettier]">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-02T13:01:24.000Z">2018-09-02</time></div>
+                    <a href="/2018/09/02/Sublime3 React、JSX 代码美化--[Prettier]/" class="has-link-black-ter is-size-6">Sublime3 React、JSX 代码美化--[Prettier]</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Sublime/">Sublime</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Ajax/">
+                        <span class="level-start">
+                            <span class="level-item">Ajax</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SSH/">
+                        <span class="level-start">
+                            <span class="level-item">SSH</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Sublime/">
+                        <span class="level-start">
+                            <span class="level-item">Sublime</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/this指向/">
+                        <span class="level-start">
+                            <span class="level-item">this指向</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2018 Roy Hsu&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/realRoyHsu">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                  <!-- 站长工具 -->
+                  <p class="control">
+                    <a class="button is-white is-large" href="#">
+                      <i class="cnzz" style="margin-top:11px;">
+                        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1275245419'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1275245419%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+                      </i>
+                    </a>
+                  </p>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+                if (typeof($.fn.lightGallery) === 'function') {
+                    $('.article').lightGallery({ selector: '.gallery-item' });
+                }
+                if (typeof($.fn.justifiedGallery) === 'function') {
+                    $('.justified-gallery').justifiedGallery();
+                }
+            });
+        })(jQuery);
+    </script>
+    
+
+    
+    
+    
+    <div id="outdated">
+        <h6>Your browser is out-of-date!</h6>
+        <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+        <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // plugin function, place inside DOM ready function
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'flex'
+            })
+        });
+    </script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/animejs@2.2.0/anime.js"></script>
+    <script>
+    function isIE() {
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf('MSIE ');
+        var trident = ua.indexOf('Trident/');
+        return (msie > 0 || trident > 0);
+    }
+
+    $(document).ready(function () {
+        $('body>.navbar,body>.section,body>.footer').css('opacity', 1);
+        if (!isIE()) {
+            ['.column-main > .card',
+             '.column-left > .card',
+             '.column-right > .card'].map(function(target) {
+                anime({
+                    targets: target,
+                    scale: [0.8, 1],
+                    opacity: [0, 1],
+                    duration: 300,
+                    easing: 'easeOutSine',
+                    delay: function(el, i, l) {
+                        return i * 100;
+                    }
+                })
+            });
+
+            anime({
+                targets: '.navbar-main',
+                translateY: [-100, 0],
+                opacity: [0, 1],
+                duration: 300,
+                easing: 'easeOutSine'
+            });
+        }
+    });
+    </script>
+    
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<style>
+#back-to-top {
+    position: fixed;
+    padding: 8px 0;
+    transition: 0.4s ease opacity, 0.4s ease width, 0.4s ease transform, 0.4s ease border-radius;
+    opacity: 0;
+    line-height: 24px;
+    outline: none;
+    transform: translateY(120px);
+}
+#back-to-top.fade-in {
+    opacity: 1;
+}
+#back-to-top.rise-up {
+    transform: translateY(0);
+}
+</style>
+<script src="/js/back-to-top.js"></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
