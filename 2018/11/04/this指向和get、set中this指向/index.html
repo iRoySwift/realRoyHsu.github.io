@@ -203,7 +203,7 @@
 <!-- [TOC]   -->
 <h2 id="1-全局环境"><a href="#1-全局环境" class="headerlink" title="1.全局环境"></a>1.全局环境</h2><ul>
 <li><p>window    </p>
-  <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="hljs-undefined"></span></span><br><span class="line"><span class="hljs-undefined">	console.log( this ); //Window</span></span><br><span class="line"><span class="hljs-undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="hljs-undefined"></span></span><br><span class="line"><span class="hljs-javascript">	<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span> ); <span class="hljs-comment">//Window</span></span></span><br><span class="line"><span class="hljs-undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
   <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">var</span> box = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"box"</span>);</span><br><span class="line">box.onclick = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">	setTimeout( <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>&#123;</span><br><span class="line">		<span class="hljs-built_in">console</span>.log( <span class="hljs-keyword">this</span> );                        <span class="hljs-comment">//  window</span></span><br><span class="line">		<span class="hljs-keyword">this</span>.style.backgroundColor = <span class="hljs-string">"red"</span>;</span><br><span class="line">	&#125;,<span class="hljs-number">1000</span> )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -544,35 +544,6 @@
 </div>
     
         
-<div class="card widget" id="toc">
-    <div class="card-content">
-        <div class="menu">
-            <h3 class="menu-label">
-                Catalogue
-            </h3>
-            <ul class="menu-list"><li>
-        <a class="is-flex" href="#1-全局环境">
-        <span class="has-mr-6">1</span>
-        <span>1.全局环境</span>
-        </a></li><li>
-        <a class="is-flex" href="#2-事件处理函数">
-        <span class="has-mr-6">2</span>
-        <span>2.事件处理函数</span>
-        </a></li><li>
-        <a class="is-flex" href="#3-函数内部">
-        <span class="has-mr-6">3</span>
-        <span>3.函数内部</span>
-        </a></li><li>
-        <a class="is-flex" href="#4-getter-和-setter-中-this">
-        <span class="has-mr-6">4</span>
-        <span>4.getter 和 setter 中 this</span>
-        </a></li></ul>
-        </div>
-    </div>
-</div>
-
-    
-        
 
 <div class="card widget">
     <div class="card-content">
@@ -683,6 +654,35 @@
             Tag Cloud
         </h3>
         <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Sublime/" style="font-size: 10px;">Sublime</a> <a href="/tags/This/" style="font-size: 10px;">This</a>
+    </div>
+</div>
+
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-全局环境">
+        <span class="has-mr-6">1</span>
+        <span>1.全局环境</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-事件处理函数">
+        <span class="has-mr-6">2</span>
+        <span>2.事件处理函数</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-函数内部">
+        <span class="has-mr-6">3</span>
+        <span>3.函数内部</span>
+        </a></li><li>
+        <a class="is-flex" href="#4-getter-和-setter-中-this">
+        <span class="has-mr-6">4</span>
+        <span>4.getter 和 setter 中 this</span>
+        </a></li></ul>
+        </div>
     </div>
 </div>
 
