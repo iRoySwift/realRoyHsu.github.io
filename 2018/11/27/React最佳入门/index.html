@@ -19,7 +19,6 @@
 <meta property="og:image" content="https://realroyhsu.github.io/Img/React/setState.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/React/event.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/React/eventthis.png">
-<meta property="og:image" content="https://realroyhsu.github.io/Img/React/update.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/React/unmounting.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/React/error.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/React/build.png">
@@ -27,9 +26,9 @@
 <meta property="og:image" content="https://realroyhsu.github.io/Img/React/build.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/React/develoop.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/React/mounttting.png">
-<meta property="og:image" content="https://realroyhsu.github.io/Img/React/input.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/React/inputvalue.png">
 <meta property="og:image" content="https://realroyhsu.github.io/Img/React/send.png">
-<meta property="og:updated_time" content="2018-11-27T14:05:04.858Z">
+<meta property="og:updated_time" content="2018-11-27T14:31:34.770Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React最佳入门">
 <meta name="twitter:description" content="React最佳入门 1.运行Hello React 2.认识jsx 3.jsx使用方式 4.认识组件 5.认识props 6.children和类组件的props 7.defaultProps 8.prop-types 9.内部状态state 10.state其它特性 11.事件系统 12.事件系统中this指向 13.生命周期 14.生命周期卸载与其他事项 15.生命周期错误捕获与总结 16">
@@ -377,21 +376,10 @@
 </ul>
 <ul>
 <li><p>1.Mounting</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>; <span class="hljs-comment">//引入react用来写jsx语法</span></span><br><span class="line"><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">"react-dom"</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MagicNumber</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      number: <span class="hljs-built_in">Math</span>.random(),</span><br><span class="line">      name: props.name + <span class="hljs-string">'888'</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"constructor mounting"</span>)<span class="hljs-comment">//mounting</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">static</span> getDerivedStateFromProps(props,state)&#123;<span class="hljs-comment">//mounting  获取props 与 state值，之后进行渲染,更改state</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(props,state,<span class="hljs-string">"mounting"</span>)</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"getDerivedStateFromProps mounting"</span>);</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'outDiv'</span>),<span class="hljs-string">"getDerivedStateFromProps"</span>,<span class="hljs-string">"mounting"</span>)<span class="hljs-comment">//获取真实dom,但是undefined</span></span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">      name:props.name === state.name ? props.name + <span class="hljs-string">'OK'</span> : props.name + <span class="hljs-string">'FAIL'</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidMount()&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"组件装载完成 mounting"</span>)</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'outDiv'</span>),<span class="hljs-string">"componentDidMount"</span>,<span class="hljs-string">"mounting"</span>)<span class="hljs-comment">//获取真实dom</span></span><br><span class="line">  &#125;</span><br><span class="line">  handleButtonClicka=<span class="hljs-function">(<span class="hljs-params">event</span>)=&gt;</span>&#123;<span class="hljs-comment">//类属性语法：可以写方法是，handleButtonClicka用箭头函数，自动绑定this</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(event.target);</span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">      number: <span class="hljs-built_in">Math</span>.random()</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"render mounting"</span>);<span class="hljs-comment">//mounting</span></span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; number, name &#125; = <span class="hljs-keyword">this</span>.state;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div id=<span class="hljs-string">"outDiv"</span>&gt;</span><br><span class="line">        &lt;h1&gt;&#123;name&#125;&lt;<span class="hljs-regexp">/h1&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;p&gt;&#123;number&#125;!&lt;/</span>p&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="hljs-keyword">this</span>.handleButtonClicka&#125;&gt;change number <span class="hljs-number">4</span>&lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;MagicNumber name=<span class="hljs-string">"m1"</span> /&gt;</span><br><span class="line">  &lt;<span class="hljs-regexp">/div&gt;,</span></span><br><span class="line"><span class="hljs-regexp">  document.getElementById("root")</span></span><br><span class="line"><span class="hljs-regexp">);</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">```  </span></span><br><span class="line"><span class="hljs-regexp">- 运行结果  </span></span><br><span class="line"><span class="hljs-regexp">  &lt;div align="left"&gt;</span></span><br><span class="line"><span class="hljs-regexp">    &lt;img src="https:/</span><span class="hljs-regexp">/realroyhsu.github.io/</span>Img/React/mounting.png<span class="hljs-string">"/&gt;</span></span><br><span class="line"><span class="hljs-string">  &lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">- 2.Update 更新  </span></span><br><span class="line"><span class="hljs-string">```javascript</span></span><br><span class="line"><span class="hljs-string">import React, &#123; Component &#125; from "</span>react<span class="hljs-string">"; //引入react用来写jsx语法</span></span><br><span class="line"><span class="hljs-string">import ReactDOM from "</span>react-dom<span class="hljs-string">";</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">class MagicNumber extends Component &#123;</span></span><br><span class="line"><span class="hljs-string">  constructor(props) &#123;</span></span><br><span class="line"><span class="hljs-string">    super(props);</span></span><br><span class="line"><span class="hljs-string">    this.state = &#123;</span></span><br><span class="line"><span class="hljs-string">      number: Math.random(),</span></span><br><span class="line"><span class="hljs-string">      name: props.name + '888'</span></span><br><span class="line"><span class="hljs-string">    &#125;;</span></span><br><span class="line"><span class="hljs-string">    console.log("</span><span class="hljs-keyword">constructor</span> mounting")//mounting</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleButtonClicka=(event)=&gt;&#123;<span class="hljs-comment">//类属性语法：可以写方法是，handleButtonClicka用箭头函数，自动绑定this</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">      number: <span class="hljs-built_in">Math</span>.random()</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">static</span> getDerivedStateFromProps(props,state)&#123;<span class="hljs-comment">//mounting  获取props 与 state值，之后进行渲染,更改state</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(props,state,<span class="hljs-string">"getDerivedStateFromProps"</span>,<span class="hljs-string">"mounting"</span>)</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"getDerivedStateFromProps mounting"</span>);</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'outDiv'</span>),<span class="hljs-string">"getDerivedStateFromProps"</span>,<span class="hljs-string">"mounting"</span>)<span class="hljs-comment">//获取真实dom,但是undefined</span></span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">      name:props.name === state.name ? props.name + <span class="hljs-string">'OK'</span> : props.name + <span class="hljs-string">'FAIL'</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidMount()&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"组件装载完成 mounting"</span>)<span class="hljs-comment">//mounting</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'outDiv'</span>),<span class="hljs-string">"componentDidMount"</span>,<span class="hljs-string">"mounting"</span>)<span class="hljs-comment">//获取真实dom</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">//update</span></span><br><span class="line">  shouldComponentUpdate(nextProps,nextState)&#123;<span class="hljs-comment">//判断props与state值，变化，是否需要更新页面，页面不需要更新，返回false</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(nextProps,nextState,<span class="hljs-string">"shouldComponentUpdate"</span>)</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<span class="hljs-comment">//返回false，后面的生命周期不执行 页面不刷新</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  getSnapshotBeforeUpdate(prevProps,prevState)&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-string">'kkk getSnapshotBeforeUpdate'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidUpdate(prevProps,prevState,snapShot)&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(snapShot,<span class="hljs-string">"componentDidUpdate"</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"render mounting"</span>);<span class="hljs-comment">//mounting</span></span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; number, name &#125; = <span class="hljs-keyword">this</span>.state;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div id=<span class="hljs-string">"outDiv"</span>&gt;</span><br><span class="line">        &lt;h1&gt;&#123;name&#125;&lt;<span class="hljs-regexp">/h1&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;p&gt;&#123;number&#125;!&lt;/</span>p&gt;</span><br><span class="line">        -----------------------------</span><br><span class="line">        &lt;Sun num=&#123;number&#125; /&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="hljs-keyword">this</span>.handleButtonClicka&#125;&gt;change number <span class="hljs-number">4</span>&lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sun</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      num : props.num</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">//不调用这个方法，子组件的num 不会随着父组件的改变而改变</span></span><br><span class="line">  <span class="hljs-keyword">static</span> getDerivedStateFromProps(props,state)&#123;<span class="hljs-comment">//mounting  </span></span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">      num:props.num<span class="hljs-comment">//这样才能，同步子组件与父组件的值</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div&gt;&#123;<span class="hljs-keyword">this</span>.state.num&#125;&lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">ReactDOM.render(</span></span><br><span class="line"><span class="hljs-regexp">  &lt;div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    &lt;MagicNumber name="m1" /</span>&gt;</span><br><span class="line">  &lt;<span class="hljs-regexp">/div&gt;,</span></span><br><span class="line"><span class="hljs-regexp">  document.getElementById("root")</span></span><br><span class="line"><span class="hljs-regexp">);</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>; <span class="hljs-comment">//引入react用来写jsx语法</span></span><br><span class="line"><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">"react-dom"</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MagicNumber</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      number: <span class="hljs-built_in">Math</span>.random(),</span><br><span class="line">      name: props.name + <span class="hljs-string">'888'</span></span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"constructor mounting"</span>)<span class="hljs-comment">//mounting</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">static</span> getDerivedStateFromProps(props,state)&#123;<span class="hljs-comment">//mounting  获取props 与 state值，之后进行渲染,更改state</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(props,state,<span class="hljs-string">"mounting"</span>)</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"getDerivedStateFromProps mounting"</span>);</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'outDiv'</span>),<span class="hljs-string">"getDerivedStateFromProps"</span>,<span class="hljs-string">"mounting"</span>)<span class="hljs-comment">//获取真实dom,但是undefined</span></span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">      name:props.name === state.name ? props.name + <span class="hljs-string">'OK'</span> : props.name + <span class="hljs-string">'FAIL'</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidMount()&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"组件装载完成 mounting"</span>)</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'outDiv'</span>),<span class="hljs-string">"componentDidMount"</span>,<span class="hljs-string">"mounting"</span>)<span class="hljs-comment">//获取真实dom</span></span><br><span class="line">  &#125;</span><br><span class="line">  handleButtonClicka=<span class="hljs-function">(<span class="hljs-params">event</span>)=&gt;</span>&#123;<span class="hljs-comment">//类属性语法：可以写方法是，handleButtonClicka用箭头函数，自动绑定this</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(event.target);</span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">      number: <span class="hljs-built_in">Math</span>.random()</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"render mounting"</span>);<span class="hljs-comment">//mounting</span></span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; number, name &#125; = <span class="hljs-keyword">this</span>.state;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div id=<span class="hljs-string">"outDiv"</span>&gt;</span><br><span class="line">        &lt;h1&gt;&#123;name&#125;&lt;<span class="hljs-regexp">/h1&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;p&gt;&#123;number&#125;!&lt;/</span>p&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="hljs-keyword">this</span>.handleButtonClicka&#125;&gt;change number <span class="hljs-number">4</span>&lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;MagicNumber name=<span class="hljs-string">"m1"</span> /&gt;</span><br><span class="line">  &lt;<span class="hljs-regexp">/div&gt;,</span></span><br><span class="line"><span class="hljs-regexp">  document.getElementById("root")</span></span><br><span class="line"><span class="hljs-regexp">);</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">```  </span></span><br><span class="line"><span class="hljs-regexp">- 运行结果  </span></span><br><span class="line"><span class="hljs-regexp">  &lt;div align="left"&gt;</span></span><br><span class="line"><span class="hljs-regexp">    &lt;img src="https:/</span><span class="hljs-regexp">/realroyhsu.github.io/</span>Img/React/mounting.png<span class="hljs-string">"/&gt;</span></span><br><span class="line"><span class="hljs-string">  &lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">- 2.Update 更新  </span></span><br><span class="line"><span class="hljs-string">```javascript</span></span><br><span class="line"><span class="hljs-string">import React, &#123; Component &#125; from "</span>react<span class="hljs-string">"; //引入react用来写jsx语法</span></span><br><span class="line"><span class="hljs-string">import ReactDOM from "</span>react-dom<span class="hljs-string">";</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">class MagicNumber extends Component &#123;</span></span><br><span class="line"><span class="hljs-string">  constructor(props) &#123;</span></span><br><span class="line"><span class="hljs-string">    super(props);</span></span><br><span class="line"><span class="hljs-string">    this.state = &#123;</span></span><br><span class="line"><span class="hljs-string">      number: Math.random(),</span></span><br><span class="line"><span class="hljs-string">      name: props.name + '888'</span></span><br><span class="line"><span class="hljs-string">    &#125;;</span></span><br><span class="line"><span class="hljs-string">    console.log("</span><span class="hljs-keyword">constructor</span> mounting")//mounting</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleButtonClicka=(event)=&gt;&#123;<span class="hljs-comment">//类属性语法：可以写方法是，handleButtonClicka用箭头函数，自动绑定this</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">      number: <span class="hljs-built_in">Math</span>.random()</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-keyword">static</span> getDerivedStateFromProps(props,state)&#123;<span class="hljs-comment">//mounting  获取props 与 state值，之后进行渲染,更改state</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(props,state,<span class="hljs-string">"getDerivedStateFromProps"</span>,<span class="hljs-string">"mounting"</span>)</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"getDerivedStateFromProps mounting"</span>);</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'outDiv'</span>),<span class="hljs-string">"getDerivedStateFromProps"</span>,<span class="hljs-string">"mounting"</span>)<span class="hljs-comment">//获取真实dom,但是undefined</span></span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">      name:props.name === state.name ? props.name + <span class="hljs-string">'OK'</span> : props.name + <span class="hljs-string">'FAIL'</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidMount()&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"组件装载完成 mounting"</span>)<span class="hljs-comment">//mounting</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'outDiv'</span>),<span class="hljs-string">"componentDidMount"</span>,<span class="hljs-string">"mounting"</span>)<span class="hljs-comment">//获取真实dom</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="hljs-comment">//update</span></span><br><span class="line">  shouldComponentUpdate(nextProps,nextState)&#123;<span class="hljs-comment">//判断props与state值，变化，是否需要更新页面，页面不需要更新，返回false</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(nextProps,nextState,<span class="hljs-string">"shouldComponentUpdate"</span>)</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<span class="hljs-comment">//返回false，后面的生命周期不执行 页面不刷新</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  getSnapshotBeforeUpdate(prevProps,prevState)&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-string">'kkk getSnapshotBeforeUpdate'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  componentDidUpdate(prevProps,prevState,snapShot)&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(snapShot,<span class="hljs-string">"componentDidUpdate"</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"render mounting"</span>);<span class="hljs-comment">//mounting</span></span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; number, name &#125; = <span class="hljs-keyword">this</span>.state;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div id=<span class="hljs-string">"outDiv"</span>&gt;</span><br><span class="line">        &lt;h1&gt;&#123;name&#125;&lt;<span class="hljs-regexp">/h1&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;p&gt;&#123;number&#125;!&lt;/</span>p&gt;</span><br><span class="line">        -----------------------------</span><br><span class="line">        &lt;Sun num=&#123;number&#125; /&gt;</span><br><span class="line">        &lt;button onClick=&#123;<span class="hljs-keyword">this</span>.handleButtonClicka&#125;&gt;change number <span class="hljs-number">4</span>&lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sun</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props)&#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      num : props.num</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="hljs-comment">//不调用这个方法，子组件的num 不会随着父组件的改变而改变</span></span><br><span class="line">  <span class="hljs-keyword">static</span> getDerivedStateFromProps(props,state)&#123;<span class="hljs-comment">//mounting  </span></span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">      num:props.num<span class="hljs-comment">//这样才能，同步子组件与父组件的值</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div&gt;&#123;<span class="hljs-keyword">this</span>.state.num&#125;&lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">ReactDOM.render(</span></span><br><span class="line"><span class="hljs-regexp">  &lt;div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    &lt;MagicNumber name="m1" /</span>&gt;</span><br><span class="line">  &lt;<span class="hljs-regexp">/div&gt;,</span></span><br><span class="line"><span class="hljs-regexp">  document.getElementById("root")</span></span><br><span class="line"><span class="hljs-regexp">);</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">```  </span></span><br><span class="line"><span class="hljs-regexp">- 运行结果  </span></span><br><span class="line"><span class="hljs-regexp">  &lt;div align="left"&gt;</span></span><br><span class="line"><span class="hljs-regexp">    &lt;img src="https:/</span><span class="hljs-regexp">/realroyhsu.github.io/</span>Img/React/update.png<span class="hljs-string">"/&gt;</span></span><br><span class="line"><span class="hljs-string">  &lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">## 14.生命周期卸载与其他事项</span></span><br><span class="line"><span class="hljs-string">  - Unmounting 卸载  </span></span><br><span class="line"><span class="hljs-string">  - componentWilUnmount()&#123;&#125; 执行一次</span></span><br><span class="line"><span class="hljs-string">```javascript</span></span><br><span class="line"><span class="hljs-string">import React, &#123; Component &#125; from "</span>react<span class="hljs-string">"; //引入react用来写jsx语法</span></span><br><span class="line"><span class="hljs-string">import ReactDOM from "</span>react-dom<span class="hljs-string">";</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">class MagicNumber extends Component &#123;</span></span><br><span class="line"><span class="hljs-string">  constructor(props) &#123;</span></span><br><span class="line"><span class="hljs-string">    super(props);</span></span><br><span class="line"><span class="hljs-string">    this.state = &#123;</span></span><br><span class="line"><span class="hljs-string">      number: Math.random(),</span></span><br><span class="line"><span class="hljs-string">      name: props.name + '888'</span></span><br><span class="line"><span class="hljs-string">    &#125;;</span></span><br><span class="line"><span class="hljs-string">  &#125;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">  handleButtonClicka=(event)=&gt;&#123;//类属性语法：可以写方法是，handleButtonClicka用箭头函数，自动绑定this</span></span><br><span class="line"><span class="hljs-string">    this.setState(&#123;</span></span><br><span class="line"><span class="hljs-string">      number: Math.random()</span></span><br><span class="line"><span class="hljs-string">    &#125;);</span></span><br><span class="line"><span class="hljs-string">  &#125;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">  render() &#123;</span></span><br><span class="line"><span class="hljs-string">    let &#123; number, name &#125; = this.state;</span></span><br><span class="line"><span class="hljs-string">    return (</span></span><br><span class="line"><span class="hljs-string">      &lt;div id="</span>outDiv<span class="hljs-string">"&gt;</span></span><br><span class="line"><span class="hljs-string">        &lt;h1&gt;&#123;name&#125;&lt;/h1&gt;</span></span><br><span class="line"><span class="hljs-string">        &lt;p&gt;&#123;number&#125;!&lt;/p&gt;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">        &lt;p&gt;-----------------------------&lt;/p&gt;</span></span><br><span class="line"><span class="hljs-string">        &#123;number&gt;0.5 &amp;&amp; &lt;Sun num=&#123;number&#125; /&gt;&#125;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">        &lt;button onClick=&#123;this.handleButtonClicka&#125;&gt;change number 4&lt;/button&gt;</span></span><br><span class="line"><span class="hljs-string">      &lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string">    );</span></span><br><span class="line"><span class="hljs-string">  &#125;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">class Sun extends Component&#123;</span></span><br><span class="line"><span class="hljs-string">  constructor(props)&#123;//只执行一次</span></span><br><span class="line"><span class="hljs-string">    super(props);</span></span><br><span class="line"><span class="hljs-string">    this.state = &#123;</span></span><br><span class="line"><span class="hljs-string">      num : props.num</span></span><br><span class="line"><span class="hljs-string">    &#125;</span></span><br><span class="line"><span class="hljs-string">  &#125;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">  componentDidMount()&#123;//只执行一次</span></span><br><span class="line"><span class="hljs-string">    console.log('Sun 创建')</span></span><br><span class="line"><span class="hljs-string">  &#125;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">  componentDidUpdate()&#123;</span></span><br><span class="line"><span class="hljs-string">    console.log('Sun 更新')</span></span><br><span class="line"><span class="hljs-string">  &#125;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">  componentWillUnmount()&#123;//只执行一次</span></span><br><span class="line"><span class="hljs-string">    console.log('Sun 卸载')</span></span><br><span class="line"><span class="hljs-string">  &#125;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">  render() &#123;</span></span><br><span class="line"><span class="hljs-string">    return (</span></span><br><span class="line"><span class="hljs-string">      &lt;div&gt;SUN&lt;/div&gt;</span></span><br><span class="line"><span class="hljs-string">    );</span></span><br><span class="line"><span class="hljs-string">  &#125;</span></span><br><span class="line"><span class="hljs-string">&#125;</span></span><br><span class="line"><span class="hljs-string"></span></span><br><span class="line"><span class="hljs-string">ReactDOM.render(</span></span><br><span class="line"><span class="hljs-string">  &lt;div&gt;</span></span><br><span class="line"><span class="hljs-string">    &lt;MagicNumber name="</span>m1<span class="hljs-string">" /&gt;</span></span><br><span class="line"><span class="hljs-string">  &lt;/div&gt;,</span></span><br><span class="line"><span class="hljs-string">  document.getElementById("</span>root<span class="hljs-string">")</span></span><br><span class="line"><span class="hljs-string">);</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>运行结果  </p>
-<div align="left"><br>  <img src="https://realroyhsu.github.io/Img/React/update.png"><br></div>
-
-
-</li>
-</ul>
-<h2 id="14-生命周期卸载与其他事项"><a href="#14-生命周期卸载与其他事项" class="headerlink" title="14.生命周期卸载与其他事项"></a>14.生命周期卸载与其他事项</h2><ul>
-<li>Unmounting 卸载  </li>
-<li>componentWilUnmount(){} 执行一次<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React, &#123; Component &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>; <span class="hljs-comment">//引入react用来写jsx语法</span></span><br><span class="line"><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">"react-dom"</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MagicNumber</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      number: <span class="hljs-built_in">Math</span>.random(),</span><br><span class="line">      name: props.name + <span class="hljs-string">'888'</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleButtonClicka=<span class="hljs-function">(<span class="hljs-params">event</span>)=&gt;</span>&#123;<span class="hljs-comment">//类属性语法：可以写方法是，handleButtonClicka用箭头函数，自动绑定this</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">      number: <span class="hljs-built_in">Math</span>.random()</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; number, name &#125; = <span class="hljs-keyword">this</span>.state;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div id=<span class="hljs-string">"outDiv"</span>&gt;</span><br><span class="line">        &lt;h1&gt;&#123;name&#125;&lt;<span class="hljs-regexp">/h1&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;p&gt;&#123;number&#125;!&lt;/</span>p&gt;</span><br><span class="line"></span><br><span class="line">        &lt;p&gt;-----------------------------<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></span><br><span class="line">        &#123;number&gt;<span class="hljs-number">0.5</span> &amp;&amp; <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Sun</span> <span class="hljs-attr">num</span>=<span class="hljs-string">&#123;number&#125;</span> /&gt;</span>&#125;</span></span><br><span class="line"><span class="hljs-xml"></span></span><br><span class="line"><span class="hljs-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">&#123;this.handleButtonClicka&#125;</span>&gt;</span>change number 4<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span></span><br><span class="line"><span class="hljs-xml">      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sun</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props)&#123;<span class="hljs-comment">//只执行一次</span></span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      num : props.num</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount()&#123;<span class="hljs-comment">//只执行一次</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Sun 创建'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidUpdate()&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Sun 更新'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentWillUnmount()&#123;<span class="hljs-comment">//只执行一次</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Sun 卸载'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div&gt;SUN&lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">ReactDOM.render(</span></span><br><span class="line"><span class="hljs-regexp">  &lt;div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    &lt;MagicNumber name="m1" /</span>&gt;</span><br><span class="line">  &lt;<span class="hljs-regexp">/div&gt;,</span></span><br><span class="line"><span class="hljs-regexp">  document.getElementById("root")</span></span><br><span class="line"><span class="hljs-regexp">);</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>运行结果  <div align="left"><br>  <img src="https://realroyhsu.github.io/Img/React/unmounting.png"><br></div>  
+<div align="left"><br>  <img src="https://realroyhsu.github.io/Img/React/unmounting.png"><br></div>  
 
 </li>
 </ul>
@@ -470,19 +458,13 @@
 </li>
 </ul>
 <h2 id="17-组件受控"><a href="#17-组件受控" class="headerlink" title="17.组件受控"></a>17.组件受控</h2><ul>
-<li><p>不受控<code>&lt;input type=&quot;text&quot; ref={(el)=&gt;this.input=el} /&gt;</code></p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React, &#123; Component,createRef &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>; <span class="hljs-comment">//引入react用来写jsx语法</span></span><br><span class="line"><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">"react-dom"</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MagicNumber</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props) &#123;</span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      number: <span class="hljs-built_in">Math</span>.random(),</span><br><span class="line">      name: props.name + <span class="hljs-string">'888'</span>,</span><br><span class="line">      hasError:<span class="hljs-literal">false</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleButtonClicka=<span class="hljs-function">(<span class="hljs-params">event</span>)=&gt;</span>&#123;<span class="hljs-comment">//类属性语法：可以写方法是，handleButtonClicka用箭头函数，自动绑定this</span></span><br><span class="line">    <span class="hljs-comment">//ref回调函数的方式，获取真实DOM</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.outDiv)</span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">      number: <span class="hljs-keyword">this</span>.input.value</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount()&#123;</span><br><span class="line">    <span class="hljs-comment">//字符串的方式获取正式dom</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.refs.outDiv,<span class="hljs-string">"componentDidMount"</span>);<span class="hljs-comment">//最先获取到DOM</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidCatch(error,info)&#123;<span class="hljs-comment">//捕获错误信息</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.setState(&#123;</span><br><span class="line">      hasError:<span class="hljs-literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">let</span> &#123; number, name,hasError&#125; = <span class="hljs-keyword">this</span>.state;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.outDiv,<span class="hljs-string">"render"</span>);<span class="hljs-comment">//真实DOM，还没有获取到,第一次加载时，还没获取到；点击后，可以获取到</span></span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      <span class="hljs-comment">//ref回调函数的方式，获取真实DOM</span></span><br><span class="line">      &lt;div id=<span class="hljs-string">"outDiv"</span> ref=<span class="hljs-string">"outDiv"</span>&gt;</span><br><span class="line">        &lt;h1&gt;&#123;name&#125;&lt;<span class="hljs-regexp">/h1&gt;</span></span><br><span class="line"><span class="hljs-regexp">        &lt;input type="text" ref=&#123;(el)=&gt;this.input=el&#125; /</span>&gt;</span><br><span class="line">        &lt;p&gt;&#123;number&#125;!<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></span><br><span class="line">        &lt;p&gt;-----------------------------<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">          &lt;Sun num=&#123;number&#125; /&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        &lt;button onClick=&#123;<span class="hljs-keyword">this</span>.handleButtonClicka&#125;&gt;change number <span class="hljs-number">4</span>&lt;<span class="hljs-regexp">/button&gt;</span></span><br><span class="line"><span class="hljs-regexp">      &lt;/</span>div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sun</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span></span>&#123;</span><br><span class="line">  <span class="hljs-keyword">constructor</span>(props)&#123;<span class="hljs-comment">//只执行一次</span></span><br><span class="line">    <span class="hljs-keyword">super</span>(props);</span><br><span class="line">    <span class="hljs-keyword">this</span>.state = &#123;</span><br><span class="line">      num : props.num</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidMount()&#123;<span class="hljs-comment">//只执行一次</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Sun 创建'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentDidUpdate()&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Sun 更新'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  componentWillUnmount()&#123;<span class="hljs-comment">//只执行一次</span></span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Sun 卸载'</span>)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">      &lt;div&gt;SUN&lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    );</span></span><br><span class="line"><span class="hljs-regexp">  &#125;</span></span><br><span class="line"><span class="hljs-regexp">&#125;</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">ReactDOM.render(</span></span><br><span class="line"><span class="hljs-regexp">  &lt;div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    &lt;MagicNumber name="m1" /</span>&gt;</span><br><span class="line">  &lt;<span class="hljs-regexp">/div&gt;,</span></span><br><span class="line"><span class="hljs-regexp">  document.getElementById("root")</span></span><br><span class="line"><span class="hljs-regexp">);</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>运行结果</p>
-<div align="left"><br>  <img src="https://realroyhsu.github.io/Img/React/input.png"><br></div>
-</li>
-<li><p>组件受控:input里面无法输入值，需要通过改变state来获取值<br><code>`</code>javascript<br>import React, { Component,createRef } from “react”; //引入react用来写jsx语法<br>import ReactDOM from “react-dom”;</p>
-</li>
+<li>不受控<code>&lt;input type=&quot;text&quot; ref={(el)=&gt;this.input=el} /&gt;</code><br><code>`</code>javascript<br>import React, { Component,createRef } from “react”; //引入react用来写jsx语法<br>import ReactDOM from “react-dom”;</li>
 </ul>
-<p>class MagicNumber extends Component {<br>  constructor(props) {<br>    super(props);<br>    this.state = {<br>      number: Math.random(),<br>      name: props.name + ‘888’,<br>      hasError:false,<br>      //受控<br>      inputValue:””<br>    };<br>  }</p>
-<p>  handleButtonClicka=(event)=&gt;{//类属性语法：可以写方法是，handleButtonClicka用箭头函数，自动绑定this<br>    //ref回调函数的方式，获取真实DOM<br>    console.log(this.outDiv)<br>    this.setState({<br>      number: this.state.inputValue,<br>      //清空input<br>      inputValue:’’<br>    });<br>  }</p>
-<p>  //受控input获取值<br>  handleInputChange=(event) =&gt; {<br>    let value = event.target.value;<br>    this.setState({<br>      inputValue:value + “00”<br>    })<br>  }</p>
-<p>  render() {<br>    let { number, name,hasError,inputValue} = this.state;<br>    console.log(this.outDiv,”render”);//真实DOM，还没有获取到,第一次加载时，还没获取到；点击后，可以获取到<br>    return (<br>      //ref回调函数的方式，获取真实DOM<br>      <div id="outDiv" ref="outDiv"><br>        <h1>{name}</h1><br>        <input type="text" value="{inputValue}" onchange="{this.handleInputChange}" ref="{(el)=">this.input=el} /&gt;<br>        <p>{number}!</p><br>        <p>—————————–</p></div></p>
+<p>class MagicNumber extends Component {<br>  constructor(props) {<br>    super(props);<br>    this.state = {<br>      number: Math.random(),<br>      name: props.name + ‘888’,<br>      hasError:false<br>    };<br>  }</p>
+<p>  handleButtonClicka=(event)=&gt;{//类属性语法：可以写方法是，handleButtonClicka用箭头函数，自动绑定this<br>    //ref回调函数的方式，获取真实DOM<br>    console.log(this.outDiv)<br>    this.setState({<br>      number: this.input.value<br>    });<br>  }</p>
+<p>  componentDidMount(){<br>    //字符串的方式获取正式dom<br>    console.log(this.refs.outDiv,”componentDidMount”);//最先获取到DOM<br>  }</p>
+<p>  componentDidCatch(error,info){//捕获错误信息<br>    this.setState({<br>      hasError:true<br>    })<br>  }</p>
+<p>  render() {<br>    let { number, name,hasError} = this.state;<br>    console.log(this.outDiv,”render”);//真实DOM，还没有获取到,第一次加载时，还没获取到；点击后，可以获取到<br>    return (<br>      //ref回调函数的方式，获取真实DOM<br>      <div id="outDiv" ref="outDiv"><br>        <h1>{name}</h1><br>        <input type="text" ref="{(el)=">this.input=el} /&gt;<br>        <p>{number}!</p><br>        <p>—————————–</p></div></p>
 <pre><code>      &lt;Sun num={number} /&gt;
 
 
@@ -498,13 +480,12 @@
 <p>ReactDOM.render(<br>  <div><br>    <magicnumber name="m1"><br>  </magicnumber></div>,<br>  document.getElementById(“root”)<br>);</p>
 <pre><code>- 运行结果
   &lt;div align=&quot;left&quot;&gt;
-    &lt;img src=&quot;https://realroyhsu.github.io/Img/React/inputvalue.png&quot;/&gt;
-  &lt;/div&gt;  
+    &lt;img src=&quot;https://realroyhsu.github.io/Img/React/input.png&quot;/&gt;
+  &lt;/div&gt;
 
-## 18.基于回调的组件交流
-- 兄弟组件间的通信  
+- 组件受控:input里面无法输入值，需要通过改变state来获取值  
 
-```javascript  
+```javascript
 import React, { Component,createRef } from &quot;react&quot;; //引入react用来写jsx语法
 import ReactDOM from &quot;react-dom&quot;;
 
@@ -516,8 +497,7 @@ class MagicNumber extends Component {
       name: props.name + &apos;888&apos;,
       hasError:false,
       //受控
-      inputValue:&quot;&quot;,
-       msg:&apos;fadsf&apos;
+      inputValue:&quot;&quot;
     };
   }
 
@@ -528,7 +508,6 @@ class MagicNumber extends Component {
       number: this.state.inputValue,
       //清空input
       inputValue:&apos;&apos;
-
     });
   }
 
@@ -540,15 +519,8 @@ class MagicNumber extends Component {
     })
   }
 
-  //改变兄弟组件间的值
-  changeMsg=(value)=&gt;{
-    this.setState({
-      msg: value
-    })
-  }
-
   render() {
-    let { number, name,hasError,inputValue,msg} = this.state;
+    let { number, name,hasError,inputValue} = this.state;
     console.log(this.outDiv,&quot;render&quot;);//真实DOM，还没有获取到,第一次加载时，还没获取到；点击后，可以获取到
     return (
       //ref回调函数的方式，获取真实DOM
@@ -557,39 +529,42 @@ class MagicNumber extends Component {
         &lt;input type=&quot;text&quot; value={inputValue} onChange={this.handleInputChange} ref={(el)=&gt;this.input=el} /&gt;
         &lt;p&gt;{number}!&lt;/p&gt;
         &lt;p&gt;-----------------------------&lt;/p&gt;
-        &lt;Send changeMsg={this.changeMsg}/&gt;
-        &lt;p&gt;-----------------------------&lt;/p&gt;
-        &lt;Receive msg={msg}/&gt;
-        &lt;p&gt;-----------------------------&lt;/p&gt;
 
-        &lt;button onClick={()=&gt;this.handleButtonClicka}&gt;change number 4&lt;/button&gt;
+          &lt;Sun num={number} /&gt;
+
+
+        &lt;button onClick={this.handleButtonClicka}&gt;change number 4&lt;/button&gt;
       &lt;/div&gt;
     );
   }
 }
 
-&lt;!-- &lt;div style=&quot;background:red;&quot;&gt; --&gt;
+class Sun extends Component{
+  constructor(props){//只执行一次
+    super(props);
+    this.state = {
+      num : props.num
+    }
+  }
 
-function Send(props){
-  return (
-    &lt;div&gt;
-      &lt;h2&gt;发送消息&lt;/h2&gt;
-      &lt;button onClick={()=&gt;props.changeMsg(Math.random())}&gt;Send&lt;/button&gt;
-    &lt;/div&gt;
-  )
+  componentDidMount(){//只执行一次
+    console.log(&apos;Sun 创建&apos;)
+  }
+
+  componentDidUpdate(){
+    console.log(&apos;Sun 更新&apos;)
+  }
+
+  componentWillUnmount(){//只执行一次
+    console.log(&apos;Sun 卸载&apos;)
+  }
+
+  render() {
+    return (
+      &lt;div&gt;SUN&lt;/div&gt;
+    );
+  }
 }
-
-function Receive(props){
-  return (
-    &lt;div&gt;
-      &lt;h2&gt;接收消息&lt;/h2&gt;
-      &lt;p&gt;{props.msg}&lt;/p&gt;
-    &lt;/div&gt;
-  )
-}
-&lt;!-- &lt;/div&gt; --&gt;
-
-
 
 ReactDOM.render(
   &lt;div&gt;
@@ -598,6 +573,107 @@ ReactDOM.render(
   document.getElementById(&quot;root&quot;)
 );
 </code></pre><ul>
+<li>运行结果<div align="left"><br>  <img src="https://realroyhsu.github.io/Img/React/inputvalue.png"><br></div>  
+
+</li>
+</ul>
+<h2 id="18-基于回调的组件交流"><a href="#18-基于回调的组件交流" class="headerlink" title="18.基于回调的组件交流"></a>18.基于回调的组件交流</h2><ul>
+<li>兄弟组件间的通信  </li>
+</ul>
+<pre><code class="javascript"><span class="keyword">import</span> React, { Component,createRef } <span class="keyword">from</span> <span class="string">"react"</span>; <span class="comment">//引入react用来写jsx语法</span>
+<span class="keyword">import</span> ReactDOM <span class="keyword">from</span> <span class="string">"react-dom"</span>;
+
+<span class="class"><span class="keyword">class</span> <span class="title">MagicNumber</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>{
+  <span class="keyword">constructor</span>(props) {
+    <span class="keyword">super</span>(props);
+    <span class="keyword">this</span>.state = {
+      number: <span class="built_in">Math</span>.random(),
+      name: props.name + <span class="string">'888'</span>,
+      hasError:<span class="literal">false</span>,
+      <span class="comment">//受控</span>
+      inputValue:<span class="string">""</span>,
+       msg:<span class="string">'fadsf'</span>
+    };
+  }
+
+  handleButtonClicka=<span class="function">(<span class="params">event</span>)=&gt;</span>{<span class="comment">//类属性语法：可以写方法是，handleButtonClicka用箭头函数，自动绑定this</span>
+    <span class="comment">//ref回调函数的方式，获取真实DOM</span>
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>.outDiv)
+    <span class="keyword">this</span>.setState({
+      number: <span class="keyword">this</span>.state.inputValue,
+      <span class="comment">//清空input</span>
+      inputValue:<span class="string">''</span>
+
+    });
+  }
+
+  <span class="comment">//受控input获取值</span>
+  handleInputChange=<span class="function">(<span class="params">event</span>) =&gt;</span> {
+    <span class="keyword">let</span> value = event.target.value;
+    <span class="keyword">this</span>.setState({
+      inputValue:value + <span class="string">"00"</span>
+    })
+  }
+
+  <span class="comment">//改变兄弟组件间的值</span>
+  changeMsg=<span class="function">(<span class="params">value</span>)=&gt;</span>{
+    <span class="keyword">this</span>.setState({
+      msg: value
+    })
+  }
+
+  render() {
+    <span class="keyword">let</span> { number, name,hasError,inputValue,msg} = <span class="keyword">this</span>.state;
+    <span class="built_in">console</span>.log(<span class="keyword">this</span>.outDiv,<span class="string">"render"</span>);<span class="comment">//真实DOM，还没有获取到,第一次加载时，还没获取到；点击后，可以获取到</span>
+    <span class="keyword">return</span> (
+      <span class="comment">//ref回调函数的方式，获取真实DOM</span>
+      &lt;div id=<span class="string">"outDiv"</span> ref=<span class="string">"outDiv"</span>&gt;
+        &lt;h1&gt;{name}&lt;<span class="regexp">/h1&gt;</span>
+<span class="regexp">        &lt;input type="text" value={inputValue} onChange={this.handleInputChange} ref={(el)=&gt;this.input=el} /</span>&gt;
+        &lt;p&gt;{number}!<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>
+        &lt;p&gt;-----------------------------<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>
+        &lt;Send changeMsg={<span class="keyword">this</span>.changeMsg}/&gt;
+        &lt;p&gt;-----------------------------<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>
+        &lt;Receive msg={msg}/&gt;
+        &lt;p&gt;-----------------------------<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span>
+
+        &lt;button onClick={()=&gt;<span class="keyword">this</span>.handleButtonClicka}&gt;change number <span class="number">4</span>&lt;<span class="regexp">/button&gt;</span>
+<span class="regexp">      &lt;/</span>div&gt;
+    );
+  }
+}
+
+&lt;!-- <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"background:red;"</span>&gt;</span> --&gt;</span>
+<span class="xml"></span>
+<span class="xml">function Send(props){</span>
+<span class="xml">  return (</span>
+    &lt;div&gt;
+      &lt;h2&gt;发送消息&lt;/h2&gt;
+      &lt;button onClick={()=&gt;props.changeMsg(Math.random())}&gt;Send&lt;/button&gt;
+<span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>
+<span class="xml">  )</span>
+<span class="xml">}</span>
+<span class="xml"></span>
+<span class="xml">function Receive(props){</span>
+<span class="xml">  return (</span>
+    &lt;div&gt;
+      &lt;h2&gt;接收消息&lt;/h2&gt;
+      &lt;p&gt;{props.msg}&lt;/p&gt;
+<span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>
+<span class="xml">  )</span>
+<span class="xml">}</span>
+<span class="xml"><span class="comment">&lt;!-- &lt;/div&gt;</span></span> --&gt;
+
+
+
+ReactDOM.render(
+  &lt;div&gt;
+    &lt;MagicNumber name=<span class="string">"m1"</span> /&gt;
+  &lt;<span class="regexp">/div&gt;,</span>
+<span class="regexp">  document.getElementById("root")</span>
+<span class="regexp">);</span>
+</code></pre>
+<ul>
 <li>运行结果<div align="left"><br>  <img src="https://realroyhsu.github.io/Img/React/send.png"><br></div>
 </li>
 </ul>
@@ -708,7 +784,7 @@ ReactDOM.render(
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        5
+                        6
                     </p>
                 </div>
             </div>
@@ -728,7 +804,7 @@ ReactDOM.render(
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        5
+                        6
                     </p>
                 </div>
             </div>
@@ -853,7 +929,7 @@ ReactDOM.render(
                 <span class="level-item">React</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/SSH/">
@@ -891,7 +967,7 @@ ReactDOM.render(
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Sublime/" style="font-size: 10px;">Sublime</a> <a href="/tags/This/" style="font-size: 10px;">This</a>
+        <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Atom/" style="font-size: 10px;">Atom</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Sublime/" style="font-size: 10px;">Sublime</a> <a href="/tags/This/" style="font-size: 10px;">This</a>
     </div>
 </div>
 
@@ -932,26 +1008,26 @@ ReactDOM.render(
         <span class="has-mr-6">1.6</span>
         <span>13.生命周期</span>
         </a></li><li>
-        <a class="is-flex" href="#14-生命周期卸载与其他事项">
-        <span class="has-mr-6">1.7</span>
-        <span>14.生命周期卸载与其他事项</span>
-        </a></li><li>
         <a class="is-flex" href="#15-生命周期错误捕获与总结">
-        <span class="has-mr-6">1.8</span>
+        <span class="has-mr-6">1.7</span>
         <span>15.生命周期错误捕获与总结</span>
         </a></li><li>
         <a class="is-flex" href="#16-获取真实DOM">
-        <span class="has-mr-6">1.9</span>
+        <span class="has-mr-6">1.8</span>
         <span>16.获取真实DOM</span>
         </a></li><li>
         <a class="is-flex" href="#17-组件受控">
-        <span class="has-mr-6">1.10</span>
+        <span class="has-mr-6">1.9</span>
         <span>17.组件受控</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#undefined">
         <span class="has-mr-6">2</span>
         <span>{name}</span>
-        </a></li></ul>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#18-基于回调的组件交流">
+        <span class="has-mr-6">2.1</span>
+        <span>18.基于回调的组件交流</span>
+        </a></li></ul></li></ul>
         </div>
     </div>
 </div>
@@ -1107,6 +1183,17 @@ ReactDOM.render(
             </a>
         </li>
         
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
         </ul>
         </div>
     </div>
@@ -1132,12 +1219,23 @@ ReactDOM.render(
                 </li>
                 
                 <li>
+                    <a class="level is-marginless" href="/tags/Atom/">
+                        <span class="level-start">
+                            <span class="level-item">Atom</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
                     <a class="level is-marginless" href="/tags/React/">
                         <span class="level-start">
                             <span class="level-item">React</span>
                         </span>
                         <span class="level-end">
-                            <span class="level-item tag">1</span>
+                            <span class="level-item tag">2</span>
                         </span>
                     </a>
                 </li>
@@ -1337,6 +1435,17 @@ ReactDOM.render(
             </a>
         </li>
         
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
         </ul>
         </div>
     </div>
@@ -1362,12 +1471,23 @@ ReactDOM.render(
                 </li>
                 
                 <li>
+                    <a class="level is-marginless" href="/tags/Atom/">
+                        <span class="level-start">
+                            <span class="level-item">Atom</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
                     <a class="level is-marginless" href="/tags/React/">
                         <span class="level-start">
                             <span class="level-item">React</span>
                         </span>
                         <span class="level-end">
-                            <span class="level-item tag">1</span>
+                            <span class="level-item tag">2</span>
                         </span>
                     </a>
                 </li>
