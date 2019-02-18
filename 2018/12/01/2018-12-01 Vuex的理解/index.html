@@ -1,0 +1,1729 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8">
+<title>Vuex的理解 - Roy Blog!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+
+    <meta name="description" content="由于Vuex的官方文档在各个模块之间缺乏一些过渡，另外新概念很多，使得初读时总有些云里雾里的感觉。于是本文在官方文档的基础上补充了一些自己的理解及相关的背景知识，尤其是试图让各个部分之间形成一定的连贯关系。希望能帮助初学者更快地理解Vuex。">
+<meta name="keywords" content="Vuex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vuex的理解">
+<meta property="og:url" content="http://yoursite.com/2018/12/01/2018-12-01 Vuex的理解/index.html">
+<meta property="og:site_name" content="Roy Blog!">
+<meta property="og:description" content="由于Vuex的官方文档在各个模块之间缺乏一些过渡，另外新概念很多，使得初读时总有些云里雾里的感觉。于是本文在官方文档的基础上补充了一些自己的理解及相关的背景知识，尤其是试图让各个部分之间形成一定的连贯关系。希望能帮助初学者更快地理解Vuex。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://vuex.vuejs.org/zh-cn/images/vuex.png">
+<meta property="og:updated_time" content="2019-02-18T16:31:56.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vuex的理解">
+<meta name="twitter:description" content="由于Vuex的官方文档在各个模块之间缺乏一些过渡，另外新概念很多，使得初读时总有些云里雾里的感觉。于是本文在官方文档的基础上补充了一些自己的理解及相关的背景知识，尤其是试图让各个部分之间形成一定的连贯关系。希望能帮助初学者更快地理解Vuex。">
+<meta name="twitter:image" content="https://vuex.vuejs.org/zh-cn/images/vuex.png">
+<meta name="twitter:creator" content="@realRoyHsu">
+<meta name="twitter:site" content="https://twitter.com/realRoyHsu">
+
+
+
+
+
+<link rel="icon" href="/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+<link rel="stylesheet" href="/css/style.css">
+
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+    
+
+    
+    
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+    
+
+    
+    
+    
+    <style>body>.navbar,body>.section,body>.footer{opacity: 0}</style>
+    
+
+    
+    
+    
+    
+
+
+    
+    
+<script async src="https://www.googletagmanager.com/gtag/js?id=realRoyHsu@Gmail.com"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'realRoyHsu@Gmail.com');
+</script>
+
+
+    
+    
+    
+    
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+<style>
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #3273dc;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}
+</style>
+
+    
+
+
+</head>
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.svg" alt="" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+                <a class="navbar-item"
+                href="/about">About</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/realRoyHsu">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-12-01T02:17:22.000Z">2018-12-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Vuex/">Vuex</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    an hour read (About 7311 words)
+                </span>
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Vuex的理解
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>由于Vuex的官方文档在各个模块之间缺乏一些过渡，另外新概念很多，使得初读时总有些云里雾里的感觉。于是本文在官方文档的基础上补充了一些自己的理解及相关的背景知识，尤其是试图让各个部分之间形成一定的连贯关系。希望能帮助初学者更快地理解Vuex。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="一、Vuex是干什么用的？"><a href="#一、Vuex是干什么用的？" class="headerlink" title="一、Vuex是干什么用的？"></a>一、Vuex是干什么用的？</h3><p>它是用于对复杂应用进行状态管理用的（官方说法是它是一种状态管理模式）。</p>
+<p>“杀鸡不用宰牛刀”。对于简单的项目，根本用不着Vuex这把“宰牛刀”。那简单的项目用什么呢？用Vue.js官方提供的<a href="https://cn.vuejs.org/v2/guide/components.html#非父子组件的通信" target="_blank" rel="noopener">事件总线</a>就可以了。</p>
+<h3 id="二、我们import进来的Vuex对象都包含些什么呢？"><a href="#二、我们import进来的Vuex对象都包含些什么呢？" class="headerlink" title="二、我们import进来的Vuex对象都包含些什么呢？"></a>二、我们import进来的Vuex对象都包含些什么呢？</h3><p>我们使用Vuex的时候怎么用呢？通常都是这样：</p>
+<blockquote>
+<p>2.1 创建store.js文件</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> Vuex <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span>;</span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">      params: &#123;</span><br><span class="line">        P_START_DATE: <span class="hljs-string">""</span>,</span><br><span class="line">        P_END_DATE: <span class="hljs-string">""</span>,</span><br><span class="line">        P_CHANNEL_ID: <span class="hljs-string">""</span>,</span><br><span class="line">        P_PRODUCT_LINE: <span class="hljs-string">""</span>,</span><br><span class="line">        P_ORG_CODE: <span class="hljs-string">""</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    getParams(state)&#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> state.params;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-comment">// 同步</span></span><br><span class="line">  mutations: &#123;<span class="hljs-comment">// 可以通过mutations来改变state值</span></span><br><span class="line">    changeParams(state,payload)&#123;<span class="hljs-comment">// payload 对象方式提交</span></span><br><span class="line">      <span class="hljs-keyword">return</span> state.params = payload.payload;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-comment">// actions与mutations区别就是，actions异步</span></span><br><span class="line">  actions: &#123;<span class="hljs-comment">// 也可以通过atctions来调用mutations方法，来改变state</span></span><br><span class="line">    changeParams(content,payload)&#123;</span><br><span class="line">      content.commit(<span class="hljs-string">"changeParams"</span>,payload)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2.2 在vue入口文件mian.js中注册store</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span></span><br><span class="line"><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">'./store/store.js'</span></span><br><span class="line"><span class="hljs-keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="hljs-string">'#app'</span>,</span><br><span class="line">  store,</span><br><span class="line">  ...</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>这里import进来的Vuex是个什么东西呢？我们用<code>console.log</code>把它输出一下：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">console</span>.log(Vuex)</span><br></pre></td></tr></table></figure>
+<p>通过输出，我们发现其结构如下：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  Store:<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Store</span>(<span class="hljs-params">options</span>),</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">createNamespacedHelpers</span>:<span class="hljs-title">function</span> (<span class="hljs-params">namespace</span>),</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">install</span>:<span class="hljs-title">function</span> <span class="hljs-title">install</span>(<span class="hljs-params">_Vue</span>),</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">mapActions</span>:<span class="hljs-title">function</span> (<span class="hljs-params">namespace, map</span>),         // 对应<span class="hljs-title">Actions</span>的结果集</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">mapGetters</span>:<span class="hljs-title">function</span> (<span class="hljs-params">namespace, map</span>),         // 对应<span class="hljs-title">Getters</span>的结果集</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">mapMutations</span>:<span class="hljs-title">function</span> (<span class="hljs-params">namespace, map</span>),       // 对应<span class="hljs-title">Mutations</span>的结果集</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">mapState</span>:<span class="hljs-title">function</span> (<span class="hljs-params">namespace, map</span>),           // 对应<span class="hljs-title">State</span>的结果集</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">version</span>:"3.0.1",</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">__proto__</span>:<span class="hljs-title">Object</span>,</span></span><br><span class="line"><span class="hljs-function">&#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>可见，import进来的Vuex它实际上是一个对象，里面包含了Store这一构造函数，还有几个mapActions、mapGetters、mapMutations、mapState这几个辅助方法</strong></p>
+<p><strong>除此之外，还有一个<code>install</code>方法。我们发现，import之后要对其进行<code>Vue.use(Vuex);</code>的操作。根据这两个线索，我们就明白了，Vuex本质上就是一个Vue.js的插件。</strong>不信你去对照下Vue.js的官方文档中对于插件的解释就知道了（<a href="https://cn.vuejs.org/v2/guide/plugins.html#main" target="_blank" rel="noopener">见这里</a>）。</p>
+<h3 id="三、创建好的store实例怎么在各个组件中都能引用到？"><a href="#三、创建好的store实例怎么在各个组件中都能引用到？" class="headerlink" title="三、创建好的store实例怎么在各个组件中都能引用到？"></a>三、创建好的store实例怎么在各个组件中都能引用到？</h3><p><strong>new Vuex.Store实例，怎么才能在各个组件中都能引用到呢？因为这个store实例是个全局单例。Vuex 通过 <code>store</code> 选项，提供了一种机制将状态从根组件“注入”到每一个子组件中：</strong></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> app = <span class="hljs-keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="hljs-string">'#app'</span>,</span><br><span class="line">  <span class="hljs-comment">// 把 store 对象提供给 “store” 选项，这可以把 store 的实例注入所有的子组件</span></span><br><span class="line">  store,</span><br><span class="line">  ...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>通过在根实例中注册 <code>store</code> 选项，该 store 实例会注入到根组件下的所有子组件中，且子组件能通过 <code>this.$store</code>访问到。</strong></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.$store)</span><br></pre></td></tr></table></figure>
+<p>通过输出，我们发现其结构如下：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  commit:<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">boundCommit</span>(<span class="hljs-params">type, payload, options</span>),</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">dispatch</span>:<span class="hljs-title">function</span> <span class="hljs-title">boundDispatch</span>(<span class="hljs-params">type, payload</span>),</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">getters</span>:<span class="hljs-title">Object</span>,                                   // 可以通过<span class="hljs-title">getters</span>，获取到<span class="hljs-title">store</span>中的全局对象          </span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">strict</span>:<span class="hljs-title">false</span>, </span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">_actionSubscribers</span>:<span class="hljs-title">Array</span>(<span class="hljs-params"><span class="hljs-number">0</span></span>),</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">_actions</span>:<span class="hljs-title">Object</span>,</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">_committing</span>:<span class="hljs-title">false</span>,</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">_modules</span>:<span class="hljs-title">ModuleCollection</span>,</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">_modulesNamespaceMap</span>:<span class="hljs-title">Object</span>,</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">_mutations</span>:<span class="hljs-title">Object</span>,</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">_subscribers</span>:<span class="hljs-title">Array</span>(<span class="hljs-params"><span class="hljs-number">0</span></span>),</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">_vm</span>:<span class="hljs-title">Vue</span>,</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">_watcherVM</span>:<span class="hljs-title">Vue</span>,</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">_wrappedGetters</span>:<span class="hljs-title">Object</span>,</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">state</span>:<span class="hljs-title">Object</span>,                                     //可以通过<span class="hljs-title">state</span>，获取到<span class="hljs-title">store</span>中的全局对象</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">__proto__</span>:<span class="hljs-title">Object</span>,</span></span><br><span class="line"><span class="hljs-function">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="四、Vuex中的几大核心概念"><a href="#四、Vuex中的几大核心概念" class="headerlink" title="四、Vuex中的几大核心概念"></a>四、Vuex中的几大核心概念</h3><h4 id="1、State"><a href="#1、State" class="headerlink" title="1、State"></a>1、State</h4><p>这个很好理解，就是状态数据。Vuex所管理的就是状态，其它的如Actions、Mutations都是来辅助实现对状态的管理的。Vue组件要有所变化，也是直接受到State的驱动来变化的。</p>
+<p><strong>可以通过this.$store.state来直接获取状态，也可以利用vuex提供的mapState辅助函数将state映射到计算属性（computed）中去。</strong></p>
+<h5 id="this-store-state来获取数据，通过mutations，或者actions来改变state值，请看下面介绍"><a href="#this-store-state来获取数据，通过mutations，或者actions来改变state值，请看下面介绍" class="headerlink" title="this.$store.state来获取数据，通过mutations，或者actions来改变state值，请看下面介绍"></a><code>this.$store.state</code>来获取数据，通过mutations，或者actions来改变state值，请看下面介绍</h5><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 在单独构建的版本中辅助函数为 Vuex.mapState</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  computed:&#123;</span><br><span class="line">    params() &#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.$store.state.params</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> &#123;</span><br><span class="line">    P_START_DATE,</span><br><span class="line">    P_END_DATE,</span><br><span class="line">    P_CHANNEL_ID,</span><br><span class="line">    P_PRODUCT_LINE,</span><br><span class="line">    P_ORG_CODE</span><br><span class="line">&#125; = <span class="hljs-keyword">this</span>.params;</span><br></pre></td></tr></table></figure>
+<h5 id="mapState-辅助函数"><a href="#mapState-辅助函数" class="headerlink" title="mapState 辅助函数"></a><code>mapState</code> 辅助函数</h5><p>当一个组件需要获取多个状态时候，将这些状态都声明为计算属性会有些重复和冗余。为了解决这个问题，我们可以使用 <code>mapState</code> 辅助函数帮助我们生成计算属性，让你少按几次键：</p>
+<p><strong>mapState通过<code>扩展运算符</code>将store.state.params 映射到子组件的this.params,这个this很重要，这个映射直接映射到当前Vue的this对象上。</strong></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 在单独构建的版本中辅助函数为 Vuex.mapState</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; mapState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  computed:&#123;</span><br><span class="line">    ...mapState(&#123;</span><br><span class="line">      <span class="hljs-comment">// 箭头函数可使代码更简练</span></span><br><span class="line">      <span class="hljs-comment">// params: state =&gt; state.params,</span></span><br><span class="line">      </span><br><span class="line">      <span class="hljs-comment">// 传字符串参数 'count' 等同于 `state =&gt; state.count`</span></span><br><span class="line">      <span class="hljs-comment">// params: 'params',</span></span><br><span class="line"></span><br><span class="line">      <span class="hljs-comment">// 为了能够使用子组件中的 `this` 获取局部状态，必须使用常规函数</span></span><br><span class="line">      params(state)&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> state.params;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>当映射的计算属性的名称与 state 的子节点名称相同时，我们也可以给 <code>mapState</code> 传一个字符串数组。</strong></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 在单独构建的版本中辅助函数为 Vuex.mapState</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; mapState &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  computed:&#123;</span><br><span class="line">    ...mapState([</span><br><span class="line">        <span class="hljs-comment">// 映射 this.params 为 store.state.params</span></span><br><span class="line">        <span class="hljs-string">'params'</span></span><br><span class="line">    ])</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>mapState通过扩展运算符将store.state.params 映射到子组件的this.params,就可以直接对this.params解构赋值，获取state里面的值</strong><br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> &#123;</span><br><span class="line">    P_START_DATE,</span><br><span class="line">    P_END_DATE,</span><br><span class="line">    P_CHANNEL_ID,</span><br><span class="line">    P_PRODUCT_LINE,</span><br><span class="line">    P_ORG_CODE</span><br><span class="line">&#125; = <span class="hljs-keyword">this</span>.params;</span><br></pre></td></tr></table></figure></p>
+<h4 id="2、Getters"><a href="#2、Getters" class="headerlink" title="2、Getters"></a>2、Getters</h4><p><strong>Getters本质上是用来对状态进行加工处理。Getters与State的关系，就像Vue.js的computed与data的关系。getter 的返回值会根据它的依赖被缓存起来，且只有当它的依赖值发生了改变才会被重新计算。</strong></p>
+<p><strong>可以通过this.$store.getters对派生出来的状态进行访问。或者直接使用辅助函数mapGetters将其映射到本地计算属性中去。</strong></p>
+<h4 id="this-store-getters来获取数据，通过mutations，或者actions来改变state值，请看下面介绍"><a href="#this-store-getters来获取数据，通过mutations，或者actions来改变state值，请看下面介绍" class="headerlink" title="this.$store.getters来获取数据，通过mutations，或者actions来改变state值，请看下面介绍"></a><code>this.$store.getters</code>来获取数据，通过mutations，或者actions来改变state值，请看下面介绍</h4><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 在单独构建的版本中辅助函数为 Vuex.mapState</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  computed:&#123;</span><br><span class="line">    getParams() &#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.$store.getters.getParams;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> &#123;</span><br><span class="line">    P_START_DATE,</span><br><span class="line">    P_END_DATE,</span><br><span class="line">    P_CHANNEL_ID,</span><br><span class="line">    P_PRODUCT_LINE,</span><br><span class="line">    P_ORG_CODE</span><br><span class="line">&#125; = <span class="hljs-keyword">this</span>.getParams;</span><br></pre></td></tr></table></figure>
+<h5 id="mapGetters-辅助函数"><a href="#mapGetters-辅助函数" class="headerlink" title="mapGetters 辅助函数"></a><code>mapGetters</code> 辅助函数</h5><p><strong>如果你想将一个 getter 属性<code>另取一个名字</code>，使用对象形式：</strong></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> &#123; mapGetters &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  computed: &#123;</span><br><span class="line">  <span class="hljs-comment">// 使用对象展开运算符将 getter 混入 computed 对象中</span></span><br><span class="line">    ...mapGetters(&#123;</span><br><span class="line">      <span class="hljs-comment">// 传字符串参数 'params' 等同于 `state =&gt; state.params`</span></span><br><span class="line">      getParams: <span class="hljs-string">'getParams'</span>,</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><code>mapGetters</code> 辅助函数仅仅是将 store 中的 getter 映射到局部计算属性：</strong></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> &#123; mapGetters &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  computed: &#123;</span><br><span class="line">  <span class="hljs-comment">// 使用对象展开运算符将 getter 混入 computed 对象中</span></span><br><span class="line">    ...mapGetters([</span><br><span class="line">      <span class="hljs-string">'getParams'</span>,</span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>mapGetters通过扩展运算符将store.getters.getParams 映射到子组件的this.getParams,就可以直接对this.getParams解构赋值，获取getters里面的值</strong></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> &#123;</span><br><span class="line">    P_START_DATE,</span><br><span class="line">    P_END_DATE,</span><br><span class="line">    P_CHANNEL_ID,</span><br><span class="line">    P_PRODUCT_LINE,</span><br><span class="line">    P_ORG_CODE</span><br><span class="line">&#125; = <span class="hljs-keyword">this</span>.getParams;</span><br></pre></td></tr></table></figure>
+<p><strong>上面这段代码中，有个写法大家可能会奇怪，就是<code>...mapGetters</code>。这是什么鬼东西呢？</strong></p>
+<p><strong>其中mapGetters实际上是一个方法Vuex对象上的一个方法，这从本文开头打印的那个Vuex对象的内容可以看出来。…这个符号是ES2015的一个新的语法糖，即将mapGetters处理后的内容展开后填入。</strong></p>
+<h4 id="3、Mutations"><a href="#3、Mutations" class="headerlink" title="3、Mutations"></a>3、Mutations</h4><p><strong>Mutations的中文意思是“变化”，利用它可以更改状态。事实上，更改 Vuex 的 store 中的状态的唯一方法就是提交 （commit）mutation。不过，mutation触发状态改变的方式有一点特别，所谓commit一个mutation，实际是像触发一个事件一样，传入一个mutation的类型以及携带一些数据（称作payload，载荷）。</strong></p>
+<p>本文开头那段代码中所指明的mutations，即：</p>
+<blockquote>
+<p>1.提交荷载 Payload</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 同步</span></span><br><span class="line">mutations: &#123;<span class="hljs-comment">// 可以通过mutations来改变state值</span></span><br><span class="line">  changeParams(state,payload)&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> state.params = payload;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>其中所包含的，<strong>实际上是一个个的mutation处理函数，用于指明收到这个mutation的commit之后，应该做些什么（当然，主要就是改变state，只是改变哪些state值的问题）。</strong></p>
+<p>那commit一个mutation在代码层面怎么表示呢？</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mutations</span></span><br><span class="line"><span class="hljs-comment">// this.$store.commit('changeParams', retailer)</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2、对象风格的提交方式 payload.payload</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 同步</span></span><br><span class="line">mutations: &#123;<span class="hljs-comment">// 可以通过mutations来改变state值</span></span><br><span class="line">  changeParams(state,payload)&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> state.params = payload.payload;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>在子组件中 commit 对象的两种方式</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">this</span>.$store.commit(&#123;</span><br><span class="line">  type: <span class="hljs-string">'changeParams'</span>,</span><br><span class="line">  payload:retailer</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">this</span>.$store.commit(<span class="hljs-string">'changeParams'</span>,&#123;</span><br><span class="line">    payload: retailer</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>除了这种使用 <code>this.$store.commit(&#39;xxx&#39;)</code> 提交 mutation的方式之外，还有一种方式，即使用 <code>mapMutations</code> 辅助函数将组件中的 methods 映射为 <code>this.$store.commit</code>。</strong>例如：</p>
+<blockquote>
+<p>3、mapMutations  </p>
+</blockquote>
+<p><strong>mapMutations 提交荷载 Payload</strong><br> 注意：下面代码中，payload 赋值不同</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 同步</span></span><br><span class="line">mutations: &#123;<span class="hljs-comment">// 可以通过mutations来改变state值</span></span><br><span class="line">  changeParams(state,payload)&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> state.params = payload;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>在父组件中调用，导入mapMutations</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> &#123; mapMutations &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapMutations([</span><br><span class="line">      <span class="hljs-string">'changeParams'</span>, <span class="hljs-comment">// 将 `this.changeParams()` 映射为 `this.$store.commit('changeParams')`</span></span><br><span class="line">    ]),</span><br><span class="line"></span><br><span class="line">    ...mapMutations(&#123;</span><br><span class="line">      changeParams: <span class="hljs-string">'changeParams'</span> <span class="hljs-comment">// 将 `this.add()` 映射为 `this.$store.commit('changeParams')`</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在方法中调用,<code>retailer</code>:父组件中定义的对象</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  storeChange() &#123;<span class="hljs-comment">// 这个方式传参， 让上面的 state = payload</span></span><br><span class="line">    <span class="hljs-keyword">this</span>.changeParams(retailer);<span class="hljs-comment">//有参数</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>像上面这样，就既声明了收到mutation后怎么处理，又清楚了怎么触发一个mutation。是不是特别像事件的处理函数（handler）以及事件的触发（emit）之间的关系？</p>
+<p><strong>考虑到触发的mutation的type必须与mutations里声明的mutation名称一致，比较好的方式是把这些mutation都集中到一个文件（如mutation-types）中以常量的形式定义，在其它地方再将这个文件引入，便于管理。而且这样做还有一个好处，就是整个应用中一共有哪些mutation type可以一目了然。</strong>就像下面这样：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// mutation-types.js</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> SOME_MUTATION = <span class="hljs-string">'SOME_MUTATION'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// store.js</span></span><br><span class="line"><span class="hljs-keyword">import</span> Vuex <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; SOME_MUTATION &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'./mutation-types'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123; ... &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    <span class="hljs-comment">// 我们可以使用 ES2015 风格的计算属性命名功能来使用一个常量作为函数名</span></span><br><span class="line">    [SOME_MUTATION] (state) &#123;</span><br><span class="line">      <span class="hljs-comment">// mutate state</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>值得注意的是，mutation必须是同步函数，目的是为了在dev-tools中能够捕捉到每一条mutation前后状态的快照</strong>（参见<a href="https://www.zhihu.com/question/48759748）。" target="_blank" rel="noopener">https://www.zhihu.com/question/48759748）。</a></p>
+<h4 id="4、Actions"><a href="#4、Actions" class="headerlink" title="4、Actions"></a>4、Actions</h4><p><strong>与同步函数Mutation所不同，Action可以包含异步的操作。</strong></p>
+<blockquote>
+<p>1、以载荷形式分发(payload)</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> Vuex <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span>;</span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">      params: &#123;</span><br><span class="line">        P_START_DATE: <span class="hljs-string">""</span>,</span><br><span class="line">          P_END_DATE: <span class="hljs-string">""</span>,</span><br><span class="line">          P_CHANNEL_ID: <span class="hljs-string">""</span>,</span><br><span class="line">          P_PRODUCT_LINE: <span class="hljs-string">""</span>,</span><br><span class="line">          P_ORG_CODE: <span class="hljs-string">""</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    getParams(state)&#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> state.params;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-comment">// 同步</span></span><br><span class="line">  mutations: &#123;</span><br><span class="line">    changeParams(state,payload)&#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> state.params = payload;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-comment">// actions与mutations区别就是，actions异步</span></span><br><span class="line">  actions: &#123;</span><br><span class="line">    changeParams(content,payload)&#123;</span><br><span class="line">      content.commit(<span class="hljs-string">"changeParams"</span>,payload)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store;</span><br></pre></td></tr></table></figure>
+<p>或者用ES2015的参数解构，可以简写成：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// actions与mutations区别就是，actions异步</span></span><br><span class="line">actions: &#123;</span><br><span class="line">  changeParams(&#123;commit&#125;,payload)&#123;</span><br><span class="line">    commit(<span class="hljs-string">"changeParams"</span>,payload)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>和mutation类似，我们像上面这样生命action的处理函数。它接收的第一个参数是一个与 store 实例具有相同方法和属性的 context 对象，因此你可以调用 <code>context.commit</code> 提交一个 mutation，或者通过 <code>context.state</code> 和 <code>context.getters</code> 来获取 state 和 getters。</strong></p>
+<p><strong>不过，mutation处理函数中所做的事情是改变state，而action处理函数中所做的事情则是commit mutation。</strong></p>
+<p><strong>那么，怎么触发action呢？按照Vuex的叫法，这叫分发（dispatch），我觉得这个名字让人不好理解，我们反正知道它实际上是触发的意思就行了。具体的触发方法是<code>this.$store.dispatch(actionType, payload)</code>。所传的两个参数一个是要触发的action的类型，一个是所携带的数据（payload），类似于上文所讲的commit mutation时所传的那两个参数。具体如下：</strong></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 以载荷形式分发</span></span><br><span class="line"><span class="hljs-comment">// actions</span></span><br><span class="line"><span class="hljs-keyword">this</span>.$store.dispatch(<span class="hljs-string">'changeParams'</span>,retailer);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>2、以对象形式分发(payload.payload)</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> Vuex <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span>;</span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">      params: &#123;</span><br><span class="line">        P_START_DATE: <span class="hljs-string">""</span>,</span><br><span class="line">          P_END_DATE: <span class="hljs-string">""</span>,</span><br><span class="line">          P_CHANNEL_ID: <span class="hljs-string">""</span>,</span><br><span class="line">          P_PRODUCT_LINE: <span class="hljs-string">""</span>,</span><br><span class="line">          P_ORG_CODE: <span class="hljs-string">""</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    getParams(state)&#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> state.params;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-comment">// 同步</span></span><br><span class="line">  mutations: &#123;</span><br><span class="line">    changeParams(state,payload)&#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> state.params = payload;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-comment">// actions与mutations区别就是，actions异步</span></span><br><span class="line">  actions: &#123;</span><br><span class="line">    changeParams(content,payload)&#123;</span><br><span class="line">      content.commit(<span class="hljs-string">"changeParams"</span>,payload.payload)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 以对象形式分发</span></span><br><span class="line"><span class="hljs-keyword">this</span>.$store.dispatch(<span class="hljs-string">'changeParams'</span>, &#123;</span><br><span class="line">  payload:retailer</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 以对象形式分发</span></span><br><span class="line"><span class="hljs-keyword">this</span>.$store.dispatch(&#123;</span><br><span class="line">  type: <span class="hljs-string">'changeParams'</span>,</span><br><span class="line">  payload:retailer</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>还有一种方法是使用 <code>mapActions</code> 辅助函数将组件的 methods 映射为 <code>this.$store.dispatch</code> 调用。如下：</strong></p>
+<blockquote>
+<p>3、 mapActions</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> &#123; mapActions &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  methods: &#123;</span><br><span class="line">    ...mapActions([</span><br><span class="line">      <span class="hljs-string">'changeParams'</span>, <span class="hljs-comment">// 将 `this.changeParams()` 映射为 `this.$store.dispatch('changeParams')`</span></span><br><span class="line"></span><br><span class="line">      <span class="hljs-comment">// `mapActions` 也支持载荷：</span></span><br><span class="line">      <span class="hljs-string">'changeParams'</span> <span class="hljs-comment">// 将 `this.changeParams(amount)` 映射为 `this.$store.dispatch('changeParams', amount)`</span></span><br><span class="line">    ]),</span><br><span class="line">    ...mapActions(&#123;</span><br><span class="line">      add: <span class="hljs-string">'changeParams'</span> <span class="hljs-comment">// 将 `this.add()` 映射为 `this.$store.dispatch('changeParams')`</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">this</span>.changeParams(retailer)</span><br><span class="line"><span class="hljs-keyword">this</span>.add(retailer)</span><br></pre></td></tr></table></figure>
+<p><strong>另外，你需要知道， <code>this.$store.dispatch</code> 可以处理被触发的 action 的处理函数返回的 Promise，并且 <code>this.$store.dispatch</code> 仍旧返回 Promise。</strong></p>
+<p>再来看一些组合性的异步操作：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  actionA (&#123; commit &#125;) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;</span><br><span class="line">      setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">        commit(<span class="hljs-string">'changeParams'</span>)</span><br><span class="line">        resolve()</span><br><span class="line">      &#125;, <span class="hljs-number">1000</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在你可以：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$<span class="hljs-keyword">this</span>.store.dispatch(<span class="hljs-string">'actionA'</span>).then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>在另外一个 action 中也可以：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  actionB (&#123; dispatch, commit &#125;) &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> dispatch(<span class="hljs-string">'actionA'</span>).then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> &#123;</span><br><span class="line">      commit(<span class="hljs-string">'someOtherMutation'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>最后，如果我们利用 <a href="https://tc39.github.io/ecmascript-asyncawait/" target="_blank" rel="noopener">async / await</a> 这个 JavaScript 即将到来的新特性，我们可以像这样组合 action：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 假设 getData() 和 getOtherData() 返回的是 Promise</span></span><br><span class="line"></span><br><span class="line">actions: &#123;</span><br><span class="line">  <span class="hljs-keyword">async</span> actionA (&#123; commit &#125;) &#123;</span><br><span class="line">    commit(<span class="hljs-string">'gotData'</span>, <span class="hljs-keyword">await</span> getData())</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-keyword">async</span> actionB (&#123; dispatch, commit &#125;) &#123;</span><br><span class="line">    <span class="hljs-keyword">await</span> dispatch(<span class="hljs-string">'actionA'</span>) <span class="hljs-comment">// 等待 actionA 完成</span></span><br><span class="line">    commit(<span class="hljs-string">'gotOtherData'</span>, <span class="hljs-keyword">await</span> getOtherData())</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>这实际上就实现了action嵌套另一个action的情况。</strong></p>
+<p><strong>讲了这么多action，你可能会纳闷一个问题：action这鬼东西不是和mutation看起来好多地方都很像吗，直接触发mutation去改变state岂不更好？为什么还要先触发action，再由action去触发mutation才达到改变state的目的？</strong></p>
+<p><strong>这是个好问题。还记得上面我们提到过mutation只能是同步的操作而action可以是包含异步操作吗？那么，若想进行异步操作，通过mutation显然是无法完成的，所以就有了action。</strong>我们来看一个更加实际的购物车示例，涉及到<strong>调用异步 API</strong> 和<strong>分发多重 mutation</strong>：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">actions: &#123;</span><br><span class="line">  checkout (&#123; commit, state &#125;, products) &#123;</span><br><span class="line">    <span class="hljs-comment">// 把当前购物车的物品备份起来</span></span><br><span class="line">    <span class="hljs-keyword">const</span> savedCartItems = [...state.cart.added]</span><br><span class="line">    <span class="hljs-comment">// 发出结账请求，然后乐观地清空购物车</span></span><br><span class="line">    commit(types.CHECKOUT_REQUEST)</span><br><span class="line">    <span class="hljs-comment">// 购物 API 接受一个成功回调和一个失败回调</span></span><br><span class="line">    shop.buyProducts(</span><br><span class="line">      products,</span><br><span class="line">      <span class="hljs-comment">// 成功操作</span></span><br><span class="line">      () =&gt; commit(types.CHECKOUT_SUCCESS),</span><br><span class="line">      <span class="hljs-comment">// 失败操作</span></span><br><span class="line">      () =&gt; commit(types.CHECKOUT_FAILURE, savedCartItems)</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5、Module"><a href="#5、Module" class="headerlink" title="5、Module"></a>5、Module</h4><p><strong>Module是什么概念呢？它实际上是对于store的一种切割。由于Vuex使用的是单一状态树，这样整个应用的所有状态都会集中到一个比较大的对象上面，那么，当应用变得非常复杂时，store 对象就很可能变得相当臃肿！</strong></p>
+<p>为了解决以上问题，Vuex 允许我们将 store 分割成一个个的<strong>模块（module）</strong>。每个模块拥有自己的 state、mutation、action、getter、甚至是嵌套子模块——从上至下进行同样方式的分割。就像这样：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> moduleA = &#123;</span><br><span class="line">  state: &#123; ... &#125;,</span><br><span class="line">  mutations: &#123; ... &#125;,</span><br><span class="line">  actions: &#123; ... &#125;,</span><br><span class="line">  getters: &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> moduleB = &#123;</span><br><span class="line">  state: &#123; ... &#125;,</span><br><span class="line">  mutations: &#123; ... &#125;,</span><br><span class="line">  actions: &#123; ... &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    a: moduleA,</span><br><span class="line">    b: moduleB</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">store.state.a <span class="hljs-comment">// -&gt; moduleA 的状态</span></span><br><span class="line">store.state.b <span class="hljs-comment">// -&gt; moduleB 的状态</span></span><br></pre></td></tr></table></figure>
+<h5 id="1、模块的局部状态"><a href="#1、模块的局部状态" class="headerlink" title="1、模块的局部状态"></a>1、模块的局部状态</h5><p>对于每个模块内部的 mutation 和 getter，接收的第一个参数就是<strong>模块的局部状态对象</strong>。</p>
+<p>同样，对于模块内部的 action，局部状态通过 <code>context.state</code> 暴露出来，根节点状态则为 <code>context.rootState</code>：<br>对于模块内部的 getter，根节点状态会作为第三个参数暴露出来：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span>;</span><br><span class="line"><span class="hljs-keyword">import</span> Vuex <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span>;</span><br><span class="line">Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> retailer = &#123;</span><br><span class="line">  namespaced: <span class="hljs-literal">true</span>,</span><br><span class="line">  state: &#123;</span><br><span class="line">      params: &#123;</span><br><span class="line">          P_START_DATE: <span class="hljs-string">"20181011"</span>,</span><br><span class="line">          P_END_DATE: <span class="hljs-string">"20181201"</span>,</span><br><span class="line">          P_CHANNEL_ID: <span class="hljs-string">""</span>,</span><br><span class="line">          P_PRODUCT_LINE: <span class="hljs-string">""</span>,</span><br><span class="line">          P_ORG_CODE: <span class="hljs-string">""</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  getters: &#123;</span><br><span class="line">    getParams(state, getters, rootState)&#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> state.params;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-comment">// 同步</span></span><br><span class="line">  mutations: &#123;</span><br><span class="line">    changeParams(state,payload)&#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> state.params = payload;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-comment">// actions与mutations区别就是，actions异步</span></span><br><span class="line">  actions: &#123;</span><br><span class="line">    changeParams(&#123; state, commit, rootState &#125;,payload)&#123;</span><br><span class="line">      commit(<span class="hljs-string">"changeParams"</span>,payload)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    retailer: retailer</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在IocRetailerParent.vue文件中，调取mutation、actions</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">this</span>.$store.commit(<span class="hljs-string">'retailer/changeParams'</span>, retailer);</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">this</span>.$store.dispatch(<span class="hljs-string">'retailer/changeParams'</span>, retailer);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在IocRetailerFirst.vue文件中，获取参数<br><figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- state --&gt;</span><br><span class="line"><span class="hljs-keyword">let</span> &#123;</span><br><span class="line">    P_START_DATE,</span><br><span class="line">    P_END_DATE,</span><br><span class="line">    P_CHANNEL_ID,</span><br><span class="line">    P_PRODUCT_LINE,</span><br><span class="line">    P_ORG_CODE</span><br><span class="line">&#125; = <span class="hljs-keyword">this</span>.$store.state.retailer.params;</span><br><span class="line"></span><br><span class="line">&lt;!-- getters --&gt;</span><br><span class="line"><span class="hljs-keyword">let</span> &#123;</span><br><span class="line">    P_START_DATE,</span><br><span class="line">    P_END_DATE,</span><br><span class="line">    P_CHANNEL_ID,</span><br><span class="line">    P_PRODUCT_LINE,</span><br><span class="line">    P_ORG_CODE</span><br><span class="line">&#125; = <span class="hljs-keyword">this</span>.$store.getters[<span class="hljs-string">"retailer/getParams"</span>];</span><br></pre></td></tr></table></figure></p>
+</blockquote>
+<h5 id="2、mapState"><a href="#2、mapState" class="headerlink" title="2、mapState"></a>2、mapState</h5><blockquote>
+<p>在IocRetailerFirst.vue文件中，获取参数</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  ...mapState(<span class="hljs-string">'retailer'</span>,&#123;</span><br><span class="line">      params: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.params</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">let</span> &#123;</span><br><span class="line">    P_START_DATE,</span><br><span class="line">    P_END_DATE,</span><br><span class="line">    P_CHANNEL_ID,</span><br><span class="line">    P_PRODUCT_LINE,</span><br><span class="line">    P_ORG_CODE</span><br><span class="line">&#125; = <span class="hljs-keyword">this</span>.params;</span><br></pre></td></tr></table></figure>
+<h5 id="3、mapGetters"><a href="#3、mapGetters" class="headerlink" title="3、mapGetters"></a>3、mapGetters</h5><blockquote>
+<p>在IocRetailerFirst.vue文件中，获取参数</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  ...mapGetters(<span class="hljs-string">'retailer'</span>,&#123;</span><br><span class="line">    <span class="hljs-comment">// 传字符串参数 'params' 等同于 `state =&gt; state.params`</span></span><br><span class="line">    getParams: <span class="hljs-string">'getParams'</span>,</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">let</span> &#123;</span><br><span class="line">    P_START_DATE,</span><br><span class="line">    P_END_DATE,</span><br><span class="line">    P_CHANNEL_ID,</span><br><span class="line">    P_PRODUCT_LINE,</span><br><span class="line">    P_ORG_CODE</span><br><span class="line">&#125; = <span class="hljs-keyword">this</span>.getParams;</span><br></pre></td></tr></table></figure>
+<h5 id="4、mapMutations"><a href="#4、mapMutations" class="headerlink" title="4、mapMutations"></a>4、mapMutations</h5><blockquote>
+<p>在IocRetailerFirst.vue文件中，获取参数</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  ...mapMutations(<span class="hljs-string">'retailer'</span>,&#123;</span><br><span class="line">    <span class="hljs-comment">// 传字符串参数 'params' 等同于 `state =&gt; state.params`</span></span><br><span class="line">    changeParams: <span class="hljs-string">'changeParams'</span>,</span><br><span class="line">  &#125;),</span><br><span class="line">  ...mapMutations(<span class="hljs-string">'retailer'</span>,[</span><br><span class="line">    <span class="hljs-string">'changeParams'</span> <span class="hljs-comment">// 将 `this.add()` 映射为 `this.$store.commit('changeParams')`</span></span><br><span class="line">  ]),</span><br><span class="line"></span><br><span class="line">  &lt;!-- 调用mapMutations方法 --&gt;</span><br><span class="line">  storeChange(retailer) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.changeParams(retailer);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="5、mapActions"><a href="#5、mapActions" class="headerlink" title="5、mapActions"></a>5、mapActions</h5><blockquote>
+<p>在IocRetailerFirst.vue文件中，获取参数</p>
+</blockquote>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">methods: &#123;</span><br><span class="line">  ...mapActions(<span class="hljs-string">'retailer'</span>,&#123;</span><br><span class="line">    <span class="hljs-comment">// 传字符串参数 'params' 等同于 `state =&gt; state.params`</span></span><br><span class="line">    changeParams: <span class="hljs-string">'changeParams'</span>,</span><br><span class="line">  &#125;),</span><br><span class="line">  ...mapActions(<span class="hljs-string">'retailer'</span>,[</span><br><span class="line">      <span class="hljs-string">'changeParams'</span> <span class="hljs-comment">// 将 `this.add()` 映射为 `this.$store.commit('changeParams')`</span></span><br><span class="line">    ]),</span><br><span class="line"></span><br><span class="line">  &lt;!-- 调用mapMutations方法 --&gt;</span><br><span class="line">  storeChange(retailer) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.changeParams(retailer);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h5><p><strong>默认情况下，模块内部的 action、mutation 和 getter 是注册在</strong>全局命名空间<strong>的——这样使得多个模块能够对同一 mutation 或 action 作出响应。</strong></p>
+<p>如果希望你的模块具有更高的封装度和复用性，你可以通过添加 <code>namespaced: true</code> 的方式使其成为命名空间模块。当模块被注册后，它的所有 getter、action 及 mutation 都会自动根据模块注册的路径调整命名。例如：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  modules: &#123;</span><br><span class="line">    account: &#123;</span><br><span class="line">      namespaced: <span class="hljs-literal">true</span>,</span><br><span class="line"></span><br><span class="line">      <span class="hljs-comment">// 模块内容（module assets）</span></span><br><span class="line">      state: &#123; ... &#125;, <span class="hljs-comment">// 模块内的状态已经是嵌套的了，使用 `namespaced` 属性不会对其产生影响</span></span><br><span class="line">      getters: &#123;</span><br><span class="line">        isAdmin () &#123; ... &#125; <span class="hljs-comment">// -&gt; getters['account/isAdmin']</span></span><br><span class="line">      &#125;,</span><br><span class="line">      actions: &#123;</span><br><span class="line">        login () &#123; ... &#125; <span class="hljs-comment">// -&gt; dispatch('account/login')</span></span><br><span class="line">      &#125;,</span><br><span class="line">      mutations: &#123;</span><br><span class="line">        login () &#123; ... &#125; <span class="hljs-comment">// -&gt; commit('account/login')</span></span><br><span class="line">      &#125;,</span><br><span class="line"></span><br><span class="line">      <span class="hljs-comment">// 嵌套模块</span></span><br><span class="line">      modules: &#123;</span><br><span class="line">        <span class="hljs-comment">// 继承父模块的命名空间</span></span><br><span class="line">        myPage: &#123;</span><br><span class="line">          state: &#123; ... &#125;,</span><br><span class="line">          getters: &#123;</span><br><span class="line">            profile () &#123; ... &#125; <span class="hljs-comment">// -&gt; getters['account/profile']</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 进一步嵌套命名空间</span></span><br><span class="line">        posts: &#123;</span><br><span class="line">          namespaced: <span class="hljs-literal">true</span>,</span><br><span class="line"></span><br><span class="line">          state: &#123; ... &#125;,</span><br><span class="line">          getters: &#123;</span><br><span class="line">            popular () &#123; ... &#125; <span class="hljs-comment">// -&gt; getters['account/posts/popular']</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>启用了命名空间的 getter 和 action 会收到局部化的 <code>getter</code>，<code>dispatch</code> 和 <code>commit</code>。</p>
+<h5 id="在命名空间模块内访问全局内容（Global-Assets）"><a href="#在命名空间模块内访问全局内容（Global-Assets）" class="headerlink" title="在命名空间模块内访问全局内容（Global Assets）"></a>在命名空间模块内访问全局内容（Global Assets）</h5><p><strong>如果你希望使用全局 state 和 getter，<code>rootState</code> 和 <code>rootGetter</code> 会作为第三和第四参数传入 getter，也会通过 <code>context</code> 对象的属性传入 action。</strong></p>
+<p><strong>若需要在全局命名空间内分发 action 或提交 mutation，将 <code>{ root: true }</code> 作为第三参数传给 <code>dispatch</code> 或 <code>commit</code>即可。</strong></p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">modules: &#123;</span><br><span class="line">  foo: &#123;</span><br><span class="line">    namespaced: <span class="hljs-literal">true</span>,</span><br><span class="line"></span><br><span class="line">    getters: &#123;</span><br><span class="line">      <span class="hljs-comment">// 在这个模块的 getter 中，`getters` 被局部化了</span></span><br><span class="line">      <span class="hljs-comment">// 你可以使用 getter 的第四个参数来调用 `rootGetters`</span></span><br><span class="line">      someGetter (state, getters, rootState, rootGetters) &#123;</span><br><span class="line">        getters.someOtherGetter <span class="hljs-comment">// -&gt; 'foo/someOtherGetter'</span></span><br><span class="line">        rootGetters.someOtherGetter <span class="hljs-comment">// -&gt; 'someOtherGetter'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      someOtherGetter: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> &#123; ... &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    actions: &#123;</span><br><span class="line">      <span class="hljs-comment">// 在这个模块中， dispatch 和 commit 也被局部化了</span></span><br><span class="line">      <span class="hljs-comment">// 他们可以接受 `root` 属性以访问根 dispatch 或 commit</span></span><br><span class="line">      someAction (&#123; dispatch, commit, getters, rootGetters &#125;) &#123;</span><br><span class="line">        getters.someGetter <span class="hljs-comment">// -&gt; 'foo/someGetter'</span></span><br><span class="line">        rootGetters.someGetter <span class="hljs-comment">// -&gt; 'someGetter'</span></span><br><span class="line"></span><br><span class="line">        dispatch(<span class="hljs-string">'someOtherAction'</span>) <span class="hljs-comment">// -&gt; 'foo/someOtherAction'</span></span><br><span class="line">        dispatch(<span class="hljs-string">'someOtherAction'</span>, <span class="hljs-literal">null</span>, &#123; <span class="hljs-attr">root</span>: <span class="hljs-literal">true</span> &#125;) <span class="hljs-comment">// -&gt; 'someOtherAction'</span></span><br><span class="line"></span><br><span class="line">        commit(<span class="hljs-string">'someMutation'</span>) <span class="hljs-comment">// -&gt; 'foo/someMutation'</span></span><br><span class="line">        commit(<span class="hljs-string">'someMutation'</span>, <span class="hljs-literal">null</span>, &#123; <span class="hljs-attr">root</span>: <span class="hljs-literal">true</span> &#125;) <span class="hljs-comment">// -&gt; 'someMutation'</span></span><br><span class="line">      &#125;,</span><br><span class="line">      someOtherAction (ctx, payload) &#123; ... &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="带命名空间的绑定函数"><a href="#带命名空间的绑定函数" class="headerlink" title="带命名空间的绑定函数"></a>带命名空间的绑定函数</h5><p>当使用 <code>mapState</code>, <code>mapGetters</code>, <code>mapActions</code> 和 <code>mapMutations</code> 这些函数来绑定命名空间模块时，写起来可能比较繁琐：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  ...mapState(&#123;</span><br><span class="line">    a: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.some.nested.module.a,</span><br><span class="line">    b: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.some.nested.module.b</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">  ...mapActions([</span><br><span class="line">    <span class="hljs-string">'some/nested/module/foo'</span>,</span><br><span class="line">    <span class="hljs-string">'some/nested/module/bar'</span></span><br><span class="line">  ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对于这种情况，你可以将模块的空间名称字符串作为第一个参数传递给上述函数，这样所有绑定都会自动将该模块作为上下文。于是上面的例子可以简化为：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  ...mapState(<span class="hljs-string">'some/nested/module'</span>, &#123;</span><br><span class="line">    a: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.a,</span><br><span class="line">    b: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.b</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">  ...mapActions(<span class="hljs-string">'some/nested/module'</span>, [</span><br><span class="line">    <span class="hljs-string">'foo'</span>,</span><br><span class="line">    <span class="hljs-string">'bar'</span></span><br><span class="line">  ])</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而且，你可以通过使用 <code>createNamespacedHelpers</code> 创建基于某个命名空间辅助函数。它返回一个对象，对象里有新的绑定在给定命名空间值上的组件绑定辅助函数：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> &#123; createNamespacedHelpers &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> &#123; mapState, mapActions &#125; = createNamespacedHelpers(<span class="hljs-string">'some/nested/module'</span>)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  computed: &#123;</span><br><span class="line">    <span class="hljs-comment">// 在 `some/nested/module` 中查找</span></span><br><span class="line">    ...mapState(&#123;</span><br><span class="line">      a: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.a,</span><br><span class="line">      b: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.b</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    <span class="hljs-comment">// 在 `some/nested/module` 中查找</span></span><br><span class="line">    ...mapActions([</span><br><span class="line">      <span class="hljs-string">'foo'</span>,</span><br><span class="line">      <span class="hljs-string">'bar'</span></span><br><span class="line">    ])</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="给插件开发者的注意事项"><a href="#给插件开发者的注意事项" class="headerlink" title="给插件开发者的注意事项"></a>给插件开发者的注意事项</h5><p>如果你开发的<a href="https://vuex.vuejs.org/zh-cn/plugins.html" target="_blank" rel="noopener">插件（Plugin）</a>提供了模块并允许用户将其添加到 Vuex store，可能需要考虑模块的空间名称问题。对于这种情况，你可以通过插件的参数对象来允许用户指定空间名称：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 通过插件的参数对象得到空间名称</span></span><br><span class="line"><span class="hljs-comment">// 然后返回 Vuex 插件函数</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createPlugin</span> (<span class="hljs-params">options = &#123;&#125;</span>) </span>&#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">store</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-comment">// 把空间名字添加到插件模块的类型（type）中去</span></span><br><span class="line">    <span class="hljs-keyword">const</span> namespace = options.namespace || <span class="hljs-string">''</span></span><br><span class="line">    store.dispatch(namespace + <span class="hljs-string">'pluginAction'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="模块动态注册"><a href="#模块动态注册" class="headerlink" title="模块动态注册"></a>模块动态注册</h5><p>在 store 创建<strong>之后</strong>，你可以使用 <code>store.registerModule</code> 方法注册模块：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 注册模块 `myModule`</span></span><br><span class="line">store.registerModule(<span class="hljs-string">'myModule'</span>, &#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="hljs-comment">// 注册嵌套模块 `nested/myModule`</span></span><br><span class="line">store.registerModule([<span class="hljs-string">'nested'</span>, <span class="hljs-string">'myModule'</span>], &#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>之后就可以通过 <code>store.state.myModule</code> 和 <code>store.state.nested.myModule</code> 访问模块的状态。</p>
+<p>模块动态注册功能使得其他 Vue 插件可以通过在 store 中附加新模块的方式来使用 Vuex 管理状态。例如，<a href="https://github.com/vuejs/vuex-router-sync" target="_blank" rel="noopener"><code>vuex-router-sync</code></a> 插件就是通过动态注册模块将 vue-router 和 vuex 结合在一起，实现应用的路由状态管理。</p>
+<p>你也可以使用 <code>store.unregisterModule(moduleName)</code> 来动态卸载模块。注意，你不能使用此方法卸载静态模块（即创建 store 时声明的模块）。</p>
+<h5 id="模块重用"><a href="#模块重用" class="headerlink" title="模块重用"></a>模块重用</h5><p>有时我们可能需要创建一个模块的多个实例，例如：</p>
+<ul>
+<li>创建多个 store，他们公用同一个模块</li>
+<li>在一个 store 中多次注册同一个模块</li>
+</ul>
+<p>如果我们使用一个纯对象来声明模块的状态，那么这个状态对象会通过引用被共享，导致状态对象被修改时 store 或模块间数据互相污染的问题。</p>
+<p>实际上这和 Vue 组件内的 <code>data</code> 是同样的问题。因此解决办法也是相同的——使用一个函数来声明模块状态（仅 2.3.0+ 支持）：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> MyReusableModule = &#123;</span><br><span class="line">  state () &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">      foo: <span class="hljs-string">'bar'</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="hljs-comment">// mutation, action 和 getter 等等...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="六、严格模式"><a href="#六、严格模式" class="headerlink" title="六、严格模式"></a>六、严格模式</h3><p>Vuex的严格模式，是指其在开启严格模式的情况下，只要发现某个状态变更不是由 mutation 函数引起的，都将会抛出错误。这能保证所有的状态变更都能被调试工具跟踪到。</p>
+<p>开启严格模式，仅需在创建 store 的时候传入 <code>strict: true</code>：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  strict: <span class="hljs-literal">true</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<p><strong>不要在发布环境下启用严格模式，以避免性能损失！</strong>严格模式会深度监测状态树来检测不合规的状态变更。</p>
+<p>类似于插件，我们可以让构建工具来处理这种情况：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  <span class="hljs-comment">// ...</span></span><br><span class="line">  strict: process.env.NODE_ENV !== <span class="hljs-string">'production'</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="七、双向绑定的处理"><a href="#七、双向绑定的处理" class="headerlink" title="七、双向绑定的处理"></a>七、双向绑定的处理</h3><p>当在严格模式中使用 Vuex 时，在属于 Vuex 的 state 上使用 <code>v-model</code> 会比较棘手：</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">v-model</span>=<span class="hljs-string">"obj.message"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>假设这里的 <code>obj</code> 是在计算属性中返回的一个属于 Vuex store 的对象，在用户输入时，<code>v-model</code> 会试图直接修改 <code>obj.message</code>。在严格模式中，由于这个修改不是在 mutation 函数中执行的, 这里会抛出一个错误。</p>
+<p>用“Vuex 的思维”去解决这个问题的方法是：给 <code>&lt;input&gt;</code> 中绑定 value，然后侦听 <code>input</code> 或者 <code>change</code> 事件，在事件回调中调用 action:</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">:value</span>=<span class="hljs-string">"message"</span> @<span class="hljs-attr">input</span>=<span class="hljs-string">"updateMessage"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// ...</span></span><br><span class="line">computed: &#123;</span><br><span class="line">  ...mapState(&#123;</span><br><span class="line">    message: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.obj.message</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">  updateMessage (e) &#123;</span><br><span class="line">    <span class="hljs-keyword">this</span>.$store.commit(<span class="hljs-string">'updateMessage'</span>, e.target.value)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>下面是 mutation 函数：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// ...</span></span><br><span class="line">mutations: &#123;</span><br><span class="line">  updateMessage (state, message) &#123;</span><br><span class="line">    state.obj.message = message</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="双向绑定的计算属性"><a href="#双向绑定的计算属性" class="headerlink" title="双向绑定的计算属性"></a>双向绑定的计算属性</h4><p>必须承认，这样做比简单地使用“<code>v-model</code> + 局部状态”要啰嗦得多，并且也损失了一些 <code>v-model</code> 中很有用的特性。另一个方法是使用带有 setter 的双向绑定计算属性：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;input v-model=<span class="hljs-string">"message"</span>&gt;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// ...</span></span><br><span class="line">computed: &#123;</span><br><span class="line">  message: &#123;</span><br><span class="line">    get () &#123;</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.$store.state.obj.message</span><br><span class="line">    &#125;,</span><br><span class="line">    set (value) &#123;</span><br><span class="line">      <span class="hljs-keyword">this</span>.$store.commit(<span class="hljs-string">'updateMessage'</span>, value)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="八、热重载"><a href="#八、热重载" class="headerlink" title="八、热重载"></a>八、热重载</h3><p>使用 webpack 的 <a href="https://webpack.github.io/docs/hot-module-replacement.html" target="_blank" rel="noopener">Hot Module Replacement API</a>，Vuex 支持在开发过程中热重载 mutation、module、action 和 getter。你也可以在 Browserify 中使用 <a href="https://github.com/AgentME/browserify-hmr/" target="_blank" rel="noopener">browserify-hmr</a> 插件。</p>
+<p>对于 mutation 和模块，你需要使用 <code>store.hotUpdate()</code> 方法：</p>
+<p>例子（来自<a href="https://github.com/vuejs/vuex/blob/dev/examples/counter-hot/store/index.js" target="_blank" rel="noopener">https://github.com/vuejs/vuex/blob/dev/examples/counter-hot/store/index.js</a>）：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span></span><br><span class="line"><span class="hljs-keyword">import</span> Vuex <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span><br><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> getters <span class="hljs-keyword">from</span> <span class="hljs-string">'./getters'</span></span><br><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> actions <span class="hljs-keyword">from</span> <span class="hljs-string">'./actions'</span></span><br><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> mutations <span class="hljs-keyword">from</span> <span class="hljs-string">'./mutations'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> state = &#123;</span><br><span class="line">  count: <span class="hljs-number">0</span>,</span><br><span class="line">  history: []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> store = <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state,</span><br><span class="line">  getters,</span><br><span class="line">  actions,</span><br><span class="line">  mutations</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">module</span>.hot) &#123;</span><br><span class="line">  <span class="hljs-built_in">module</span>.hot.accept([</span><br><span class="line">    <span class="hljs-string">'./getters'</span>,</span><br><span class="line">    <span class="hljs-string">'./actions'</span>,</span><br><span class="line">    <span class="hljs-string">'./mutations'</span></span><br><span class="line">  ], () =&gt; &#123;</span><br><span class="line">    store.hotUpdate(&#123;</span><br><span class="line">      getters: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./getters'</span>),</span><br><span class="line">      actions: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./actions'</span>),</span><br><span class="line">      mutations: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./mutations'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> store</span><br></pre></td></tr></table></figure>
+<p>主要是下面这一小段代码：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">module</span>.hot) &#123;</span><br><span class="line">  <span class="hljs-built_in">module</span>.hot.accept([</span><br><span class="line">    <span class="hljs-string">'./getters'</span>,</span><br><span class="line">    <span class="hljs-string">'./actions'</span>,</span><br><span class="line">    <span class="hljs-string">'./mutations'</span></span><br><span class="line">  ], () =&gt; &#123;</span><br><span class="line">    store.hotUpdate(&#123;</span><br><span class="line">      getters: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./getters'</span>),</span><br><span class="line">      actions: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./actions'</span>),</span><br><span class="line">      mutations: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./mutations'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="九、实际使用时的文件结构和关系"><a href="#九、实际使用时的文件结构和关系" class="headerlink" title="九、实际使用时的文件结构和关系"></a>九、实际使用时的文件结构和关系</h3><p>来看一个Vuex综合运用的例子：</p>
+<p>来自：<a href="https://github.com/vuejs/vuex/tree/dev/examples/shopping-cart" target="_blank" rel="noopener">https://github.com/vuejs/vuex/tree/dev/examples/shopping-cart</a></p>
+<p>//入口文件：app.js</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-string">'babel-polyfill'</span></span><br><span class="line"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span></span><br><span class="line"><span class="hljs-keyword">import</span> App <span class="hljs-keyword">from</span> <span class="hljs-string">'./components/App.vue'</span></span><br><span class="line"><span class="hljs-keyword">import</span> store <span class="hljs-keyword">from</span> <span class="hljs-string">'./store'</span></span><br><span class="line"><span class="hljs-keyword">import</span> &#123; currency &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'./currency'</span></span><br><span class="line"></span><br><span class="line">Vue.filter(<span class="hljs-string">'currency'</span>, currency)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="hljs-string">'#app'</span>,</span><br><span class="line">  store,</span><br><span class="line">  render: <span class="hljs-function"><span class="hljs-params">h</span> =&gt;</span> h(App)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>//store/index.js</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> Vue <span class="hljs-keyword">from</span> <span class="hljs-string">'vue'</span></span><br><span class="line"><span class="hljs-keyword">import</span> Vuex <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span><br><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> actions <span class="hljs-keyword">from</span> <span class="hljs-string">'./actions'</span></span><br><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> getters <span class="hljs-keyword">from</span> <span class="hljs-string">'./getters'</span></span><br><span class="line"><span class="hljs-keyword">import</span> cart <span class="hljs-keyword">from</span> <span class="hljs-string">'./modules/cart'</span></span><br><span class="line"><span class="hljs-keyword">import</span> products <span class="hljs-keyword">from</span> <span class="hljs-string">'./modules/products'</span></span><br><span class="line"><span class="hljs-keyword">import</span> createLogger <span class="hljs-keyword">from</span> <span class="hljs-string">'../../../src/plugins/logger'</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> debug = process.env.NODE_ENV !== <span class="hljs-string">'production'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  actions,</span><br><span class="line">  getters,</span><br><span class="line">  modules: &#123;</span><br><span class="line">    cart,</span><br><span class="line">    products</span><br><span class="line">  &#125;,</span><br><span class="line">  strict: debug,</span><br><span class="line">  plugins: debug ? [createLogger()] : []</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">if</span> (<span class="hljs-built_in">module</span>.hot) &#123;</span><br><span class="line">  <span class="hljs-built_in">module</span>.hot.accept([</span><br><span class="line">    <span class="hljs-string">'./actions'</span>,</span><br><span class="line">    <span class="hljs-string">'./getters'</span>,</span><br><span class="line">    <span class="hljs-string">'./modules/cart'</span>,</span><br><span class="line">    <span class="hljs-string">'./modules/products'</span></span><br><span class="line">  ], () =&gt; &#123;</span><br><span class="line">    store.hotUpdate(&#123;</span><br><span class="line">      actions: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./actions'</span>),</span><br><span class="line">      getters: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./getters'</span>),</span><br><span class="line">      modules: &#123;</span><br><span class="line">    	cart: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./modules/cart'</span>),</span><br><span class="line">    	products: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./modules/products'</span>)</span><br><span class="line">      &#125;,</span><br><span class="line">      mutations: <span class="hljs-built_in">require</span>(<span class="hljs-string">'./mutations'</span>)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>//store/mutation-types.js</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> ADD_TO_CART = <span class="hljs-string">'ADD_TO_CART'</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CHECKOUT_REQUEST = <span class="hljs-string">'CHECKOUT_REQUEST'</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CHECKOUT_SUCCESS = <span class="hljs-string">'CHECKOUT_SUCCESS'</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CHECKOUT_FAILURE = <span class="hljs-string">'CHECKOUT_FAILURE'</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> RECEIVE_PRODUCTS = <span class="hljs-string">'RECEIVE_PRODUCTS'</span></span><br></pre></td></tr></table></figure>
+<p>//store/getters.js</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> cartProducts = <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-keyword">return</span> state.cart.added.map(<span class="hljs-function">(<span class="hljs-params">&#123; id, quantity &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> product = state.products.all.find(<span class="hljs-function"><span class="hljs-params">p</span> =&gt;</span> p.id === id)</span><br><span class="line">    <span class="hljs-keyword">return</span> &#123;</span><br><span class="line">      title: product.title,</span><br><span class="line">      price: product.price,</span><br><span class="line">      quantity</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>//store/actions.js</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> types <span class="hljs-keyword">from</span> <span class="hljs-string">'./mutation-types'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> addToCart = <span class="hljs-function">(<span class="hljs-params">&#123; commit &#125;, product</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="hljs-keyword">if</span> (product.inventory &gt; <span class="hljs-number">0</span>) &#123;</span><br><span class="line">    commit(types.ADD_TO_CART, &#123;</span><br><span class="line">      id: product.id</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>//store/modules/cart.js</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> shop <span class="hljs-keyword">from</span> <span class="hljs-string">'../../api/shop'</span></span><br><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> types <span class="hljs-keyword">from</span> <span class="hljs-string">'../mutation-types'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// initial state</span></span><br><span class="line"><span class="hljs-comment">// shape: [&#123; id, quantity &#125;]</span></span><br><span class="line"><span class="hljs-keyword">const</span> state = &#123;</span><br><span class="line">  added: [],</span><br><span class="line">  checkoutStatus: <span class="hljs-literal">null</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// getters</span></span><br><span class="line"><span class="hljs-keyword">const</span> getters = &#123;</span><br><span class="line">  checkoutStatus: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.checkoutStatus</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// actions</span></span><br><span class="line"><span class="hljs-keyword">const</span> actions = &#123;</span><br><span class="line">  checkout (&#123; commit, state &#125;, products) &#123;</span><br><span class="line">    <span class="hljs-keyword">const</span> savedCartItems = [...state.added]</span><br><span class="line">    commit(types.CHECKOUT_REQUEST)</span><br><span class="line">    shop.buyProducts(</span><br><span class="line">      products,</span><br><span class="line">      () =&gt; commit(types.CHECKOUT_SUCCESS),</span><br><span class="line">      () =&gt; commit(types.CHECKOUT_FAILURE, &#123; savedCartItems &#125;)</span><br><span class="line">    )</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// mutations</span></span><br><span class="line"><span class="hljs-keyword">const</span> mutations = &#123;</span><br><span class="line">  [types.ADD_TO_CART] (state, &#123; id &#125;) &#123;</span><br><span class="line">    state.lastCheckout = <span class="hljs-literal">null</span></span><br><span class="line">    <span class="hljs-keyword">const</span> record = state.added.find(<span class="hljs-function"><span class="hljs-params">p</span> =&gt;</span> p.id === id)</span><br><span class="line">    <span class="hljs-keyword">if</span> (!record) &#123;</span><br><span class="line">      state.added.push(&#123;</span><br><span class="line">        id,</span><br><span class="line">        quantity: <span class="hljs-number">1</span></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">      record.quantity++</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  [types.CHECKOUT_REQUEST] (state) &#123;</span><br><span class="line">    <span class="hljs-comment">// clear cart</span></span><br><span class="line">    state.added = []</span><br><span class="line">    state.checkoutStatus = <span class="hljs-literal">null</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  [types.CHECKOUT_SUCCESS] (state) &#123;</span><br><span class="line">    state.checkoutStatus = <span class="hljs-string">'successful'</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  [types.CHECKOUT_FAILURE] (state, &#123; savedCartItems &#125;) &#123;</span><br><span class="line">    <span class="hljs-comment">// rollback to the cart saved before sending the request</span></span><br><span class="line">    state.added = savedCartItems</span><br><span class="line">    state.checkoutStatus = <span class="hljs-string">'failed'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  state,</span><br><span class="line">  getters,</span><br><span class="line">  actions,</span><br><span class="line">  mutations</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>//store/modules/products.js</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> shop <span class="hljs-keyword">from</span> <span class="hljs-string">'../../api/shop'</span></span><br><span class="line"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> types <span class="hljs-keyword">from</span> <span class="hljs-string">'../mutation-types'</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// initial state</span></span><br><span class="line"><span class="hljs-keyword">const</span> state = &#123;</span><br><span class="line">  all: []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// getters</span></span><br><span class="line"><span class="hljs-keyword">const</span> getters = &#123;</span><br><span class="line">  allProducts: <span class="hljs-function"><span class="hljs-params">state</span> =&gt;</span> state.all</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// actions</span></span><br><span class="line"><span class="hljs-keyword">const</span> actions = &#123;</span><br><span class="line">  getAllProducts (&#123; commit &#125;) &#123;</span><br><span class="line">    shop.getProducts(<span class="hljs-function"><span class="hljs-params">products</span> =&gt;</span> &#123;</span><br><span class="line">      commit(types.RECEIVE_PRODUCTS, &#123; products &#125;)</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// mutations</span></span><br><span class="line"><span class="hljs-keyword">const</span> mutations = &#123;</span><br><span class="line">  [types.RECEIVE_PRODUCTS] (state, &#123; products &#125;) &#123;</span><br><span class="line">    state.all = products</span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  [types.ADD_TO_CART] (state, &#123; id &#125;) &#123;</span><br><span class="line">    state.all.find(<span class="hljs-function"><span class="hljs-params">p</span> =&gt;</span> p.id === id).inventory--</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  state,</span><br><span class="line">  getters,</span><br><span class="line">  actions,</span><br><span class="line">  mutations</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>//components/App.vue</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=<span class="hljs-string">"app"</span>&gt;</span><br><span class="line">    &lt;h1&gt;Shopping Cart Example&lt;<span class="hljs-regexp">/h1&gt;</span></span><br><span class="line"><span class="hljs-regexp">    &lt;hr&gt;</span></span><br><span class="line"><span class="hljs-regexp">    &lt;h2&gt;Products&lt;/</span>h2&gt;</span><br><span class="line">    &lt;product-list&gt;<span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">product-list</span>&gt;</span></span></span><br><span class="line">    &lt;hr&gt;</span><br><span class="line">    &lt;cart&gt;&lt;/cart&gt;</span><br><span class="line"><span class="hljs-xml">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line"><span class="hljs-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="hljs-keyword">import</span> ProductList <span class="hljs-keyword">from</span> <span class="hljs-string">'./ProductList.vue'</span></span><br><span class="line"><span class="hljs-keyword">import</span> Cart <span class="hljs-keyword">from</span> <span class="hljs-string">'./Cart.vue'</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span><br><span class="line">  components: &#123; ProductList, Cart &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="hljs-regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+<p>//components/Cart.vue</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"cart"</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>Your Cart<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-show</span>=<span class="hljs-string">"!products.length"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">i</span>&gt;</span>Please add some products to cart.<span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">"p in products"</span>&gt;</span></span><br><span class="line">        &#123;&#123; p.title &#125;&#125; - &#123;&#123; p.price | currency &#125;&#125; x &#123;&#123; p.quantity &#125;&#125;</span><br><span class="line">      <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Total: &#123;&#123; total | currency &#125;&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">:disabled</span>=<span class="hljs-string">"!products.length"</span> @<span class="hljs-attr">click</span>=<span class="hljs-string">"checkout(products)"</span>&gt;</span>Checkout<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">v-show</span>=<span class="hljs-string">"checkoutStatus"</span>&gt;</span>Checkout &#123;&#123; checkoutStatus &#125;&#125;.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="hljs-undefined"></span></span><br><span class="line"><span class="hljs-javascript"><span class="hljs-keyword">import</span> &#123; mapGetters &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span></span><br><span class="line"><span class="hljs-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="line"><span class="hljs-undefined">  computed: &#123;</span></span><br><span class="line"><span class="hljs-undefined">    ...mapGetters(&#123;</span></span><br><span class="line"><span class="hljs-javascript">      products: <span class="hljs-string">'cartProducts'</span>,</span></span><br><span class="line"><span class="hljs-javascript">      checkoutStatus: <span class="hljs-string">'checkoutStatus'</span></span></span><br><span class="line"><span class="hljs-undefined">    &#125;),</span></span><br><span class="line"><span class="hljs-undefined">    total () &#123;</span></span><br><span class="line"><span class="hljs-javascript">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.products.reduce(<span class="hljs-function">(<span class="hljs-params">total, p</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="hljs-javascript">        <span class="hljs-keyword">return</span> total + p.price * p.quantity</span></span><br><span class="line"><span class="hljs-undefined">      &#125;, 0)</span></span><br><span class="line"><span class="hljs-undefined">    &#125;</span></span><br><span class="line"><span class="hljs-undefined">  &#125;,</span></span><br><span class="line"><span class="hljs-undefined">  methods: &#123;</span></span><br><span class="line"><span class="hljs-undefined">    checkout (products) &#123;</span></span><br><span class="line"><span class="hljs-javascript">      <span class="hljs-keyword">this</span>.$store.dispatch(<span class="hljs-string">'checkout'</span>, products)</span></span><br><span class="line"><span class="hljs-undefined">    &#125;</span></span><br><span class="line"><span class="hljs-undefined">  &#125;</span></span><br><span class="line"><span class="hljs-undefined">&#125;</span></span><br><span class="line"><span class="hljs-undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>//components/ProductList.vue</p>
+<figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">template</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">ul</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">v-for</span>=<span class="hljs-string">"p in products"</span>&gt;</span></span><br><span class="line">      &#123;&#123; p.title &#125;&#125; - &#123;&#123; p.price | currency &#125;&#125;</span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">br</span>&gt;</span></span><br><span class="line">      <span class="hljs-tag">&lt;<span class="hljs-name">button</span></span></span><br><span class="line"><span class="hljs-tag">        <span class="hljs-attr">:disabled</span>=<span class="hljs-string">"!p.inventory"</span></span></span><br><span class="line"><span class="hljs-tag">        @<span class="hljs-attr">click</span>=<span class="hljs-string">"addToCart(p)"</span>&gt;</span></span><br><span class="line">        Add to cart</span><br><span class="line">      <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;/<span class="hljs-name">ul</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="hljs-undefined"></span></span><br><span class="line"><span class="hljs-javascript"><span class="hljs-keyword">import</span> &#123; mapGetters, mapActions &#125; <span class="hljs-keyword">from</span> <span class="hljs-string">'vuex'</span></span></span><br><span class="line"><span class="hljs-javascript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> &#123;</span></span><br><span class="line"><span class="hljs-undefined">  computed: mapGetters(&#123;</span></span><br><span class="line"><span class="hljs-javascript">    products: <span class="hljs-string">'allProducts'</span></span></span><br><span class="line"><span class="hljs-undefined">  &#125;),</span></span><br><span class="line"><span class="hljs-undefined">  methods: mapActions([</span></span><br><span class="line"><span class="hljs-javascript">    <span class="hljs-string">'addToCart'</span></span></span><br><span class="line"><span class="hljs-undefined">  ]),</span></span><br><span class="line"><span class="hljs-undefined">  created () &#123;</span></span><br><span class="line"><span class="hljs-javascript">    <span class="hljs-keyword">this</span>.$store.dispatch(<span class="hljs-string">'getAllProducts'</span>)</span></span><br><span class="line"><span class="hljs-undefined">  &#125;</span></span><br><span class="line"><span class="hljs-undefined">&#125;</span></span><br><span class="line"><span class="hljs-undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="十、总结"><a href="#十、总结" class="headerlink" title="十、总结"></a>十、总结</h3><p>1、应用层级的状态应该集中到单个 store 对象中，状态对象太复杂的时候可以划分<strong>module</strong>。</p>
+<p>2、提交 <strong>mutation</strong> 是更改状态的唯一方法。</p>
+<p>3、在触发方法上：</p>
+<p>action的触发是dispatch</p>
+<p>mutation的触发是commit；</p>
+<p>4、在功能上：</p>
+<p>state保存的是数据</p>
+<p>getters是对state进行二次加工</p>
+<p>action的处理函数的功能最终是commit mutation</p>
+<p>mutation处理函数的功能最终是改变state</p>
+<p>5、在同步异步上：</p>
+<p>异步逻辑都应该封装到 <strong>action</strong> 里面</p>
+<p><strong>mutation</strong> 是同步的，不能出现异步</p>
+<p>6、在流程上：</p>
+<p>vue component—-dispatch—-&gt;actions—-commit—-&gt;mutations—-mutate—-&gt;state—-render—-&gt;vue component。从而形成闭环。见图：</p>
+<p><img src="https://vuex.vuejs.org/zh-cn/images/vuex.png" alt=""></p>
+<p>7、辅助方法的映射上：</p>
+<p>mapGetters、mapState 都是用在computed声明里面；</p>
+<p>mapActions、mapMutations则都是用在methods声明里面。</p>
+<p>参考： <a href="https://vuex.vuejs.org/zh-cn/intro.html" target="_blank" rel="noopener">https://vuex.vuejs.org/zh-cn/intro.html</a></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Vuex/">Vuex</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_google_plus"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+        
+    </div>
+</div>
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/11/27/2018-11-27 React最佳入门/">
+                <span class="level-item">React最佳入门</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ0OC8xNTk3NQ==">
+    <script type="text/javascript">
+        (function(d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
+</div>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered">
+                <div>
+                    <img class="image is-128x128 has-mb-6" src="/images/avatar.png">
+                    
+                    <p class="is-size-4 is-block">
+                        Roy
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Roy Blogs!
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Nanjing,China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        9
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <p class="title has-text-weight-normal">
+                        8
+                    </p>
+                </div>
+            </div>
+        </nav>
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/realRoyHsu">
+                Follow</a>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/realRoyHsu/realRoyHsu.github.io">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="http://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com/realRoyHsu">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Dribbble" href="http://dribbble.com">
+                
+                <i class="fab fa-dribbble"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Links
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://twitter.com/realRoyHsu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">Twitter</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://twitter.com/realRoyHsu</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/realRoyHsu" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">GitHub</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://github.com/realRoyHsu</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://blog.csdn.net/qq_41711507" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">CSDN</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">https://blog.csdn.net/qq_41711507</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/Ajax/">
+            <span class="level-start">
+                <span class="level-item">Ajax</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Atom/">
+            <span class="level-start">
+                <span class="level-item">Atom</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/CSS/">
+            <span class="level-start">
+                <span class="level-item">CSS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/React/">
+            <span class="level-start">
+                <span class="level-item">React</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/SSH/">
+            <span class="level-start">
+                <span class="level-item">SSH</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Sublime/">
+            <span class="level-start">
+                <span class="level-item">Sublime</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/This/">
+            <span class="level-start">
+                <span class="level-item">This</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Vuex/">
+            <span class="level-start">
+                <span class="level-item">Vuex</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Atom/" style="font-size: 20px;">Atom</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Sublime/" style="font-size: 10px;">Sublime</a> <a href="/tags/This/" style="font-size: 10px;">This</a> <a href="/tags/Vuex/" style="font-size: 10px;">Vuex</a>
+    </div>
+</div>
+
+    
+        
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            <ul class="menu-list"><li>
+        <a class="is-flex" href="#一、Vuex是干什么用的？">
+        <span class="has-mr-6">1</span>
+        <span>一、Vuex是干什么用的？</span>
+        </a></li><li>
+        <a class="is-flex" href="#二、我们import进来的Vuex对象都包含些什么呢？">
+        <span class="has-mr-6">2</span>
+        <span>二、我们import进来的Vuex对象都包含些什么呢？</span>
+        </a></li><li>
+        <a class="is-flex" href="#三、创建好的store实例怎么在各个组件中都能引用到？">
+        <span class="has-mr-6">3</span>
+        <span>三、创建好的store实例怎么在各个组件中都能引用到？</span>
+        </a></li><li>
+        <a class="is-flex" href="#四、Vuex中的几大核心概念">
+        <span class="has-mr-6">4</span>
+        <span>四、Vuex中的几大核心概念</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1、State">
+        <span class="has-mr-6">4.1</span>
+        <span>1、State</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#this-store-state来获取数据，通过mutations，或者actions来改变state值，请看下面介绍">
+        <span class="has-mr-6">4.1.1</span>
+        <span>this.$store.state来获取数据，通过mutations，或者actions来改变state值，请看下面介绍</span>
+        </a></li><li>
+        <a class="is-flex" href="#mapState-辅助函数">
+        <span class="has-mr-6">4.1.2</span>
+        <span>mapState 辅助函数</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2、Getters">
+        <span class="has-mr-6">4.2</span>
+        <span>2、Getters</span>
+        </a></li><li>
+        <a class="is-flex" href="#this-store-getters来获取数据，通过mutations，或者actions来改变state值，请看下面介绍">
+        <span class="has-mr-6">4.3</span>
+        <span>this.$store.getters来获取数据，通过mutations，或者actions来改变state值，请看下面介绍</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#mapGetters-辅助函数">
+        <span class="has-mr-6">4.3.1</span>
+        <span>mapGetters 辅助函数</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3、Mutations">
+        <span class="has-mr-6">4.4</span>
+        <span>3、Mutations</span>
+        </a></li><li>
+        <a class="is-flex" href="#4、Actions">
+        <span class="has-mr-6">4.5</span>
+        <span>4、Actions</span>
+        </a></li><li>
+        <a class="is-flex" href="#5、Module">
+        <span class="has-mr-6">4.6</span>
+        <span>5、Module</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1、模块的局部状态">
+        <span class="has-mr-6">4.6.1</span>
+        <span>1、模块的局部状态</span>
+        </a></li><li>
+        <a class="is-flex" href="#2、mapState">
+        <span class="has-mr-6">4.6.2</span>
+        <span>2、mapState</span>
+        </a></li><li>
+        <a class="is-flex" href="#3、mapGetters">
+        <span class="has-mr-6">4.6.3</span>
+        <span>3、mapGetters</span>
+        </a></li><li>
+        <a class="is-flex" href="#4、mapMutations">
+        <span class="has-mr-6">4.6.4</span>
+        <span>4、mapMutations</span>
+        </a></li><li>
+        <a class="is-flex" href="#5、mapActions">
+        <span class="has-mr-6">4.6.5</span>
+        <span>5、mapActions</span>
+        </a></li><li>
+        <a class="is-flex" href="#命名空间">
+        <span class="has-mr-6">4.6.6</span>
+        <span>命名空间</span>
+        </a></li><li>
+        <a class="is-flex" href="#在命名空间模块内访问全局内容（Global-Assets）">
+        <span class="has-mr-6">4.6.7</span>
+        <span>在命名空间模块内访问全局内容（Global Assets）</span>
+        </a></li><li>
+        <a class="is-flex" href="#带命名空间的绑定函数">
+        <span class="has-mr-6">4.6.8</span>
+        <span>带命名空间的绑定函数</span>
+        </a></li><li>
+        <a class="is-flex" href="#给插件开发者的注意事项">
+        <span class="has-mr-6">4.6.9</span>
+        <span>给插件开发者的注意事项</span>
+        </a></li><li>
+        <a class="is-flex" href="#模块动态注册">
+        <span class="has-mr-6">4.6.10</span>
+        <span>模块动态注册</span>
+        </a></li><li>
+        <a class="is-flex" href="#模块重用">
+        <span class="has-mr-6">4.6.11</span>
+        <span>模块重用</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#六、严格模式">
+        <span class="has-mr-6">5</span>
+        <span>六、严格模式</span>
+        </a></li><li>
+        <a class="is-flex" href="#七、双向绑定的处理">
+        <span class="has-mr-6">6</span>
+        <span>七、双向绑定的处理</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#双向绑定的计算属性">
+        <span class="has-mr-6">6.1</span>
+        <span>双向绑定的计算属性</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#八、热重载">
+        <span class="has-mr-6">7</span>
+        <span>八、热重载</span>
+        </a></li><li>
+        <a class="is-flex" href="#九、实际使用时的文件结构和关系">
+        <span class="has-mr-6">8</span>
+        <span>九、实际使用时的文件结构和关系</span>
+        </a></li><li>
+        <a class="is-flex" href="#十、总结">
+        <span class="has-mr-6">9</span>
+        <span>十、总结</span>
+        </a></li></ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+        <div class="card card-transparent is-hidden-widescreen">
+        
+            
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/12/01/2018-12-01 Vuex的理解/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vuex的理解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-01T02:17:22.000Z">2018-12-01</time></div>
+                    <a href="/2018/12/01/2018-12-01 Vuex的理解/" class="has-link-black-ter is-size-6">Vuex的理解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vuex/">Vuex</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/27/2018-11-27 React最佳入门/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="React最佳入门">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-27T10:00:24.000Z">2018-11-27</time></div>
+                    <a href="/2018/11/27/2018-11-27 React最佳入门/" class="has-link-black-ter is-size-6">React最佳入门</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/React/">React</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/2018-11-04 this指向和get、set中this指向/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="this指向和get、set中this指向">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-04T13:53:24.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/2018-11-04 this指向和get、set中this指向/" class="has-link-black-ter is-size-6">this指向和get、set中this指向</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/This/">This</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/28/2018-10-28 SSH远程连接Google的Compute Engine/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SSH远程连接Google的Compute Engine">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time></div>
+                    <a href="/2018/10/28/2018-10-28 SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6">SSH远程连接Google的Compute Engine</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/09/27/2018-09-27 关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="关于jquery中的ajax调取数据成功回调函数，失败回调函数">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-27T03:01:24.000Z">2018-09-27</time></div>
+                    <a href="/2018/09/27/2018-09-27 关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="has-link-black-ter is-size-6">关于jquery中的ajax调取数据成功回调函数，失败回调函数</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ajax/">Ajax</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Ajax/">
+                        <span class="level-start">
+                            <span class="level-item">Ajax</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Atom/">
+                        <span class="level-start">
+                            <span class="level-item">Atom</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CSS/">
+                        <span class="level-start">
+                            <span class="level-item">CSS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/React/">
+                        <span class="level-start">
+                            <span class="level-item">React</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SSH/">
+                        <span class="level-start">
+                            <span class="level-item">SSH</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Sublime/">
+                        <span class="level-start">
+                            <span class="level-item">Sublime</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/This/">
+                        <span class="level-start">
+                            <span class="level-item">This</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vuex/">
+                        <span class="level-start">
+                            <span class="level-item">Vuex</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+                
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/2018/12/01/2018-12-01 Vuex的理解/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vuex的理解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-01T02:17:22.000Z">2018-12-01</time></div>
+                    <a href="/2018/12/01/2018-12-01 Vuex的理解/" class="has-link-black-ter is-size-6">Vuex的理解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vuex/">Vuex</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/27/2018-11-27 React最佳入门/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="React最佳入门">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-27T10:00:24.000Z">2018-11-27</time></div>
+                    <a href="/2018/11/27/2018-11-27 React最佳入门/" class="has-link-black-ter is-size-6">React最佳入门</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/React/">React</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/04/2018-11-04 this指向和get、set中this指向/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="this指向和get、set中this指向">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-04T13:53:24.000Z">2018-11-04</time></div>
+                    <a href="/2018/11/04/2018-11-04 this指向和get、set中this指向/" class="has-link-black-ter is-size-6">this指向和get、set中this指向</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/This/">This</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/10/28/2018-10-28 SSH远程连接Google的Compute Engine/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="SSH远程连接Google的Compute Engine">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time></div>
+                    <a href="/2018/10/28/2018-10-28 SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6">SSH远程连接Google的Compute Engine</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/09/27/2018-09-27 关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="关于jquery中的ajax调取数据成功回调函数，失败回调函数">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-27T03:01:24.000Z">2018-09-27</time></div>
+                    <a href="/2018/09/27/2018-09-27 关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="has-link-black-ter is-size-6">关于jquery中的ajax调取数据成功回调函数，失败回调函数</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Ajax/">Ajax</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2017/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2017</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Tags
+            </h3>
+            <ul class="menu-list">
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Ajax/">
+                        <span class="level-start">
+                            <span class="level-item">Ajax</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Atom/">
+                        <span class="level-start">
+                            <span class="level-item">Atom</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CSS/">
+                        <span class="level-start">
+                            <span class="level-item">CSS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/React/">
+                        <span class="level-start">
+                            <span class="level-item">React</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/SSH/">
+                        <span class="level-start">
+                            <span class="level-item">SSH</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Sublime/">
+                        <span class="level-start">
+                            <span class="level-item">Sublime</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/This/">
+                        <span class="level-start">
+                            <span class="level-item">This</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vuex/">
+                        <span class="level-start">
+                            <span class="level-item">Vuex</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+    
+    
+</div>
+
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.svg" alt="" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 Roy Hsu&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/realRoyHsu">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                  <!-- 站长工具 -->
+                  <p class="control">
+                    <a class="button is-white is-large" href="#">
+                      <i class="cnzz" style="margin-top:11px;">
+                        <script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1275245419'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s23.cnzz.com/z_stat.php%3Fid%3D1275245419%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+                      </i>
+                    </a>
+                  </p>
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-Hans");</script>
+
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+                if (typeof($.fn.lightGallery) === 'function') {
+                    $('.article').lightGallery({ selector: '.gallery-item' });
+                }
+                if (typeof($.fn.justifiedGallery) === 'function') {
+                    $('.justified-gallery').justifiedGallery();
+                }
+            });
+        })(jQuery);
+    </script>
+    
+
+    
+    
+    
+    <div id="outdated">
+        <h6>Your browser is out-of-date!</h6>
+        <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+        <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // plugin function, place inside DOM ready function
+            outdatedBrowser({
+                bgColor: '#f25648',
+                color: '#ffffff',
+                lowerThan: 'flex'
+            })
+        });
+    </script>
+    
+
+    
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/animejs@2.2.0/anime.js"></script>
+    <script>
+    function isIE() {
+        var ua = window.navigator.userAgent;
+        var msie = ua.indexOf('MSIE ');
+        var trident = ua.indexOf('Trident/');
+        return (msie > 0 || trident > 0);
+    }
+
+    $(document).ready(function () {
+        $('body>.navbar,body>.section,body>.footer').css('opacity', 1);
+        if (!isIE()) {
+            ['.column-main > .card',
+             '.column-left > .card',
+             '.column-right > .card'].map(function(target) {
+                anime({
+                    targets: target,
+                    scale: [0.8, 1],
+                    opacity: [0, 1],
+                    duration: 300,
+                    easing: 'easeOutSine',
+                    delay: function(el, i, l) {
+                        return i * 100;
+                    }
+                })
+            });
+
+            anime({
+                targets: '.navbar-main',
+                translateY: [-100, 0],
+                opacity: [0, 1],
+                duration: 300,
+                easing: 'easeOutSine'
+            });
+        }
+    });
+    </script>
+    
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {matchFontHeight: false},
+        SVG: {matchFontHeight: false},
+        CommonHTML: {matchFontHeight: false}
+    });
+</script>
+
+    
+    
+
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<style>
+#back-to-top {
+    position: fixed;
+    padding: 8px 0;
+    transition: 0.4s ease opacity, 0.4s ease width, 0.4s ease transform, 0.4s ease border-radius;
+    opacity: 0;
+    line-height: 24px;
+    outline: none;
+    transform: translateY(120px);
+}
+#back-to-top.fade-in {
+    opacity: 1;
+}
+#back-to-top.rise-up {
+    transform: translateY(0);
+}
+</style>
+<script src="/js/back-to-top.js"></script>
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+    
+
+
+<script src="/js/main.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css">
+    
+</body>
+</html>
