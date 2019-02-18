@@ -2,31 +2,28 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>Sublime3 React、JSX 代码美化--[Prettier] - Roy Blog!</title>
+<title>SSH远程连接Google的Compute Engine - Roy Blog!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
-    <meta name="description" content="最近一直用Sublime写React项目，但是jsx语法格式化一直让我头疼。尝试了JsFormat、jsfmt、HTML/CSS/JS pretty、esformatter等都没有完美的解决我的问题结果惨不忍睹：">
-<meta name="keywords" content="Sublime">
+    <meta name="description" content="在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名的注释。">
+<meta name="keywords" content="SSH">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Sublime3 React、JSX 代码美化--[Prettier]">
-<meta property="og:url" content="http://yoursite.com/2018/09/02/Sublime3 React、JSX 代码美化--[Prettier]/index.html">
+<meta property="og:title" content="SSH远程连接Google的Compute Engine">
+<meta property="og:url" content="http://yoursite.com/2018/10/28/2018-10-28 SSH远程连接Google的Compute Engine/index.html">
 <meta property="og:site_name" content="Roy Blog!">
-<meta property="og:description" content="最近一直用Sublime写React项目，但是jsx语法格式化一直让我头疼。尝试了JsFormat、jsfmt、HTML/CSS/JS pretty、esformatter等都没有完美的解决我的问题结果惨不忍睹：">
+<meta property="og:description" content="在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名的注释。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://realroyhsu.github.io/Img/JsPrettier/prettier.png">
-<meta property="og:image" content="https://realroyhsu.github.io/Img/JsPrettier/npm.prettier.png">
-<meta property="og:image" content="https://realroyhsu.github.io/Img/JsPrettier/jsprettiersublime.png">
-<meta property="og:image" content="https://realroyhsu.github.io/Img/JsPrettier/prettierrc配置文件.png">
-<meta property="og:image" content="https://realroyhsu.github.io/Img/JsPrettier/prettierkey.png">
-<meta property="og:image" content="https://realroyhsu.github.io/Img/JsPrettier/prettier-console.png">
-<meta property="og:image" content="https://realroyhsu.github.io/Img/JsPrettier/jsprettierfinish.png">
-<meta property="og:updated_time" content="2018-11-02T23:47:28.000Z">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/GoogleCloud/1ssh-keygen.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/GoogleCloud/2.chmod400.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/GoogleCloud/3.元数据.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/GoogleCloud/4.ssh.png">
+<meta property="og:updated_time" content="2019-02-18T15:00:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sublime3 React、JSX 代码美化--[Prettier]">
-<meta name="twitter:description" content="最近一直用Sublime写React项目，但是jsx语法格式化一直让我头疼。尝试了JsFormat、jsfmt、HTML/CSS/JS pretty、esformatter等都没有完美的解决我的问题结果惨不忍睹：">
-<meta name="twitter:image" content="https://realroyhsu.github.io/Img/JsPrettier/prettier.png">
+<meta name="twitter:title" content="SSH远程连接Google的Compute Engine">
+<meta name="twitter:description" content="在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名的注释。">
+<meta name="twitter:image" content="https://realroyhsu.github.io/Img/GoogleCloud/1ssh-keygen.png">
 <meta name="twitter:creator" content="@realRoyHsu">
 <meta name="twitter:site" content="https://twitter.com/realRoyHsu">
 
@@ -179,17 +176,17 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-09-02T13:01:24.000Z">2018-09-02</time>
+                <time class="level-item has-text-grey" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/Sublime/">Sublime</a>
+                <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 536 words)
+                    4 minutes read (About 572 words)
                 </span>
                 
             </div>
@@ -197,69 +194,69 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                Sublime3 React、JSX 代码美化--[Prettier]
+                SSH远程连接Google的Compute Engine
             
         </h1>
         <div class="content">
-            <!-- <h2>Sublime3 React、JSX 代码美化--[Prettier](https://packagecontrol.io/packages/JsPrettier) </h2>   -->
-<blockquote>
-<p>最近一直用Sublime写<br><code bgcolor="#f9f2f4"><font color="#c7254e">React</font></code>项目，但是jsx语法格式化一直让我头疼。<br>尝试了<br><code bgcolor="#f9f2f4"><font color="#c7254e">JsFormat</font></code>、<br><code bgcolor="#f9f2f4"><font color="#c7254e">jsfmt</font></code>、<br><code bgcolor="#f9f2f4"><font color="#c7254e">HTML/CSS/JS pretty</font></code>、<br><code bgcolor="#f9f2f4"><font color="#c7254e">esformatter</font></code>等都没有完美的解决我的问题<br>结果惨不忍睹：</p>
+            <blockquote>
+<p>在您的工作站上打开一个终端，再使用 ssh-keygen 命令生成新的密钥。指定 -C 标志以添加一条带有您的用户名的注释。</p>
 </blockquote>
 <a id="more"></a>
-<blockquote>
-<p>最近一直用Sublime写<br><code bgcolor="#f9f2f4"><font color="#c7254e">React</font></code>项目，但是jsx语法格式化一直让我头疼。<br>尝试了<br><code bgcolor="#f9f2f4"><font color="#c7254e">JsFormat</font></code>、<br><code bgcolor="#f9f2f4"><font color="#c7254e">jsfmt</font></code>、<br><code bgcolor="#f9f2f4"><font color="#c7254e">HTML/CSS/JS pretty</font></code>、<br><code bgcolor="#f9f2f4"><font color="#c7254e">esformatter</font></code>等都没有完美的解决我的问题<br>结果惨不忍睹：  </p>
-</blockquote>
-<!-- ![img](htmlpretty.png) -->
-<div align="center"><br>    <img src="https://realroyhsu.github.io/Img/JsPrettier/prettier.png" width="50%" height="50%"><br></div>
-
-<p><a href="https://packagecontrol.io/packages/JsPrettier" target="_blank" rel="noopener">Prettier官网</a>  </p>
-<p>JsPrettier is a Sublime Text Plug-in for Prettier, the opinionated code formatter.<br>网传facebook也是在用它优化React项目  </p>
 <ul>
-<li><p>开始安装插件 -g 全局安装<br><strong><code>npm install -g prettier</code></strong></p>
-<div align="center"><br>  <img src="https://realroyhsu.github.io/Img/JsPrettier/npm.prettier.png"><br></div>
-</li>
-<li><p>sublime text3 直接在package control搜索prettier下载，打开它的User配置项加入如下保存即可。</p>
-</li>
-<li><p>修改配置文件<strong><code>Preferences&gt;PackageSettings&gt;JsPrettier&gt;Settings User</code></strong></p>
-<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"debug"</span>: <span class="hljs-literal">false</span>,</span><br><span class="line">  <span class="hljs-attr">"prettier_cli_path"</span>: <span class="hljs-string">"C:/Users/njwb/AppData/Roaming/npm/node_modules/prettier/bin-prettier.js"</span>,</span><br><span class="line">  <span class="hljs-attr">"node_path"</span>: <span class="hljs-string">"C:/Program Files/nodejs/node.exe"</span>,</span><br><span class="line">  <span class="hljs-attr">"auto_format_on_save"</span>: <span class="hljs-literal">false</span>,</span><br><span class="line">  <span class="hljs-attr">"auto_format_on_save_excludes"</span>: [],</span><br><span class="line">  <span class="hljs-attr">"allow_inline_formatting"</span>: <span class="hljs-literal">false</span>,</span><br><span class="line">  <span class="hljs-attr">"custom_file_extensions"</span>: [],</span><br><span class="line">  <span class="hljs-attr">"max_file_size_limit"</span>: <span class="hljs-number">-1</span>,</span><br><span class="line">  <span class="hljs-attr">"additional_cli_args"</span>: &#123;&#125;,</span><br><span class="line">  <span class="hljs-attr">"prettier_options"</span>: &#123;</span><br><span class="line">    <span class="hljs-attr">"printWidth"</span>: <span class="hljs-number">80</span>,</span><br><span class="line">    <span class="hljs-attr">"singleQuote"</span>: <span class="hljs-literal">false</span>,</span><br><span class="line">    <span class="hljs-attr">"trailingComma"</span>: <span class="hljs-string">"none"</span>,</span><br><span class="line">    <span class="hljs-attr">"bracketSpacing"</span>: <span class="hljs-literal">true</span>,</span><br><span class="line">    <span class="hljs-attr">"jsxBracketSameLine"</span>: <span class="hljs-literal">false</span>,</span><br><span class="line">    <span class="hljs-attr">"parser"</span>: <span class="hljs-string">"babylon"</span>,</span><br><span class="line">    <span class="hljs-attr">"semi"</span>: <span class="hljs-literal">true</span>,</span><br><span class="line">    <span class="hljs-attr">"requirePragma"</span>: <span class="hljs-literal">false</span>,</span><br><span class="line">    <span class="hljs-attr">"proseWrap"</span>: <span class="hljs-string">"preserve"</span>,</span><br><span class="line">    <span class="hljs-attr">"arrowParens"</span>: <span class="hljs-string">"avoid"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<div align="center"><br>    <img src="https://realroyhsu.github.io/Img/JsPrettier/jsprettiersublime.png"><br></div>
-
-<blockquote>
-<p>“prettier_cli_path”: 是你全局安装prettier插件的路径<br>“node_path”: 是你nodejs安装的路径</p>
-</blockquote>
+<li><p>1、<code>ssh-keygen -t rsa -f ~/.ssh/[KEY_FILENAME] -C [USERNAME]</code>  </p>
+<p>其中：  </p>
 <ul>
-<li>在<strong>项目根目录</strong>下面建一个 <strong>.prettierrc</strong> 文件,并配置<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-string">"printWidth"</span>: <span class="hljs-number">120</span>,               <span class="hljs-comment">// 换行字符串阈值</span></span><br><span class="line">  <span class="hljs-string">"semi"</span>: <span class="hljs-literal">true</span>,                    <span class="hljs-comment">// 句末加分号</span></span><br><span class="line">  <span class="hljs-string">"singleQuote"</span>: <span class="hljs-literal">true</span>,             <span class="hljs-comment">// 用单引号</span></span><br><span class="line">  <span class="hljs-string">"trailingComma"</span>: <span class="hljs-string">"none"</span>,         <span class="hljs-comment">// 最后一个对象元素加逗号</span></span><br><span class="line">  <span class="hljs-string">"bracketSpacing"</span>: <span class="hljs-literal">true</span>,          <span class="hljs-comment">// 对象，数组加空格</span></span><br><span class="line">  <span class="hljs-string">"jsxBracketSameLine"</span>: <span class="hljs-literal">false</span>,     <span class="hljs-comment">// jsx &gt; 是否另起一行</span></span><br><span class="line">  <span class="hljs-string">"arrowParens"</span>: <span class="hljs-string">"avoid"</span>,          <span class="hljs-comment">// (x) =&gt; &#123;&#125; 是否要有小括号</span></span><br><span class="line">  <span class="hljs-string">"requirePragma"</span>: <span class="hljs-literal">false</span>,          <span class="hljs-comment">// 是否要注释来决定是否格式化代码</span></span><br><span class="line">  <span class="hljs-string">"proseWrap"</span>: <span class="hljs-string">"preserve"</span>          <span class="hljs-comment">// 是否要换行</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p><strong>[KEY_FILENAME]</strong> 是您要用于 SSH 密钥文件的名称。例如，文件名 my-ssh-key 生成一个名为 my-ssh-key 的私钥文件和一个名为 my-ssh-key.pub 公钥文件。  </p>
 </li>
-</ul>
-<div align="center"><br>    <img src="https://realroyhsu.github.io/Img/JsPrettier/prettierrc配置文件.png"><br></div>
-
+<li><p><strong>[USERNAME]</strong> 是您要为其应用此 SSH 密钥的用户。  </p>
+</li>
+<li><p>该命令生成一个 SSH 私钥文件和一个匹配的 SSH 公钥，公钥结构如下所示：<br><code>ssh-rsa [KEY_VALUE] [USERNAME]</code>   </p>
 <ul>
-<li>修改快捷键<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="hljs-attr">"keys"</span>: [<span class="hljs-string">"ctrl+shift+j"</span>],</span><br><span class="line">  <span class="hljs-attr">"command"</span>: <span class="hljs-string">"js_prettier"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>其中：<br><code>[KEY_VALUE]</code> 是您生成的密钥值。<br><code>[USERNAME]</code> 是此密钥要应用到的用户。   </li>
+</ul>
 </li>
 </ul>
-<div align="center"><br>    <img src="https://realroyhsu.github.io/Img/JsPrettier/prettierkey.png"><br></div>
+<div align="center"><br>  <img src="https://realroyhsu.github.io/Img/GoogleCloud/1ssh-keygen.png" width="50%" height="50%"><br></div>  
 
-<blockquote>
+
+</li>
+</ul>
 <ul>
-<li>如果按照本教程出现插件还是无法使用,请输入<code>Ctrl + ·</code>，查看控制台是否有报错<br>它会提示你哪里有错误，<a href="https://packagecontrol.io/packages/JsPrettier" target="_blank" rel="noopener">Prettier官网</a><ul>
-<li>错可能情况有：<ul>
-<li>React文件中，有单标签没有闭合：<code>img</code> <code>input</code></li>
-<li>配置文件中符号为中文</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<div align="center"><br>    <img src="https://realroyhsu.github.io/Img/JsPrettier/prettier-console.png"><br></div>  
+<li><p>2、限制对您的私钥的访问，以便只有您能读取此密钥，且所有人都不可向其写入。  </p>
+<p><code>chmod 400 ~/.ssh/[KEY_FILENAME]</code>  </p>
+<p>其中 <code>[KEY_FILENAME]</code> 是您用于 SSH 密钥文件的名称。</p>
+<div align="center"><br>  <img src="https://realroyhsu.github.io/Img/GoogleCloud/2.chmod400.png" width="50%" height="50%"><br></div>  
 
 
+
+</li>
+</ul>
 <ul>
-<li>完美的解决了React格式化问题  </li>
+<li><p>3、要使用 ssh 连接到实例，请执行以下操作：</p>
+<ul>
+<li><p>1、使用其中一个可用选项为实例提供 SSH 公钥。</p>
+<ul>
+<li><p>1、<code>cat google.pub</code></p>
+</li>
+<li><p>2、生成的公钥内容要复制出来</p>
+</li>
+<li><p>3、粘贴到Compute Engine的 元数据中  </p>
+<div align="center"><br><img src="https://realroyhsu.github.io/Img/GoogleCloud/3.元数据.png" width="50%" height="50%"><br></div>
+</li>
 </ul>
-<div align="center"><br>    <img src="https://realroyhsu.github.io/Img/JsPrettier/jsprettierfinish.png"><br></div>
+</li>
+<li><p>2、在控制台中，查找要连接到的实例的外部 IP 地址。转到您的实例列表。</p>
+</li>
+<li><p>3、在终端中，使用 ssh 命令和 SSH 私钥文件连接到实例。指定您的用户名和您要连接到的实例的外部 IP 地址。</p>
+<p><code>ssh -i [PATH_TO_PRIVATE_KEY] [USERNAME]@[EXTERNAL_IP_ADDRESS]</code>  </p>
+<ul>
+<li>其中：<br><code>[PATH_TO_PRIVATE_KEY]</code> 是您的 SSH 私钥文件的路径。<br><code>[USERNAME]</code> 是连接到实例的用户的名称。在创建 SSH 密钥时，就指定了该 SSH 公钥的用户名。如果实例具有该用户的有效 SSH 公钥，并且您拥有与之匹配的 SSH 私钥，则您可以以该用户的身份连接到此实例。<br><code>[EXTERNAL_IP_ADDRESS]</code> 是您的实例的外部 IP 地址。<br>如果连接成功，您就可以使用终端在您的实例上运行命令。完成操作后，可使用 <strong>exit</strong> 命令断开与实例的连接。  </li>
+</ul>
+<div align="center"><br>  <img src="https://realroyhsu.github.io/Img/GoogleCloud/4.ssh.png" width="50%" height="50%"><br></div>
+</li>
+</ul>
+</li>
+</ul>
 
         </div>
         
@@ -267,7 +264,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/Sublime/">Sublime</a>
+                    <a class="has-link-grey -link" href="/tags/SSH/">SSH</a>
                 </div>
             </div>
         </div>
@@ -292,16 +289,16 @@
     <div class="level post-navigation is-flex-wrap is-mobile">
         
         <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2018/11/04/2018-11-04 this指向和get、set中this指向/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">关于jquery中的ajax调取数据成功回调函数，失败回调函数</span>
+                <span class="level-item">this指向和get、set中this指向</span>
             </a>
         </div>
         
         
         <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/2017/06/27/Emmet自动补全React中jsx/">
-                <span class="level-item">Emmet自动补全React中jsx</span>
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/09/27/2018-09-27 关于jquery中的ajax调取数据成功回调函数，失败回调函数/">
+                <span class="level-item">关于jquery中的ajax调取数据成功回调函数，失败回调函数</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -374,7 +371,7 @@
                         Posts
                     </p>
                     <p class="title has-text-weight-normal">
-                        7
+                        9
                     </p>
                 </div>
             </div>
@@ -384,7 +381,7 @@
                         Categories
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        8
                     </p>
                 </div>
             </div>
@@ -394,7 +391,7 @@
                         Tags
                     </p>
                     <p class="title has-text-weight-normal">
-                        6
+                        8
                     </p>
                 </div>
             </div>
@@ -522,6 +519,14 @@
                 <span class="level-item tag">1</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/CSS/">
+            <span class="level-start">
+                <span class="level-item">CSS</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/React/">
             <span class="level-start">
                 <span class="level-item">React</span>
@@ -553,6 +558,14 @@
             <span class="level-end">
                 <span class="level-item tag">1</span>
             </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/Vuex/">
+            <span class="level-start">
+                <span class="level-item">Vuex</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
         </a></li>
             </ul>
         </div>
@@ -565,7 +578,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Atom/" style="font-size: 20px;">Atom</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Sublime/" style="font-size: 10px;">Sublime</a> <a href="/tags/This/" style="font-size: 10px;">This</a>
+        <a href="/tags/Ajax/" style="font-size: 10px;">Ajax</a> <a href="/tags/Atom/" style="font-size: 20px;">Atom</a> <a href="/tags/CSS/" style="font-size: 10px;">CSS</a> <a href="/tags/React/" style="font-size: 20px;">React</a> <a href="/tags/SSH/" style="font-size: 10px;">SSH</a> <a href="/tags/Sublime/" style="font-size: 10px;">Sublime</a> <a href="/tags/This/" style="font-size: 10px;">This</a> <a href="/tags/Vuex/" style="font-size: 10px;">Vuex</a>
     </div>
 </div>
 
@@ -595,7 +608,26 @@
         
         <article class="media">
             
-            <a href="/2018/11/27/React最佳入门/" class="media-left">
+            <a href="/2018/12/01/2018-12-01 Vuex的理解 /" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vuex的理解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-01T02:17:22.000Z">2018-12-01</time></div>
+                    <a href="/2018/12/01/2018-12-01 Vuex的理解 /" class="has-link-black-ter is-size-6">Vuex的理解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vuex/">Vuex</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/27/2018-11-27 React最佳入门/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="React最佳入门">
                 </p>
@@ -604,7 +636,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-27T10:00:24.000Z">2018-11-27</time></div>
-                    <a href="/2018/11/27/React最佳入门/" class="has-link-black-ter is-size-6">React最佳入门</a>
+                    <a href="/2018/11/27/2018-11-27 React最佳入门/" class="has-link-black-ter is-size-6">React最佳入门</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/React/">React</a>
                     </p>
@@ -614,7 +646,7 @@
         
         <article class="media">
             
-            <a href="/2018/11/04/this指向和get、set中this指向/" class="media-left">
+            <a href="/2018/11/04/2018-11-04 this指向和get、set中this指向/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="this指向和get、set中this指向">
                 </p>
@@ -623,7 +655,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-04T13:53:24.000Z">2018-11-04</time></div>
-                    <a href="/2018/11/04/this指向和get、set中this指向/" class="has-link-black-ter is-size-6">this指向和get、set中this指向</a>
+                    <a href="/2018/11/04/2018-11-04 this指向和get、set中this指向/" class="has-link-black-ter is-size-6">this指向和get、set中this指向</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/This/">This</a>
                     </p>
@@ -633,7 +665,7 @@
         
         <article class="media">
             
-            <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="media-left">
+            <a href="/2018/10/28/2018-10-28 SSH远程连接Google的Compute Engine/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="SSH远程连接Google的Compute Engine">
                 </p>
@@ -642,7 +674,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time></div>
-                    <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6">SSH远程连接Google的Compute Engine</a>
+                    <a href="/2018/10/28/2018-10-28 SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6">SSH远程连接Google的Compute Engine</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
                     </p>
@@ -652,7 +684,7 @@
         
         <article class="media">
             
-            <a href="/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="media-left">
+            <a href="/2018/09/27/2018-09-27 关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="关于jquery中的ajax调取数据成功回调函数，失败回调函数">
                 </p>
@@ -661,28 +693,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-27T03:01:24.000Z">2018-09-27</time></div>
-                    <a href="/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="has-link-black-ter is-size-6">关于jquery中的ajax调取数据成功回调函数，失败回调函数</a>
+                    <a href="/2018/09/27/2018-09-27 关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="has-link-black-ter is-size-6">关于jquery中的ajax调取数据成功回调函数，失败回调函数</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Ajax/">Ajax</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/09/02/Sublime3 React、JSX 代码美化--[Prettier]/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Sublime3 React、JSX 代码美化--[Prettier]">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-02T13:01:24.000Z">2018-09-02</time></div>
-                    <a href="/2018/09/02/Sublime3 React、JSX 代码美化--[Prettier]/" class="has-link-black-ter is-size-6">Sublime3 React、JSX 代码美化--[Prettier]</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Sublime/">Sublime</a>
                     </p>
                 </div>
             </div>
@@ -699,6 +712,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/11/">
@@ -755,6 +779,17 @@
             </a>
         </li>
         
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
         </ul>
         </div>
     </div>
@@ -786,6 +821,17 @@
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CSS/">
+                        <span class="level-start">
+                            <span class="level-item">CSS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
                         </span>
                     </a>
                 </li>
@@ -827,6 +873,17 @@
                     <a class="level is-marginless" href="/tags/This/">
                         <span class="level-start">
                             <span class="level-item">This</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/Vuex/">
+                        <span class="level-start">
+                            <span class="level-item">Vuex</span>
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">1</span>
@@ -858,7 +915,26 @@
         
         <article class="media">
             
-            <a href="/2018/11/27/React最佳入门/" class="media-left">
+            <a href="/2018/12/01/2018-12-01 Vuex的理解 /" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Vuex的理解">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-12-01T02:17:22.000Z">2018-12-01</time></div>
+                    <a href="/2018/12/01/2018-12-01 Vuex的理解 /" class="has-link-black-ter is-size-6">Vuex的理解</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/Vuex/">Vuex</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/2018/11/27/2018-11-27 React最佳入门/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="React最佳入门">
                 </p>
@@ -867,7 +943,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-27T10:00:24.000Z">2018-11-27</time></div>
-                    <a href="/2018/11/27/React最佳入门/" class="has-link-black-ter is-size-6">React最佳入门</a>
+                    <a href="/2018/11/27/2018-11-27 React最佳入门/" class="has-link-black-ter is-size-6">React最佳入门</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/React/">React</a>
                     </p>
@@ -877,7 +953,7 @@
         
         <article class="media">
             
-            <a href="/2018/11/04/this指向和get、set中this指向/" class="media-left">
+            <a href="/2018/11/04/2018-11-04 this指向和get、set中this指向/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="this指向和get、set中this指向">
                 </p>
@@ -886,7 +962,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-11-04T13:53:24.000Z">2018-11-04</time></div>
-                    <a href="/2018/11/04/this指向和get、set中this指向/" class="has-link-black-ter is-size-6">this指向和get、set中this指向</a>
+                    <a href="/2018/11/04/2018-11-04 this指向和get、set中this指向/" class="has-link-black-ter is-size-6">this指向和get、set中this指向</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/This/">This</a>
                     </p>
@@ -896,7 +972,7 @@
         
         <article class="media">
             
-            <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="media-left">
+            <a href="/2018/10/28/2018-10-28 SSH远程连接Google的Compute Engine/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="SSH远程连接Google的Compute Engine">
                 </p>
@@ -905,7 +981,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-10-28T13:01:24.000Z">2018-10-28</time></div>
-                    <a href="/2018/10/28/SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6">SSH远程连接Google的Compute Engine</a>
+                    <a href="/2018/10/28/2018-10-28 SSH远程连接Google的Compute Engine/" class="has-link-black-ter is-size-6">SSH远程连接Google的Compute Engine</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/SSH/">SSH</a>
                     </p>
@@ -915,7 +991,7 @@
         
         <article class="media">
             
-            <a href="/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="media-left">
+            <a href="/2018/09/27/2018-09-27 关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/images/thumbnail.svg" alt="关于jquery中的ajax调取数据成功回调函数，失败回调函数">
                 </p>
@@ -924,28 +1000,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-27T03:01:24.000Z">2018-09-27</time></div>
-                    <a href="/2018/09/27/关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="has-link-black-ter is-size-6">关于jquery中的ajax调取数据成功回调函数，失败回调函数</a>
+                    <a href="/2018/09/27/2018-09-27 关于jquery中的ajax调取数据成功回调函数，失败回调函数/" class="has-link-black-ter is-size-6">关于jquery中的ajax调取数据成功回调函数，失败回调函数</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/Ajax/">Ajax</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <a href="/2018/09/02/Sublime3 React、JSX 代码美化--[Prettier]/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/images/thumbnail.svg" alt="Sublime3 React、JSX 代码美化--[Prettier]">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2018-09-02T13:01:24.000Z">2018-09-02</time></div>
-                    <a href="/2018/09/02/Sublime3 React、JSX 代码美化--[Prettier]/" class="has-link-black-ter is-size-6">Sublime3 React、JSX 代码美化--[Prettier]</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/Sublime/">Sublime</a>
                     </p>
                 </div>
             </div>
@@ -962,6 +1019,17 @@
             Archives
         </h3>
         <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
         
         <li>
             <a class="level is-marginless" href="/archives/2018/11/">
@@ -1018,6 +1086,17 @@
             </a>
         </li>
         
+        <li>
+            <a class="level is-marginless" href="/archives/2016/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2016</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
         </ul>
         </div>
     </div>
@@ -1049,6 +1128,17 @@
                         </span>
                         <span class="level-end">
                             <span class="level-item tag">2</span>
+                        </span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a class="level is-marginless" href="/tags/CSS/">
+                        <span class="level-start">
+                            <span class="level-item">CSS</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
                         </span>
                     </a>
                 </li>
@@ -1097,6 +1187,17 @@
                     </a>
                 </li>
                 
+                <li>
+                    <a class="level is-marginless" href="/tags/Vuex/">
+                        <span class="level-start">
+                            <span class="level-item">Vuex</span>
+                        </span>
+                        <span class="level-end">
+                            <span class="level-item tag">1</span>
+                        </span>
+                    </a>
+                </li>
+                
             </ul>
         </div>
     </div>
@@ -1118,7 +1219,7 @@
                 
                 </a>
                 <p class="is-size-7">
-                &copy; 2018 Roy Hsu&nbsp;
+                &copy; 2019 Roy Hsu&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a
                         href="http://github.com/ppoffice/hexo-theme-icarus">Icarus</a>
                 </p>
