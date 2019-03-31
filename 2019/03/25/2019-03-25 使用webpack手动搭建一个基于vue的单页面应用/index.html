@@ -2,22 +2,41 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>Archives: 2018/12 - Roy Blog!</title>
+<title>使用 webpack 手动搭建一个基于 vue 的单页面应用 - Roy Blog!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
-    <meta name="description" content="Roy Blog">
-<meta name="keywords" content="Roy Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Roy Blog!">
-<meta property="og:url" content="https://effiego.com/archives/2018/12/index.html">
+    <meta name="description" content="使用 webpack 手动搭建一个基于 vue 的单页面应用">
+<meta name="keywords" content="Webpack">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 webpack 手动搭建一个基于 vue 的单页面应用">
+<meta property="og:url" content="https://effiego.com/2019/03/25/2019-03-25 使用webpack手动搭建一个基于vue的单页面应用/index.html">
 <meta property="og:site_name" content="Roy Blog!">
-<meta property="og:description" content="Roy Blog">
+<meta property="og:description" content="使用 webpack 手动搭建一个基于 vue 的单页面应用">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/1.npminit.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/2.创建基础文件.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/3.安装依赖.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/4.创建build脚本,并运行.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/5.打包html模板.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/6.添加cross-evn.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/7.热加载.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/8.配置loader.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/9.helloworld.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/10.开启热加载，更新babel.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/11.让webpack认识vue文件.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/12.让webpack认识vue文件解决.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/13.runtime.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/14.vue别名.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/15.render函数.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/16.结果.png">
+<meta property="og:image" content="https://realroyhsu.github.io/Img/webpack/17.router.png">
+<meta property="og:updated_time" content="2019-03-31T05:33:43.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Roy Blog!">
-<meta name="twitter:description" content="Roy Blog">
+<meta name="twitter:title" content="使用 webpack 手动搭建一个基于 vue 的单页面应用">
+<meta name="twitter:description" content="使用 webpack 手动搭建一个基于 vue 的单页面应用">
+<meta name="twitter:image" content="https://realroyhsu.github.io/Img/webpack/1.npminit.png">
 <meta name="twitter:creator" content="@realRoyHsu">
 <meta name="twitter:site" content="https://twitter.com/realRoyHsu">
 
@@ -164,39 +183,210 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        December 2018
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-25T14:49:06.000Z">2019-03-25</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-12-01T02:17:22.000Z">2018-12-01</time>
-                        <a href="/2018/12/01/2018-12-01 Vuex的理解/" class="has-link-black-ter is-size-6">Vuex的理解</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Vuex/">Vuex</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Webpack/">Webpack</a>
                 </div>
-            </article>
-        
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 961 words)
+                </span>
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                使用 webpack 手动搭建一个基于 vue 的单页面应用
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>使用 webpack 手动搭建一个基于 vue 的单页面应用</p>
+</blockquote>
+<a id="more"></a>
+<ol>
+<li><p>创建项目,进入目录，运行下面命令，可以生产 package.json 文件</p>
+<blockquote>
+<p><code>npm init</code></p>
+</blockquote>
+<p><img src="https://realroyhsu.github.io/Img/webpack/1.npminit.png" alt="图片"></p>
+</li>
+<li><p>创建项目需要的基础文件和文件夹</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/2.创建基础文件.png" alt="图片"></p>
+</li>
+<li><p>安装 webpack 以及一些其他<strong>开发依赖</strong></p>
+</li>
+</ol>
+<ul>
+<li>webpack-dev-server 热加载依赖</li>
+<li>html-webpack-plugin 打包 html 模板依赖</li>
+<li>添加 babel-loader babel-core babel-preset-env 依赖包，支持 es6<blockquote>
+<p><code>npm i --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin babel-core babel-loader babel-preset-env css-loader style-loader vue-loader vue-template-compiler</code></p>
+</blockquote>
+</li>
+</ul>
+<ol start="4">
+<li><p>安装<strong>项目依赖</strong></p>
+<blockquote>
+<p><code>npm i --save vue vue-router vuex</code></p>
+</blockquote>
+<p><img src="https://realroyhsu.github.io/Img/webpack/3.安装依赖.png" alt="图片"></p>
+</li>
+<li><p>配置 webpack-config.js</p>
+</li>
+</ol>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">'path'</span>);</span><br><span class="line"><span class="hljs-built_in">module</span>.exports = &#123;</span><br><span class="line">  mode: <span class="hljs-string">'development'</span>,</span><br><span class="line">  <span class="hljs-comment">// 入口文件，用绝对路径，保证我们不因为路径发生错误</span></span><br><span class="line">  <span class="hljs-comment">//path.join(__dirname, 'src/index.js')中__dirname表示当前文件的路径，path.join就是将当前文件的路径跟'src/index.js'拼接起来，形成一个绝对路径</span></span><br><span class="line">  entry: &#123;</span><br><span class="line">    app: <span class="hljs-string">'./src/app.js'</span>, <span class="hljs-comment">//入口js</span></span><br><span class="line">  &#125;,</span><br><span class="line">  output: &#123;</span><br><span class="line">    <span class="hljs-comment">//打包输出目录</span></span><br><span class="line">    path: path.join(__dirname, <span class="hljs-string">'../dist'</span>), <span class="hljs-comment">//打包输出路径</span></span><br><span class="line">    filename: <span class="hljs-string">'[name].js'</span>, <span class="hljs-comment">//打包输出文件名字 name对应 entry 里面的 app</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>在 package.json 里面添加 打包命令，添加 –config 指向 webpack.config.js</li>
+</ol>
+<ul>
+<li>在命令面板中输入 npm run build</li>
+<li>会在项目中生成一个 dist 文件夹<br><img src="https://realroyhsu.github.io/Img/webpack/4.创建build脚本,并运行.png" alt="图片"></li>
+<li>已经生成好打包文件，但是只有 js，没有 html</li>
+</ul>
+<ol start="7">
+<li><p>引入 html-webpack-plugin 插件，让 webpack 把 html 也打包进去<br><img src="https://realroyhsu.github.io/Img/webpack/5.打包html模板.png" alt="图片"></p>
+</li>
+<li><p>安装 cross-env 这个包,这个包能够使得在不同的平台执行同一个 script,并修改脚本</p>
+<blockquote>
+<p><code>npm i --save-dev cross-env</code></p>
+</blockquote>
+<p><img src="https://realroyhsu.github.io/Img/webpack/6.添加cross-evn.png" alt="图片"></p>
+</li>
+<li><p>在 webpack.dev.config.js 中配置 dev-server 构建本地 node 服务器，添加热部署功能</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/7.热加载.png" alt="图片"></p>
+</li>
+<li><p>配置 loader ，添加 css, js, vue loader，注意，loader 加载有先后顺序，后加载的放开头，要先了解每个 loader 之间的依赖关系</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/8.配置loader.png" alt="图片"></p>
+</li>
+<li><p>修改 app.js、index.html、App.vue 文件, app.js 文件中注册组件的 components 写错了</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/9.helloworld.png" alt="图片"></p>
+</li>
+<li><p>运行<code>npm run dev</code>,开启服务，发现报错</p>
+<ul>
+<li><p>开启热加载</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/10.开启热加载，更新babel.png" alt="图片"></p>
+</li>
+<li><p>webpack 不认识 vue 文件，Vue-loader 在 15.*之后的版本都是 vue-loader 的使用都是需要伴生 VueLoaderPlugin 的,</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/11.让webpack认识vue文件.png" alt="图片"></p>
+</li>
+<li><p>解决问题</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/12.让webpack认识vue文件解决.png" alt="图片"></p>
+</li>
+</ul>
+</li>
+<li><p>继续报错，是因为我们只加载了 vue.runtime.esm.js 文件</p>
+<ul>
+<li><p>运行时构建不包含模板编译器，因此不支持 template 选项，只能用 render 选项，但即使使用运行时构建，在单文件组件中也依然可以写模板，因为单文件组件的模板会在构建时预编译为 render 函数。运行时构建比独立构建要轻量 30%，只有 17.14 Kb min+gzip 大小。</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/13.runtime.png" alt="图片"></p>
+</li>
+<li><p>解决方法一:给 Vue 文件起别名(推荐)</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/14.vue别名.png" alt="图片"></p>
+</li>
+<li><p>解决方法二:使用 render 函数</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/15.render函数.png" alt="图片"></p>
+</li>
+<li><p>结果</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/16.结果.png" alt="图片"></p>
+</li>
+</ul>
+</li>
+<li><p>路由配置</p>
+<ul>
+<li>新建./src/components/HelloWorld.vue 文件</li>
+<li>新建./src/router/index.js 文件</li>
+<li>修改 App.vue 与入口文件 index.js 文件</li>
+<li><p>在 APP.vue 中创建路由容器</p>
+<p><img src="https://realroyhsu.github.io/Img/webpack/17.router.png" alt="图片"></p>
+</li>
+</ul>
+</li>
+</ol>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Webpack/">Webpack</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_google_plus"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+        
     </div>
 </div>
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/03/29/2019-03-29 了解Webpack/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">了解Webpack</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/01/11/2019-01-11 js对象，set和get方法 的三种实现形式/">
+                <span class="level-item">js对象，set和get方法 的三种实现形式</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ0OC8xNTk3NQ==">
+    <script type="text/javascript">
+        (function(d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
+</div>
+
+    </div>
+</div>
 </div>
                 
 
@@ -466,6 +656,17 @@
 
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            
+        </div>
+    </div>
+</div>
+
     
     
         <div class="card card-transparent is-hidden-widescreen">

@@ -2,22 +2,23 @@
 <html  lang="zh">
 <head>
     <meta charset="utf-8">
-<title>Archives: 2018/12 - Roy Blog!</title>
+<title>js对象，set和get方法 的三种实现形式 - Roy Blog!</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 
 
-    <meta name="description" content="Roy Blog">
-<meta name="keywords" content="Roy Blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Roy Blog!">
-<meta property="og:url" content="https://effiego.com/archives/2018/12/index.html">
+    <meta name="description" content="ES5 Get [[Getter]] 读取方法 Set [[Setter]] 设置方法">
+<meta name="keywords" content="Object">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js对象，set和get方法 的三种实现形式">
+<meta property="og:url" content="https://effiego.com/2019/01/11/2019-01-11 js对象，set和get方法 的三种实现形式/index.html">
 <meta property="og:site_name" content="Roy Blog!">
-<meta property="og:description" content="Roy Blog">
+<meta property="og:description" content="ES5 Get [[Getter]] 读取方法 Set [[Setter]] 设置方法">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-31T05:44:09.459Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Roy Blog!">
-<meta name="twitter:description" content="Roy Blog">
+<meta name="twitter:title" content="js对象，set和get方法 的三种实现形式">
+<meta name="twitter:description" content="ES5 Get [[Getter]] 读取方法 Set [[Setter]] 设置方法">
 <meta name="twitter:creator" content="@realRoyHsu">
 <meta name="twitter:site" content="https://twitter.com/realRoyHsu">
 
@@ -164,39 +165,154 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        December 2018
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-01-11T04:10:06.000Z">2019-01-11</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-12-01T02:17:22.000Z">2018-12-01</time>
-                        <a href="/2018/12/01/2018-12-01 Vuex的理解/" class="has-link-black-ter is-size-6">Vuex的理解</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/categories/Vuex/">Vuex</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/Object/">Object</a>
                 </div>
-            </article>
-        
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 439 words)
+                </span>
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                js对象，set和get方法 的三种实现形式
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>ES5 Get [[Getter]] 读取方法 Set [[Setter]] 设置方法</p>
+</blockquote>
+<a id="more"></a>
+<blockquote>
+<p>ES5 新增 “属性描述符”，可针对对象属性的特性进行配置。</p>
+</blockquote>
+<ul>
+<li>数据属性<ul>
+<li>Configurable 可配置（可删除）？[true|false]</li>
+<li>Writable 可写？ [true|false]</li>
+<li>Value 值？默认 undefined</li>
+</ul>
+</li>
+<li>访问器属性<ul>
+<li>Get [[Getter]] 读取方法</li>
+<li>Set [[Setter]] 设置方法</li>
+</ul>
+</li>
+<li>访问器属性优先级高于数据属性<ul>
+<li>访问器属性会优于 writeable/value</li>
+<li>获取属性值时，如果对象属性存在 get()，会忽略其 value 值，直接调用 get()；</li>
+<li>设置属性值时，如果对象属性存在 set()，会忽略 writable 的设置，直接调用 set();</li>
+<li>访问器属性日常应用：<ul>
+<li>属性值联动修改（一个属性值修改，会触发另外属性值修改）；</li>
+<li>属性值保护（只能通过 set() 制定逻辑修改属性值）</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>定义属性特性</p>
+<ul>
+<li>Object.defineProperty() 定义单个属性</li>
+<li>Object.defineProperties() 定义多个属性</li>
+</ul>
+</li>
+<li><p>第一种方式，直接在对象内设置。如代码所示。</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> book = &#123;</span><br><span class="line">  name: <span class="hljs-string">'乐园'</span>,</span><br><span class="line">  get nameGet() &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.name, <span class="hljs-string">'Get'</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name;</span><br><span class="line">  &#125;,</span><br><span class="line">  set nameSet(value) &#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(value, <span class="hljs-string">'set'</span>);</span><br><span class="line">    <span class="hljs-keyword">this</span>.name = value;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line">book.nameSet = <span class="hljs-string">'开心'</span>;</span><br><span class="line"><span class="hljs-built_in">console</span>.log(book.nameGet, book);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第二种方式，使用 Object.defineProperty()和 Object.defineProperties()进行设置</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> book = &#123;&#125;;</span><br><span class="line"><span class="hljs-built_in">Object</span>.defineProperties(book, &#123;</span><br><span class="line">  <span class="hljs-comment">// _name: &#123;</span></span><br><span class="line">  <span class="hljs-comment">//   configurable: true,</span></span><br><span class="line">  <span class="hljs-comment">//   writable: true,</span></span><br><span class="line">  <span class="hljs-comment">//   value: "roy"</span></span><br><span class="line">  <span class="hljs-comment">// &#125;,</span></span><br><span class="line">  name: &#123;</span><br><span class="line">    get: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">      <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>, <span class="hljs-string">'get'</span>);</span><br><span class="line">      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._name;</span><br><span class="line">    &#125;,</span><br><span class="line">    set: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>&#123;</span><br><span class="line">      <span class="hljs-built_in">console</span>.log(value, <span class="hljs-string">'set'</span>);</span><br><span class="line">      <span class="hljs-keyword">this</span>._name = value;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"><span class="hljs-comment">// Object.defineProperties(book, &#123;</span></span><br><span class="line"><span class="hljs-comment">//   _name: &#123;</span></span><br><span class="line"><span class="hljs-comment">//     configurable: true,</span></span><br><span class="line"><span class="hljs-comment">//     writable: true,</span></span><br><span class="line"><span class="hljs-comment">//     value: "roy"</span></span><br><span class="line"><span class="hljs-comment">//   &#125;,</span></span><br><span class="line"><span class="hljs-comment">//   get name() &#123;</span></span><br><span class="line"><span class="hljs-comment">//     console.log(this, "get")</span></span><br><span class="line"><span class="hljs-comment">//     return this._name</span></span><br><span class="line"><span class="hljs-comment">//   &#125;,</span></span><br><span class="line"><span class="hljs-comment">//   set name(value) &#123;</span></span><br><span class="line"><span class="hljs-comment">//     this.name = value;</span></span><br><span class="line"><span class="hljs-comment">//   &#125;</span></span><br><span class="line"><span class="hljs-comment">// &#125;)</span></span><br><span class="line">book.name = <span class="hljs-number">34</span>;</span><br><span class="line"><span class="hljs-built_in">console</span>.log(book.name);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>第三种方式：使用原型方法进行设置</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">let</span> book = &#123;</span><br><span class="line">  name: <span class="hljs-string">'乐园'</span>,</span><br><span class="line">&#125;;</span><br><span class="line">book.__defineGetter__(<span class="hljs-string">'nameGet'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.name, <span class="hljs-string">'Get'</span>);</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name;</span><br><span class="line">&#125;),</span><br><span class="line">  book.__defineSetter__(<span class="hljs-string">'nameSet'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">value</span>) </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(value, <span class="hljs-string">'set'</span>);</span><br><span class="line">    <span class="hljs-keyword">this</span>.name = value;</span><br><span class="line">  &#125;);</span><br><span class="line">book.nameSet = <span class="hljs-string">'开心'</span>;</span><br><span class="line"><span class="hljs-built_in">console</span>.log(book.nameGet);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/Object/">Object</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <!-- AddToAny BEGIN -->
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+<a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+<a class="a2a_button_facebook"></a>
+<a class="a2a_button_twitter"></a>
+<a class="a2a_button_google_plus"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+<!-- AddToAny END -->
+        
     </div>
 </div>
 
 
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/03/25/2019-03-25 使用webpack手动搭建一个基于vue的单页面应用/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">使用 webpack 手动搭建一个基于 vue 的单页面应用</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2018/12/01/2018-12-01 Vuex的理解/">
+                <span class="level-item">Vuex的理解</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zOTQ0OC8xNTk3NQ==">
+    <script type="text/javascript">
+        (function(d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
+    </script>
+    <noscript> Please activate JavaScript for write a comment in LiveRe</noscript>
+</div>
+
+    </div>
+</div>
 </div>
                 
 
@@ -466,6 +582,17 @@
 
     
         
+<div class="card widget" id="toc">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Catalogue
+            </h3>
+            
+        </div>
+    </div>
+</div>
+
     
     
         <div class="card card-transparent is-hidden-widescreen">

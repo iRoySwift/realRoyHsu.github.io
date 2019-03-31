@@ -2,77 +2,91 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://yoursite.com/about/index.html</loc>
+    <loc>https://effiego.com/2019/01/11/2019-01-11%20js%E5%AF%B9%E8%B1%A1%EF%BC%8Cset%E5%92%8Cget%E6%96%B9%E6%B3%95%20%E7%9A%84%E4%B8%89%E7%A7%8D%E5%AE%9E%E7%8E%B0%E5%BD%A2%E5%BC%8F/</loc>
+    
+    <lastmod>2019-03-31T05:44:09.459Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://effiego.com/2019/03/29/2019-03-29%20%E4%BA%86%E8%A7%A3Webpack/</loc>
+    
+    <lastmod>2019-03-31T05:39:12.582Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://effiego.com/2019/03/25/2019-03-25%20%E4%BD%BF%E7%94%A8webpack%E6%89%8B%E5%8A%A8%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Evue%E7%9A%84%E5%8D%95%E9%A1%B5%E9%9D%A2%E5%BA%94%E7%94%A8/</loc>
+    
+    <lastmod>2019-03-31T05:33:43.838Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://effiego.com/about/index.html</loc>
     
     <lastmod>2019-03-15T15:14:40.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2019/03/15/2019-03-15%20%E4%BA%86%E8%A7%A3Webpack/</loc>
-    
-    <lastmod>2019-03-15T15:06:10.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://yoursite.com/2018/12/01/2018-12-01%20Vuex%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
+    <loc>https://effiego.com/2018/12/01/2018-12-01%20Vuex%E7%9A%84%E7%90%86%E8%A7%A3/</loc>
     
     <lastmod>2019-02-18T16:31:56.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2018/11/27/2018-11-27%20React%E6%9C%80%E4%BD%B3%E5%85%A5%E9%97%A8/</loc>
+    <loc>https://effiego.com/2018/11/27/2018-11-27%20React%E6%9C%80%E4%BD%B3%E5%85%A5%E9%97%A8/</loc>
     
     <lastmod>2019-02-18T16:20:26.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2016/11/17/2016-11-17%20%E8%AE%A9Table%E8%A1%A8%E6%A0%BC%E4%B8%AD%E7%9A%84td%E5%8D%95%E5%85%83%E6%A0%BC%E5%86%85%E5%AE%B9%E8%BF%87%E9%95%BF%E6%98%BE%E7%A4%BA%E4%B8%BA%E7%95%A5%E5%8F%B7%E4%BB%A3%E6%9B%BF/</loc>
+    <loc>https://effiego.com/2016/11/17/2016-11-17%20%E8%AE%A9Table%E8%A1%A8%E6%A0%BC%E4%B8%AD%E7%9A%84td%E5%8D%95%E5%85%83%E6%A0%BC%E5%86%85%E5%AE%B9%E8%BF%87%E9%95%BF%E6%98%BE%E7%A4%BA%E4%B8%BA%E7%95%A5%E5%8F%B7%E4%BB%A3%E6%9B%BF/</loc>
     
     <lastmod>2019-02-18T15:45:08.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/05/20/2017-05-20%20Atom%E6%8F%92%E4%BB%B6/</loc>
+    <loc>https://effiego.com/2017/05/20/2017-05-20%20Atom%E6%8F%92%E4%BB%B6/</loc>
     
     <lastmod>2019-02-18T15:44:10.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2018/09/02/2018-09-02%20Sublime3%20React%E3%80%81JSX%20%E4%BB%A3%E7%A0%81%E7%BE%8E%E5%8C%96--%5BPrettier%5D/</loc>
+    <loc>https://effiego.com/2018/09/02/2018-09-02%20Sublime3%20React%E3%80%81JSX%20%E4%BB%A3%E7%A0%81%E7%BE%8E%E5%8C%96--%5BPrettier%5D/</loc>
     
     <lastmod>2019-02-18T15:42:42.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2018/09/27/2018-09-27%20%E5%85%B3%E4%BA%8Ejquery%E4%B8%AD%E7%9A%84ajax%E8%B0%83%E5%8F%96%E6%95%B0%E6%8D%AE%E6%88%90%E5%8A%9F%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%EF%BC%8C%E5%A4%B1%E8%B4%A5%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</loc>
+    <loc>https://effiego.com/2018/09/27/2018-09-27%20%E5%85%B3%E4%BA%8Ejquery%E4%B8%AD%E7%9A%84ajax%E8%B0%83%E5%8F%96%E6%95%B0%E6%8D%AE%E6%88%90%E5%8A%9F%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0%EF%BC%8C%E5%A4%B1%E8%B4%A5%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0/</loc>
     
     <lastmod>2019-02-18T15:41:44.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2018/11/04/2018-11-04%20this%E6%8C%87%E5%90%91%E5%92%8Cget%E3%80%81set%E4%B8%ADthis%E6%8C%87%E5%90%91/</loc>
+    <loc>https://effiego.com/2018/11/04/2018-11-04%20this%E6%8C%87%E5%90%91%E5%92%8Cget%E3%80%81set%E4%B8%ADthis%E6%8C%87%E5%90%91/</loc>
     
     <lastmod>2019-02-18T15:00:42.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2018/10/28/2018-10-28%20SSH%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5Google%E7%9A%84Compute%20Engine/</loc>
+    <loc>https://effiego.com/2018/10/28/2018-10-28%20SSH%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5Google%E7%9A%84Compute%20Engine/</loc>
     
     <lastmod>2019-02-18T15:00:18.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/2017/06/27/2017-06-27%20Emmet%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8React%E4%B8%ADjsx/</loc>
+    <loc>https://effiego.com/2017/06/27/2017-06-27%20Emmet%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8React%E4%B8%ADjsx/</loc>
     
     <lastmod>2019-02-18T14:59:54.000Z</lastmod>
     
